@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/capstonegroup7/static/css/main.76f2fda3.chunk.css",
+    "main.js": "/capstonegroup7/static/js/main.a60e31ac.chunk.js",
+    "main.js.map": "/capstonegroup7/static/js/main.a60e31ac.chunk.js.map",
+    "runtime-main.js": "/capstonegroup7/static/js/runtime-main.47908664.js",
+    "runtime-main.js.map": "/capstonegroup7/static/js/runtime-main.47908664.js.map",
+    "static/css/2.e54ffc33.chunk.css": "/capstonegroup7/static/css/2.e54ffc33.chunk.css",
+    "static/js/2.83c83172.chunk.js": "/capstonegroup7/static/js/2.83c83172.chunk.js",
+    "static/js/2.83c83172.chunk.js.map": "/capstonegroup7/static/js/2.83c83172.chunk.js.map",
+    "static/js/3.c125d2aa.chunk.js": "/capstonegroup7/static/js/3.c125d2aa.chunk.js",
+    "static/js/3.c125d2aa.chunk.js.map": "/capstonegroup7/static/js/3.c125d2aa.chunk.js.map",
+    "index.html": "/capstonegroup7/index.html",
+    "static/css/2.e54ffc33.chunk.css.map": "/capstonegroup7/static/css/2.e54ffc33.chunk.css.map",
+    "static/css/main.76f2fda3.chunk.css.map": "/capstonegroup7/static/css/main.76f2fda3.chunk.css.map",
+    "static/js/2.83c83172.chunk.js.LICENSE.txt": "/capstonegroup7/static/js/2.83c83172.chunk.js.LICENSE.txt",
+    "static/media/semantic.min.css": "/capstonegroup7/static/media/outline-icons.ddae9b1b.woff",
+    "static/media/logo.6ce24c58.svg": "/capstonegroup7/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.47908664.js",
+    "static/css/2.e54ffc33.chunk.css",
+    "static/js/2.83c83172.chunk.js",
+    "static/css/main.76f2fda3.chunk.css",
+    "static/js/main.a60e31ac.chunk.js"
+  ]
+}
