@@ -68,3 +68,33 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+Schema: 
+    user: {
+        username: ,
+        createdAt: ,
+
+    }
+
+    playlist: {
+        likes: [
+            {//some Like Object}
+        ]
+    }
+
+    likes: {
+        id: ,
+        username: ,
+        playlistId: ,
+        createdAt: 
+    }
+
+Authors :
+    Project Owner - Brian Ward
+    Scrum Master - Sarah Edwards
+    Quality Assurance - Nicholas Dudash
+    Contributor - Jeremiah Harris
+References:
+    Spotify API - https://api.spotify.com/v1/
+    Spotify API Documentation and Guides - https://developer.spotify.com/
+    Thirtify Webapp - Official API Example -  https://github.com/possan/webapi-player-example
