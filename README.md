@@ -69,10 +69,14 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-Schema: 
-    user: {
-        username: ,
-        createdAt: ,
+GET https://accounts.spotify.com/authorize?response_type=token&redirect_uri=https:%2F%2Fsarahedwards715.github.io%2Fcapstonegroup7%2F&client_id=7a4ffd2d4afc4f4d876826b6d369ab66&state=123
+
+CLIENT ID FOR SPOTIFY API : 7a4ffd2d4afc4f4d876826b6d369ab66
+
+Schema:
+user: {
+username: ,
+createdAt: ,
 
     }
 
@@ -86,15 +90,16 @@ Schema:
         id: ,
         username: ,
         playlistId: ,
-        createdAt: 
+        createdAt:
     }
 
 Authors :
-    Project Owner - Brian Ward
-    Scrum Master - Sarah Edwards
-    Quality Assurance - Nicholas Dudash
-    Contributor - Jeremiah Harris
+Project Owner - Brian Ward
+Scrum Master - Sarah Edwards
+Quality Assurance - Nicholas Dudash
+Contributor - Jeremiah Harris
 References:
-    Spotify API - https://api.spotify.com/v1/
-    Spotify API Documentation and Guides - https://developer.spotify.com/
-    Thirtify Webapp - Official API Example -  https://github.com/possan/webapi-player-example
+Spotify API - https://api.spotify.com/v1/
+Spotify API Documentation and Guides - https://developer.spotify.com/
+Thirtify Webapp - Official Spotify API Example - Per-Olov Jernberg, Jose M. Perez, Michael Thelin, and asmitter - https://github.com/possan/webapi-player-example
+How to Build A Spotify Player with React in 15 Minutes - Joe Karlsson - https://levelup.gitconnected.com/how-to-build-a-spotify-player-with-react-in-15-minutes-7e01991bc4b6
