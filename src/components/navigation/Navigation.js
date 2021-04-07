@@ -16,7 +16,6 @@ function Navigation(props) {
     <div className="navigationWrapper">
       <Link to="/">Landing</Link>
       {accessToken && <Link to="/browse">Browse</Link>}
-      {accessToken && <Link to="/browse/underground-hip-hop">Some Mood</Link>}
       {accessToken && <Link to="/playlist/somePlaylist">Some Playlist</Link>}
       {accessToken && (
         <Link to="/" onClick={(event) => logout(event)}>
