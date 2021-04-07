@@ -8,6 +8,7 @@ const initialState = {
   accessToken: "",
   accessExpiresIn: null,
   authUrl: buildLoginURL(),
+  moodsArray: [],
 };
 
 //Action Types
@@ -16,6 +17,7 @@ export const LOGOUT = "LOGOUT";
 export const GET_ACCESS_TOKEN = "GET_ACCESS_TOKEN";
 export const SET_ACCESS_TOKEN = "SET_ACCESS_TOKEN";
 export const SET_ACCESS_EXPIRES_IN = "SET_ACCESS_EXPIRES_IN";
+export const SET_MOODS = "SET_MOODS"
 
 //Reducer State Changing Function
 const reducer = (state, action) => {
@@ -30,6 +32,8 @@ const reducer = (state, action) => {
       return { accessToken: action.payload };
     case SET_ACCESS_EXPIRES_IN:
       return { accessExpiresIn: action.payload };
+    case SET_MOODS:
+        return {moodsArray: action.payload}
     default:
       return state;
   }
