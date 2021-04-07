@@ -1,14 +1,23 @@
+//////Two Imports Below Will Be Needed For Auth Pop Out Window////////////
 import { Button } from "semantic-ui-react";
-import { launchLoginSpot, buildLoginURL } from "../services/authSpot";
+import { launchLoginSpot } from "../services/authSpot";
+/////////////////////////////////////////////////////////////////////////
 import React, { useEffect, useState } from "react";
+import {
+  SET_ACCESS_TOKEN,
+  SET_ACCESS_EXPIRES_IN,
+  useStore,
+} from "../store/store";
 
 function Landing(props) {
-  const [token, setToken] = useState("");
-  const [authUrl, setAuthUrl] = useState(buildLoginURL());
-  const [expiresIn, setExpiresIn] = useState(null)
+  const accessToken = useStore((state) => state.accessToken);
+  const accessExpiresIn = useStore((state) => state.accessExpiresIn);
+  const authUrl = useStore((state) => state.authUrl);
+  const dispatch = useStore((state) => state.dispatch);
 
   // CITATION: Credit to Joe Karlsson -
   // https://levelup.gitconnected.com/how-to-build-a-spotify-player-with-react-in-15-minutes-7e01991bc4b6
+  // This code basically takes the hash and splits it up into an object
   useEffect(() => {
     const hash = window.location.hash
       .substring(1)
@@ -26,13 +35,13 @@ function Landing(props) {
     let authToken = hash.access_token;
     if (authToken) {
       console.log(authToken);
-      setToken(authToken);
+      dispatch({ type: SET_ACCESS_TOKEN, payload: authToken });
     }
 
-    let expires_In = hash.expires_in
-    if (expires_In) {
-      console.log(expires_In);
-      setExpiresIn(expires_In);
+    let expires_in = hash.expires_in;
+    if (expires_in) {
+      console.log(expires_in);
+      dispatch({ type: SET_ACCESS_EXPIRES_IN, payload: expires_in });
     }
 
     window.location.hash = "";
@@ -43,14 +52,11 @@ function Landing(props) {
       Hello From Landing!
       {/* This was for launching separate window, may come back to later*/}
       {/* <Button onClick={() => launchLoginSpot(props)}>Click Me!</Button> */}
-      {!token && (
+      {!accessToken && (
         <a className="authBtn" href={authUrl}>
           Authorize With Spotify
         </a>
       )}
-      <br />
-      {token && <p>{token}</p>}
-      {expiresIn && <p>{expiresIn}</p>}
     </div>
   );
 }
