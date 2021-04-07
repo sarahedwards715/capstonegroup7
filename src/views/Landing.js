@@ -5,9 +5,10 @@ import React, { useEffect, useState } from "react";
 function Landing(props) {
   const [token, setToken] = useState("");
   const [authUrl, setAuthUrl] = useState(buildLoginURL());
+  const [expiresIn, setExpiresIn] = useState(null)
+
   // CITATION: Credit to Joe Karlsson -
   // https://levelup.gitconnected.com/how-to-build-a-spotify-player-with-react-in-15-minutes-7e01991bc4b6
-
   useEffect(() => {
     const hash = window.location.hash
       .substring(1)
@@ -19,13 +20,19 @@ function Landing(props) {
         }
         return initial;
       }, {});
-      
-    console.log('Hash:', hash)
+
+    console.log("Hash:", hash);
 
     let authToken = hash.access_token;
     if (authToken) {
       console.log(authToken);
       setToken(authToken);
+    }
+
+    let expires_In = hash.expires_in
+    if (expires_In) {
+      console.log(expires_In);
+      setExpiresIn(expires_In);
     }
 
     window.location.hash = "";
@@ -34,6 +41,7 @@ function Landing(props) {
   return (
     <div>
       Hello From Landing!
+      {/* This was for launching separate window, may come back to later*/}
       {/* <Button onClick={() => launchLoginSpot(props)}>Click Me!</Button> */}
       {!token && (
         <a className="authBtn" href={authUrl}>
@@ -42,6 +50,7 @@ function Landing(props) {
       )}
       <br />
       {token && <p>{token}</p>}
+      {expiresIn && <p>{expiresIn}</p>}
     </div>
   );
 }

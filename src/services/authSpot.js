@@ -1,5 +1,3 @@
-// GET https://accounts.spotify.com/authorize?response_type=token&redirect_uri=https:%2F%2Fsarahedwards715.github.io%2Fcapstonegroup7%2F&client_id=7a4ffd2d4afc4f4d876826b6d369ab66&state=123
-
 // CITATION: Most of this authorization code is taken from the Spotify Official Thirtify Example - https://github.com/possan/webapi-player-example
 // Credits to Per-Olov Jernberg, Jose M. Perez, Michael Thelin, and asmitter
 let redirect_uri = "";
@@ -24,22 +22,24 @@ export function buildLoginURL() {
   );
 }
 
-export function launchLoginSpot() {
-  let url = buildLoginURL();
+// This Function is for launching the auth in a separate window. Couldn't quite get it to work.
+// I may try and return to this much later in the project
+// export function launchLoginSpot() {
+//   let url = buildLoginURL();
 
-  let dimensions = {
-    height: 800,
-    width: 400,
-    left: window.screen.width / 2 - 400,
-    top: window.screen.height / 2 - 200,
-  };
+//   let dimensions = {
+//     height: 800,
+//     width: 400,
+//     left: window.screen.width / 2 - 400,
+//     top: window.screen.height / 2 - 200,
+//   };
 
-  let authPopup = window.open(
-    url,
-    "Spotify Authentication",
-    `menubar=no,location=no,resizable=no,scrollbars=no,width=${dimensions.width},height=${dimensions.height},top=${dimensions.top},left=${dimensions.left}`
-  );
-}
+//   let authPopup = window.open(
+//     url,
+//     "Spotify Authentication",
+//     `menubar=no,location=no,resizable=no,scrollbars=no,width=${dimensions.width},height=${dimensions.height},top=${dimensions.top},left=${dimensions.left}`
+//   );
+// }
 
 export function setAccessToken(token, expires_in) {
   localStorage.setItem("access_token", token);
