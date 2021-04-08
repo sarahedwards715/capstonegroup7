@@ -1,5 +1,5 @@
 //////Two Imports Below Will Be Needed For Auth Pop Out Window////////////
-import { Button } from "semantic-ui-react";
+import { Button, Form } from "semantic-ui-react";
 import { launchLoginSpot } from "../services/authSpot";
 /////////////////////////////////////////////////////////////////////////
 import React, { useEffect, useState } from "react";
@@ -8,6 +8,8 @@ import {
   SET_ACCESS_EXPIRES_IN,
   useStore,
 } from "../store/store";
+import UserRegistration from "../components/userRegistration/UserRegistration";
+import UserLogin from "../components/userLogin/UserLogin";
 
 function Landing(props) {
   const accessToken = useStore((state) => state.accessToken);
@@ -57,6 +59,8 @@ function Landing(props) {
           Authorize With Spotify
         </a>
       )}
+      <UserRegistration />
+      <UserLogin />
     </div>
   );
 }

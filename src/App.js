@@ -12,14 +12,12 @@ import Navigation from "./components/navigation/Navigation";
 
 function App() {
   const accessToken = useStore((state) => state.accessToken);
-  const accessExpiresIn = useStore((state) => state.accessExpiresIn);
 
   return (
     <div className="App">
       Hello From App Wrapper
       <Navigation />
-      {accessToken ? <p>{accessToken}</p> : <p>You Are Not Authorized! Login with Spotify!</p>}
-      {accessExpiresIn && <p>{accessExpiresIn}</p>}
+      {accessToken || <p>You Are Not Authorized! Login with Spotify!</p>}
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route exact path="/browse" component={Browse} />
