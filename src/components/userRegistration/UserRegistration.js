@@ -6,6 +6,7 @@ import { postUsers } from "../../services/backendRequests";
 function UserRegistration() {
   const [formData, setFormData] = useState({
     username: "",
+    displayName: "",
     password: "",
   });
 
@@ -30,6 +31,14 @@ function UserRegistration() {
           <input
             name="username"
             placeholder="Username"
+            onChange={(e) => handleChange(e)}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label>Display Name</label>
+          <input
+            name="displayName"
+            placeholder="Display Name"
             onChange={(e) => handleChange(e)}
           />
         </Form.Field>

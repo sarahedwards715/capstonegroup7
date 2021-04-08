@@ -12,6 +12,7 @@ export const postUsers = (formData) => {
     },
     body: JSON.stringify({
       username: formData.username,
+      displayName: formData.displayName
     }),
   }).then((res) => res.json());
 };
