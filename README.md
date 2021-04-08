@@ -69,8 +69,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-GET https://accounts.spotify.com/authorize?response_type=token&redirect_uri=https:%2F%2Fsarahedwards715.github.io%2Fcapstonegroup7%2F&client_id=7a4ffd2d4afc4f4d876826b6d369ab66&state=123
-
 CLIENT ID FOR SPOTIFY API : 7a4ffd2d4afc4f4d876826b6d369ab66
 
 Schema:
