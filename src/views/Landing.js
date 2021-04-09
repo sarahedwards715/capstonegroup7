@@ -10,12 +10,13 @@ import {
 } from "../store/store";
 import UserRegistration from "../components/userRegistration/UserRegistration";
 import UserLogin from "../components/userLogin/UserLogin";
+import "./views.css";
 
 function Landing(props) {
-  const accessToken = useStore((state) => state.accessToken);
-  const accessExpiresIn = useStore((state) => state.accessExpiresIn);
-  const authUrl = useStore((state) => state.authUrl);
-  const dispatch = useStore((state) => state.dispatch);
+  const accessToken = useStore(state => state.accessToken);
+  const accessExpiresIn = useStore(state => state.accessExpiresIn);
+  const authUrl = useStore(state => state.authUrl);
+  const dispatch = useStore(state => state.dispatch);
 
   // CITATION: Credit to Joe Karlsson -
   // https://levelup.gitconnected.com/how-to-build-a-spotify-player-with-react-in-15-minutes-7e01991bc4b6
@@ -50,17 +51,17 @@ function Landing(props) {
   }, []);
 
   return (
-    <div>
-      Hello From Landing!
+    <div className="landingWrapper">
       {/* This was for launching separate window, may come back to later*/}
       {/* <Button onClick={() => launchLoginSpot(props)}>Click Me!</Button> */}
+      <span className="landingTitle">moodify</span>
+      <UserRegistration />
+      <UserLogin />
       {!accessToken && (
         <a className="authBtn" href={authUrl}>
           Authorize With Spotify
         </a>
       )}
-      <UserRegistration />
-      <UserLogin />
     </div>
   );
 }

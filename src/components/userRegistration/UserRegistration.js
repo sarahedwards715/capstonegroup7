@@ -10,7 +10,7 @@ function UserRegistration() {
   });
 
   function handleChange(event) {
-    setFormData((state) => ({
+    setFormData(state => ({
       ...state,
       [event.target.name]: event.target.value,
     }));
@@ -18,19 +18,18 @@ function UserRegistration() {
 
   function handleRegister(event) {
     event.preventDefault();
-    postUsers(formData).then((data) => console.log(data));
+    postUsers(formData).then(data => console.log(data));
   }
 
   return (
     <div className="userRegistrationWrapper">
-      Hello from Register User
       <Form onSubmit={handleRegister}>
         <Form.Field>
           <label>Username</label>
           <input
             name="username"
             placeholder="Username"
-            onChange={(e) => handleChange(e)}
+            onChange={e => handleChange(e)}
           />
         </Form.Field>
         <Form.Field>
@@ -38,7 +37,7 @@ function UserRegistration() {
           <input
             name="password"
             placeholder="Password"
-            onChange={(e) => handleChange(e)}
+            onChange={e => handleChange(e)}
           />
         </Form.Field>
         <Button type="submit">Register</Button>

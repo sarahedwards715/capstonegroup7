@@ -1,0 +1,48 @@
+:root {
+  --gradient: linear-gradient(
+    45deg,
+    #845ec2,
+    #d65db1,
+    #ff6f91,
+    #ff9671,
+    #ffc75f,
+    #f9f871
+  );
+}
+
+.landingWrapper {
+  background: black;
+  color: white;
+  text-align: center;
+}
+
+.landingTitle {
+  font-family: "Fredoka One", cursive;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 6em;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  height: 100px;
+  transform: translateX(-50%);
+  background-image: var(--gradient);
+  color: transparent;
+  background-clip: text;
+  background-size: 400%;
+  animation: bg-animation 5s infinite alternate;
+}
+
+.browseWrapper {
+  height: 100;
+}
+
+@keyframes bg-animation {
+  0% {
+    background-position: left;
+  }
+  100% {
+    background-position: right;
+  }
+}
