@@ -10,16 +10,13 @@ import {
 } from "../store/store";
 import UserRegistration from "../components/userRegistration/UserRegistration";
 import UserLogin from "../components/userLogin/UserLogin";
-import { getUsers, getUsersById } from "../services/backendRequests";
-import "./views.css";
+import "./views.scss";
 
 function Landing(props) {
-  const accessToken = useStore(state => state.accessToken);
-  const accessExpiresIn = useStore(state => state.accessExpiresIn);
-  const authUrl = useStore(state => state.authUrl);
-  const dispatch = useStore(state => state.dispatch);
-
-  const [id, setId] = useState("")
+  const accessToken = useStore((state) => state.accessToken);
+  const accessExpiresIn = useStore((state) => state.accessExpiresIn);
+  const authUrl = useStore((state) => state.authUrl);
+  const dispatch = useStore((state) => state.dispatch);
 
   // CITATION: Credit to Joe Karlsson -
   // https://levelup.gitconnected.com/how-to-build-a-spotify-player-with-react-in-15-minutes-7e01991bc4b6
@@ -53,11 +50,7 @@ function Landing(props) {
     window.location.hash = "";
   }, []);
 
-  function handleSearch(event) {
-    event.preventDefault();
-    getUsersById(id);
-  }
-
+  
   return (
     <div className="landingWrapper">
       {/* This was for launching separate window, may come back to later*/}
@@ -72,13 +65,6 @@ function Landing(props) {
       )}
       <UserRegistration />
       <UserLogin />
-      <Button onClick={getUsers}>Get All Users</Button>
-      <Form onSubmit = {handleSearch}>
-        <Form.Field>
-          <input name="id" placeholder="userId" onChange={(e) => setId(e.target.name)} />
-        </Form.Field>
-        <Button type = "submit">Search</Button>
-      </Form>
     </div>
   );
 }
