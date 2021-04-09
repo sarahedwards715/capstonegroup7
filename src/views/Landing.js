@@ -11,12 +11,13 @@ import {
 import UserRegistration from "../components/userRegistration/UserRegistration";
 import UserLogin from "../components/userLogin/UserLogin";
 import { getUsers, getUsersById } from "../services/backendRequests";
+import "./views.css";
 
 function Landing(props) {
-  const accessToken = useStore((state) => state.accessToken);
-  const accessExpiresIn = useStore((state) => state.accessExpiresIn);
-  const authUrl = useStore((state) => state.authUrl);
-  const dispatch = useStore((state) => state.dispatch);
+  const accessToken = useStore(state => state.accessToken);
+  const accessExpiresIn = useStore(state => state.accessExpiresIn);
+  const authUrl = useStore(state => state.authUrl);
+  const dispatch = useStore(state => state.dispatch);
 
   const [id, setId] = useState("")
 
@@ -58,10 +59,12 @@ function Landing(props) {
   }
 
   return (
-    <div>
-      Hello From Landing!
+    <div className="landingWrapper">
       {/* This was for launching separate window, may come back to later*/}
       {/* <Button onClick={() => launchLoginSpot(props)}>Click Me!</Button> */}
+      <span className="landingTitle">moodify</span>
+      <UserRegistration />
+      <UserLogin />
       {!accessToken && (
         <a className="authBtn" href={authUrl}>
           Authorize With Spotify
