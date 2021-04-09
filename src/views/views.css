@@ -12,13 +12,11 @@
 
 .landingWrapper {
   background: black;
-  /* height: 100vh; */
   color: white;
   text-align: center;
 }
 
 .landingTitle {
-  /* height: 160%; */
   font-family: "Fredoka One", cursive;
   display: flex;
   align-items: center;
@@ -27,7 +25,6 @@
   position: absolute;
   top: 20%;
   left: 50%;
-  width: 18%;
   height: 100px;
   transform: translateX(-50%);
   background-image: var(--gradient);
