@@ -1,7 +1,5 @@
 //Since our backend is still only local, baseURL is port 4000 for now.
 
-import PlaylistsCard from "../components/playlistsCard/PlaylistsCard";
-
 //Just change baseURL whenever we deploy our backend somewhere
 let baseURL = "http://localhost:4000/";
 
