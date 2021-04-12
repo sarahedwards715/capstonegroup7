@@ -14,10 +14,9 @@ function Mood(props) {
   }, []);
 
   return (
-    <div className = "moodPageWrapper">
-      Hello from Mood!
-      {props.match.params.mood}
-      <SongList songs={songs} />
+    <div className="moodPageWrapper">
+      <div className="moodPageBanner">{props.match.params.mood}</div>
+      <SongList songs={songs} collapsing={false} compact={false} />
     </div>
   );
 }

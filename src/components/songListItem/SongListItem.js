@@ -20,18 +20,18 @@ function SongListItem(props) {
       <Table.Cell>
         {!createdPlaylistSongs.some((song) => song.id === id) ? (
           <Button onClick={() => addCreatedPlaylistSongs(props.song)}>
-            Add to Playlist
+            {!props.compact ? "Add to Playlist" : "Add"}
           </Button>
         ) : (
           <Button onClick={() => deleteCreatedPlaylistSongs(id)}>
-            Delete from Playlist
+            {!props.compact ? "Delete from Playlist" : "Delete"}
           </Button>
         )}
       </Table.Cell>
       <Table.Cell>{name}</Table.Cell>
       <Table.Cell>{artists[0].name}</Table.Cell>
-      <Table.Cell>{album.name}</Table.Cell>
-      <Table.Cell>{duration_ms}</Table.Cell>
+      {props.compact || <Table.Cell>{album.name}</Table.Cell>}
+      {props.compact || <Table.Cell>{duration_ms}</Table.Cell>}
     </Table.Row>
   );
 }

@@ -55,18 +55,18 @@ export const getPlaylists = () => {
   }).then((res) => res.json());
 };
 
-export const postPlaylists = (playlist, username) => {
+export const postPlaylists = (formData, songs, username) => {
   return fetch(baseURL + "playlists", {
-    method: "GET",
+    method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      title: playlist.title,
-      songs: playlist.songs,
+      title: formData.title,
+      songs: songs,
       username: username,
-      description: playlist.description || "",
+      description: formData.description || "",
     }),
   });
 };
