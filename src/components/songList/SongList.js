@@ -3,8 +3,6 @@ import { Table } from "semantic-ui-react";
 import SongListItem from "../songListItem/SongListItem";
 
 function SongList(props) {
-  console.log(props.songs);
-
   return (
     <div className="songListWrapper">
       <Table>
@@ -19,9 +17,10 @@ function SongList(props) {
         </Table.Header>
 
         <Table.Body>
-          {props.songs.map((song) => {
-            return <SongListItem song={song} key={song.id} />;
-          })}
+          {props.songs &&
+            props.songs.map((song) => {
+              return <SongListItem song={song} key={song.id} />;
+            })}
         </Table.Body>
       </Table>
     </div>

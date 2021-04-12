@@ -9,6 +9,7 @@ import Playlist from "./views/Playlist";
 import NotFound from "./views/NotFound";
 import Mood from "./views/Mood";
 import Navigation from "./components/navigation/Navigation";
+import PlaylistsCreation from "./components/playlistsCreation/PlaylistsCreation";
 
 function App() {
   const accessToken = useStore((state) => state.accessToken);
@@ -17,6 +18,7 @@ function App() {
     <div className="App">
       Hello From App Wrapper
       <Navigation />
+      {accessToken && <PlaylistsCreation />}
       {accessToken || <p>You Are Not Authorized! Login with Spotify!</p>}
       <Switch>
         <Route exact path="/" component={Landing} />

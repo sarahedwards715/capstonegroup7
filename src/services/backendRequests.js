@@ -1,4 +1,7 @@
 //Since our backend is still only local, baseURL is port 4000 for now.
+
+import PlaylistsCard from "../components/playlistsCard/PlaylistsCard";
+
 //Just change baseURL whenever we deploy our backend somewhere
 let baseURL = "http://localhost:4000/";
 
@@ -50,4 +53,20 @@ export const getPlaylists = () => {
       "Content-Type": "application/json",
     },
   }).then((res) => res.json());
+};
+
+export const postPlaylists = (playlist, username) => {
+  return fetch(baseURL + "playlists", {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title: playlist.title,
+      songs: playlist.songs,
+      username: username,
+      description: playlist.description || "",
+    }),
+  });
 };
