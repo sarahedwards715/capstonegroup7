@@ -1,53 +1,49 @@
 //////Two Imports Below Will Be Needed For Auth Pop Out Window////////////
-import { Button, Form } from "semantic-ui-react";
-import { launchLoginSpot } from "../services/authSpot";
+// import { Button, Form } from "semantic-ui-react";
+// import { launchLoginSpot, setAccessToken } from "../services/authSpot";
 /////////////////////////////////////////////////////////////////////////
-import React, { useEffect, useState } from "react";
-import {
-  SET_ACCESS_TOKEN,
-  SET_ACCESS_EXPIRES_IN,
-  useStore,
-} from "../store/store";
+import React, { useEffect } from "react";
+import useStore from "../store/store";
 import UserRegistration from "../components/userRegistration/UserRegistration";
 import UserLogin from "../components/userLogin/UserLogin";
-import "./views.css";
+import "./views.scss";
 
 function Landing(props) {
-  const accessToken = useStore(state => state.accessToken);
-  const accessExpiresIn = useStore(state => state.accessExpiresIn);
-  const authUrl = useStore(state => state.authUrl);
-  const dispatch = useStore(state => state.dispatch);
+  const accessToken = useStore((state) => state.accessToken);
+  const setAccessToken = useStore((state) => state.setAccessToken);
+  const setExpiresIn = useStore((state) => state.setExpiresIn);
+  const authURL = useStore((state) => state.authURL);
 
   // CITATION: Credit to Joe Karlsson -
   // https://levelup.gitconnected.com/how-to-build-a-spotify-player-with-react-in-15-minutes-7e01991bc4b6
   // This code basically takes the hash and splits it up into an object
   useEffect(() => {
-    const hash = window.location.hash
-      .substring(1)
-      .split("&")
-      .reduce((initial, item) => {
-        if (item) {
-          let parts = item.split("=");
-          initial[parts[0]] = decodeURIComponent(parts[1]);
-        }
-        return initial;
-      }, {});
+    if (window.location.hash) {
+      const hash = window.location.hash
+        .substring(1)
+        .split("&")
+        .reduce((initial, item) => {
+          if (item) {
+            let parts = item.split("=");
+            initial[parts[0]] = decodeURIComponent(parts[1]);
+          }
+          return initial;
+        }, {});
 
-    console.log("Hash:", hash);
+      console.log("Hash:", hash);
 
-    let authToken = hash.access_token;
-    if (authToken) {
-      console.log(authToken);
-      dispatch({ type: SET_ACCESS_TOKEN, payload: authToken });
+      let authToken = hash.access_token;
+      if (authToken) {
+        setAccessToken(authToken);
+      }
+
+      let expires_in = hash.expires_in;
+      if (expires_in) {
+        setExpiresIn(expires_in);
+      }
+
+      window.location.hash = "";
     }
-
-    let expires_in = hash.expires_in;
-    if (expires_in) {
-      console.log(expires_in);
-      dispatch({ type: SET_ACCESS_EXPIRES_IN, payload: expires_in });
-    }
-
-    window.location.hash = "";
   }, []);
 
   return (
@@ -58,7 +54,7 @@ function Landing(props) {
       <UserRegistration />
       <UserLogin />
       {!accessToken && (
-        <a className="authBtn" href={authUrl}>
+        <a className="authBtn" href={authURL}>
           Authorize With Spotify
         </a>
       )}

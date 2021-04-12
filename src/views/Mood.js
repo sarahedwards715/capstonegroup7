@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SongList from "../components/songList/SongList";
 import { getRecommendations } from "../services/spotAPIRequests";
-import { useStore } from "../store/store";
+import useStore from "../store/store";
 
 function Mood(props) {
   const [songs, setSongs] = useState([]);
@@ -15,11 +15,11 @@ function Mood(props) {
   }, []);
 
   useEffect(() => {
-      console.log(songs)
-  }, [songs])
+    console.log(songs);
+  }, [songs]);
 
   return (
-    <div>
+    <div className = "moodPageWrapper">
       Hello from Mood!
       {props.match.params.mood}
       <SongList songs={songs} />

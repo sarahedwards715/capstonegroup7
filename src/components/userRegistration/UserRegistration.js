@@ -6,11 +6,12 @@ import { postUsers } from "../../services/backendRequests";
 function UserRegistration() {
   const [formData, setFormData] = useState({
     username: "",
+    displayName: "",
     password: "",
   });
 
   function handleChange(event) {
-    setFormData(state => ({
+    setFormData((state) => ({
       ...state,
       [event.target.name]: event.target.value,
     }));
@@ -18,30 +19,41 @@ function UserRegistration() {
 
   function handleRegister(event) {
     event.preventDefault();
-    postUsers(formData).then(data => console.log(data));
+    postUsers(formData).then((data) => console.log(data));
   }
 
   return (
     <div className="userRegistrationWrapper">
-      <Form onSubmit={handleRegister}>
-        <Form.Field>
-          <label>Username</label>
-          <input
-            name="username"
-            placeholder="Username"
-            onChange={e => handleChange(e)}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Password</label>
-          <input
-            name="password"
-            placeholder="Password"
-            onChange={e => handleChange(e)}
-          />
-        </Form.Field>
-        <Button type="submit">Register</Button>
-      </Form>
+      <div className="formContainer">
+        <Form onSubmit={handleRegister}>
+          <Form.Field>
+            <label>Username</label>
+            <input
+              name="username"
+              placeholder="Username"
+              onChange={(e) => handleChange(e)}
+            />
+          </Form.Field>
+          <Form.Field>
+            <label>Display Name</label>
+            <input
+              name="displayName"
+              placeholder="Display Name"
+              onChange={(e) => handleChange(e)}
+            />
+          </Form.Field>
+          <Form.Field>
+            <label>Password</label>
+            <input
+              name="password"
+              placeholder="Password"
+              type="password"
+              onChange={(e) => handleChange(e)}
+            />
+          </Form.Field>
+          <Button type="submit">Register</Button>
+        </Form>
+      </div>
     </div>
   );
 }

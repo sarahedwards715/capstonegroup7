@@ -1,7 +1,7 @@
 import logo from "./logo.svg";
 import { Switch, Route } from "react-router-dom";
 import "./App.css";
-import { useStore } from "./store/store";
+import useStore from "./store/store";
 
 import Landing from "./views/Landing";
 import Browse from "./views/Browse";

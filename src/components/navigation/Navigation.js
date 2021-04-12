@@ -1,21 +1,19 @@
 import "./Navigation.scss";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { LOGOUT, useStore } from "../../store/store";
+import useStore from "../../store/store";
 import { Menu } from "semantic-ui-react";
 
 function Navigation(props) {
   const accessToken = useStore((state) => state.accessToken);
-  const user = useStore((state) => state.user);
-  const dispatch = useStore((state) => state.dispatch);
+  const logout = useStore((state) => state.logout);
   const [activeItem, setActiveItem] = useState("landing");
 
-  const logout = (e) => {
-    dispatch({ type: LOGOUT });
+  const logoutOnClick = (e) => {
+    logout();
   };
 
   const handleClick = (e, name) => {
-    console.log(e.target.name);
     setActiveItem(name);
   };
 
@@ -35,18 +33,8 @@ function Navigation(props) {
           </Menu.Item>
         )}
         {accessToken && (
-          <Menu.Item name="playlist" active={activeItem === "playlist"}>
-            <Link
-              to="/playlist/somePlaylist"
-              onClick={(e) => handleClick(e, "playlist")}
-            >
-              Some Playlist
-            </Link>
-          </Menu.Item>
-        )}
-        {accessToken && (
           <Menu.Item name="logout" active={activeItem === "logout"}>
-            <Link to="/" onClick={(event) => logout(event)}>
+            <Link to="/" onClick={(event) => logoutOnClick(event)}>
               Logout
             </Link>
           </Menu.Item>
