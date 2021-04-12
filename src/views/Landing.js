@@ -1,8 +1,8 @@
 //////Two Imports Below Will Be Needed For Auth Pop Out Window////////////
-import { Button, Form } from "semantic-ui-react";
-import { launchLoginSpot, setAccessToken } from "../services/authSpot";
+// import { Button, Form } from "semantic-ui-react";
+// import { launchLoginSpot, setAccessToken } from "../services/authSpot";
 /////////////////////////////////////////////////////////////////////////
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import useStore from "../store/store";
 import UserRegistration from "../components/userRegistration/UserRegistration";
 import UserLogin from "../components/userLogin/UserLogin";
@@ -11,7 +11,6 @@ import "./views.scss";
 function Landing(props) {
   const accessToken = useStore((state) => state.accessToken);
   const setAccessToken = useStore((state) => state.setAccessToken);
-  const accessExpiresIn = useStore((state) => state.accessExpiresIn);
   const setExpiresIn = useStore((state) => state.setExpiresIn);
   const authURL = useStore((state) => state.authURL);
 

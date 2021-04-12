@@ -21,6 +21,11 @@ function Playlist(props) {
       {Object.keys(activePlaylist).length ? (
         <>
           <div className="playlistPageTitle">{activePlaylist.title}</div>
+          {activePlaylist.description && (
+            <div className="playlistPageDescription">
+              {activePlaylist.description}
+            </div>
+          )}
           <SongList songs={activePlaylist.songs} />
         </>
       ) : (

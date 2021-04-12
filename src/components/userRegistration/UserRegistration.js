@@ -47,6 +47,7 @@ function UserRegistration() {
             <input
               name="password"
               placeholder="Password"
+              type="password"
               onChange={(e) => handleChange(e)}
             />
           </Form.Field>

@@ -5,7 +5,6 @@ import MoodsList from "../components/moodsList/MoodsList";
 import PlaylistsList from "../components/playlistsList/PlaylistsList";
 
 function Browse(props) {
-  let accessToken = useStore((state) => state.accessToken);
   let moodsArray = useStore((state) => state.moodsArray);
   let setMoodsArray = useStore((state) => state.setMoodsArray);
   let playlists = useStore((state) => state.playlists);
