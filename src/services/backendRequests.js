@@ -30,16 +30,24 @@ export const getUsers = () => {
 };
 
 export const getUsersById = (id) => {
-  return fetch(baseURL + "users", {
+  console.log(id);
+  return fetch(baseURL + "users/" + id, {
     method: "GET",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      id: id,
-    }),
   })
     .then((res) => res.json())
     .then((data) => console.log(data));
+};
+
+export const getPlaylists = () => {
+  return fetch(baseURL + "playlists", {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  }).then((res) => res.json());
 };

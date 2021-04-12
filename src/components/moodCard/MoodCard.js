@@ -2,10 +2,8 @@ import "./MoodCard.scss";
 import { Card } from "semantic-ui-react";
 import React from "react";
 import { Link } from "react-router-dom";
-// {accessToken && <Link to="/browse/underground-hip-hop">Some Mood</Link>}
 
 function MoodCard(props) {
-  console.log(props, "from mood card");
   return (
     <Card className="moodCard">
       <Card.Content>

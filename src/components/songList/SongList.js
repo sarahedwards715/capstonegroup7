@@ -3,9 +3,11 @@ import { Table } from "semantic-ui-react";
 import SongListItem from "../songListItem/SongListItem";
 
 function SongList(props) {
+  console.log(props.songs);
+
   return (
     <div className="songListWrapper">
-      <Table >
+      <Table>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Add</Table.HeaderCell>

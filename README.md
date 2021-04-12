@@ -101,3 +101,42 @@ Spotify API - https://api.spotify.com/v1/
 Spotify API Documentation and Guides - https://developer.spotify.com/
 Thirtify Webapp - Official Spotify API Example - Per-Olov Jernberg, Jose M. Perez, Michael Thelin, and asmitter - https://github.com/possan/webapi-player-example
 How to Build A Spotify Player with React in 15 Minutes - Joe Karlsson - https://levelup.gitconnected.com/how-to-build-a-spotify-player-with-react-in-15-minutes-7e01991bc4b6
+
+This Get Users and Get Users By Id Stuff Works, putting it here for now!
+
+<!-- import React, { useEffect, useState } from "react";
+
+import { Button, Form } from "semantic-ui-react";
+
+import { getUsers, getUsersById } from "../services/backendRequests";
+
+function Playlist(props) {
+  const [id, setId] = useState("");
+
+  function handleSearch(event) {
+    event.preventDefault();
+    console.log(id);
+    getUsersById(id);
+  }
+
+  return (
+    <div>
+      Hello From Playlist
+      <Button onClick={getUsers}>Get All Users</Button>
+      <Form onSubmit={handleSearch}>
+        <Form.Field>
+          <input
+            name="id"
+            placeholder="userId"
+            onChange={(e) => setId(e.target.value)}
+          />
+        </Form.Field>
+        <Button type="submit">Search</Button>
+      </Form>
+      {props.match.params.playlistId}
+    </div>
+  );
+}
+
+export default Playlist; -->
+

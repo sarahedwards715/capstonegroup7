@@ -1,28 +1,43 @@
-import { useStore, SET_MOODS } from "../store/store";
-import React, { useEffect } from "react";
-import { Loader } from "semantic-ui-react";
-import { getMoods } from "../services/spotAPIRequests";
+import useStore from "../store/store";
+import React, { useEffect, useState } from "react";
+import { Loader, Button } from "semantic-ui-react";
 import MoodsList from "../components/moodsList/MoodsList";
+import PlaylistsList from "../components/playlistsList/PlaylistsList";
 
 function Browse(props) {
   let accessToken = useStore((state) => state.accessToken);
   let moodsArray = useStore((state) => state.moodsArray);
-  let dispatch = useStore((state) => state.dispatch);
+  let setMoodsArray = useStore((state) => state.setMoodsArray);
+  let playlists = useStore((state) => state.playlists);
+  let setPlaylists = useStore((state) => state.setPlaylists);
+
+  const [moodsOrPlaylists, setMoodsOrPlaylists] = useState("moods");
 
   useEffect(() => {
-    if (accessToken) {
-      getMoods(accessToken).then((data) => {
-        console.log(data);
-        dispatch({ type: SET_MOODS, payload: data.genres });
-      });
-    }
+    setMoodsArray();
+    setPlaylists();
   }, []);
+
+  function togglePlaylists(e) {
+    console.log("clicky");
+    if (moodsOrPlaylists === "moods") {
+      setMoodsOrPlaylists("playlists");
+    }
+    if (moodsOrPlaylists === "playlists") {
+      setMoodsOrPlaylists("moods");
+    }
+  }
 
   return (
     <div className="browseWrapper">
       <p>Hello From Browse</p>
-      {moodsArray?.length !== 0 ? (
-        <MoodsList />
+      <Button onClick={togglePlaylists}>{moodsOrPlaylists}</Button>
+      {moodsArray?.length && playlists?.length ? (
+        moodsOrPlaylists === "moods" ? (
+          <MoodsList />
+        ) : (
+          <PlaylistsList />
+        )
       ) : (
         <Loader size="big"> Loading... </Loader>
       )}
