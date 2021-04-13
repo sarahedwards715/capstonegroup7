@@ -26,7 +26,11 @@ function Playlist(props) {
               {activePlaylist.description}
             </div>
           )}
-          <SongList songs={activePlaylist.songs} />
+          <SongList
+            songs={activePlaylist.songs}
+            collapsing={false}
+            compact={false}
+          />
         </>
       ) : (
         <Loader size="big"> Loading... </Loader>

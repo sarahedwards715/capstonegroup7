@@ -3,25 +3,31 @@ import { Table } from "semantic-ui-react";
 import SongListItem from "../songListItem/SongListItem";
 
 function SongList(props) {
-  console.log(props.songs);
-
   return (
     <div className="songListWrapper">
-      <Table>
+      <Table collapsing={props.collapsing} compact={props.compact}>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell>Add</Table.HeaderCell>
+            <Table.HeaderCell></Table.HeaderCell>
             <Table.HeaderCell>Track</Table.HeaderCell>
             <Table.HeaderCell>Artist</Table.HeaderCell>
-            <Table.HeaderCell>Album</Table.HeaderCell>
-            <Table.HeaderCell>Time</Table.HeaderCell>
+            {props.compact || <Table.HeaderCell>Album</Table.HeaderCell>}
+            {props.compact || <Table.HeaderCell>Time</Table.HeaderCell>}
           </Table.Row>
         </Table.Header>
 
         <Table.Body>
-          {props.songs.map((song) => {
-            return <SongListItem song={song} key={song.id} />;
-          })}
+          {props.songs &&
+            props.songs.map((song) => {
+              return (
+                <SongListItem
+                  song={song}
+                  key={song.id}
+                  compact={props.compact}
+                  collapsing={props.collapsing}
+                />
+              );
+            })}
         </Table.Body>
       </Table>
     </div>

@@ -31,11 +31,11 @@ function Browse(props) {
     <div className="browseWrapper">
       <p>Hello From Browse</p>
       <Button onClick={togglePlaylists}>{moodsOrPlaylists}</Button>
-      {moodsArray?.length && playlists?.length ? (
-        moodsOrPlaylists === "moods" ? (
-          <MoodsList />
-        ) : (
+      {moodsArray?.length ? (
+        playlists?.length && moodsOrPlaylists === "playlists" ? (
           <PlaylistsList />
+        ) : (
+          <MoodsList />
         )
       ) : (
         <Loader size="big"> Loading... </Loader>
@@ -43,5 +43,6 @@ function Browse(props) {
     </div>
   );
 }
+//playlists?.length
 
 export default Browse;
