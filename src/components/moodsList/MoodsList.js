@@ -9,7 +9,6 @@ function MoodsList(props) {
 
   return (
     <div className="moodsListWrapper">
-      Hello from Moodslist
       <Card.Group textAlign="center" className="moodsContainer">
         {moodsArray.map((mood, index) => {
           return <MoodCard mood={mood} key={index} />;
