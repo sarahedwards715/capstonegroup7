@@ -9,20 +9,14 @@ function Mood(props) {
 
   useEffect(() => {
     getRecommendations(accessToken, props.match.params.mood).then((data) => {
-      console.log(data);
       setSongs(data.tracks);
     });
   }, []);
 
-  useEffect(() => {
-    console.log(songs);
-  }, [songs]);
-
   return (
-    <div className = "moodPageWrapper">
-      Hello from Mood!
-      {props.match.params.mood}
-      <SongList songs={songs} />
+    <div className="moodPageWrapper">
+      <div className="moodPageBanner">{props.match.params.mood}</div>
+      <SongList songs={songs} collapsing={false} compact={false} />
     </div>
   );
 }

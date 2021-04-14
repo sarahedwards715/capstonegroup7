@@ -21,7 +21,6 @@ const useStore = (set, get) => ({
   setMoodsArray: () => {
     if (get().accessToken) {
       getMoods(get().accessToken).then((data) => {
-        console.log(data);
         set({ moodsArray: data.genres });
       });
     }
@@ -40,6 +39,23 @@ const useStore = (set, get) => ({
       user: { username: "", moodifyToken: "" },
       accessToken: "",
       accessExpiresIn: "",
+    });
+  },
+  createdPlaylistSongs: [],
+  addCreatedPlaylistSongs: (newSongObj) => {
+    let currentSongs = get().createdPlaylistSongs;
+    set({
+      createdPlaylistSongs: [...currentSongs, newSongObj],
+    });
+  },
+  deleteCreatedPlaylistSongs: (songId) => {
+    let indexForDeletion = get().createdPlaylistSongs.findIndex(
+      (song) => song.id === songId
+    );
+    let newArray = [...get().createdPlaylistSongs];
+    newArray.splice(indexForDeletion, 1)
+    set({
+      createdPlaylistSongs: newArray,
     });
   },
 });

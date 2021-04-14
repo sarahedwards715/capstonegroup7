@@ -1,4 +1,5 @@
 //Since our backend is still only local, baseURL is port 4000 for now.
+
 //Just change baseURL whenever we deploy our backend somewhere
 let baseURL = "http://localhost:4000/";
 
@@ -65,4 +66,20 @@ export const getPlaylists = () => {
       "Content-Type": "application/json",
     },
   }).then(res => res.json());
+};
+
+export const postPlaylists = (formData, songs, username) => {
+  return fetch(baseURL + "playlists", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title: formData.title,
+      songs: songs,
+      username: username,
+      description: formData.description || "",
+    }),
+  });
 };
