@@ -18,14 +18,6 @@ function App() {
   return (
     <div className="App">
       Hello From App Wrapper
-      {/* <Navigation /> */}
-      {/* {accessToken || <p>You Are Not Authorized! Login with Spotify!</p>}
-      <Switch>
-        <Route exact path="/" component={Landing} />
-        <Route exact path="/browse" component={Browse} />
-        <Route path="/browse/:mood" component={Mood} />
-        <Route exact path="/playlist/:playlistId" component={Playlist} />
-      </Switch> */}
       <div className="appRightColumn">
         <Navigation />
         {accessToken || <p>You Are Not Authorized! Login with Spotify!</p>}
