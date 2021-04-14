@@ -2,7 +2,7 @@
 //Just change baseURL whenever we deploy our backend somewhere
 let baseURL = "http://localhost:4000/";
 
-export const postUsers = (formData) => {
+export const postUsers = formData => {
   //Maybe Password Later??
   return fetch(baseURL + "users", {
     method: "POST",
@@ -13,8 +13,23 @@ export const postUsers = (formData) => {
     body: JSON.stringify({
       username: formData.username,
       displayName: formData.displayName,
+      password: formData.password,
     }),
-  }).then((res) => res.json());
+  }).then(res => res.json());
+};
+
+export const loginUser = formData => {
+  return fetch(baseURL + "users/login", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username: formData.username,
+      password: formData.password,
+    }),
+  }).then(res => res.json());
 };
 
 export const getUsers = () => {
@@ -25,11 +40,11 @@ export const getUsers = () => {
       "Content-Type": "application/json",
     },
   })
-    .then((res) => res.json())
-    .then((data) => console.log(data));
+    .then(res => res.json())
+    .then(data => console.log(data));
 };
 
-export const getUsersById = (id) => {
+export const getUsersById = id => {
   console.log(id);
   return fetch(baseURL + "users/" + id, {
     method: "GET",
@@ -38,8 +53,8 @@ export const getUsersById = (id) => {
       "Content-Type": "application/json",
     },
   })
-    .then((res) => res.json())
-    .then((data) => console.log(data));
+    .then(res => res.json())
+    .then(data => console.log(data));
 };
 
 export const getPlaylists = () => {
@@ -49,5 +64,5 @@ export const getPlaylists = () => {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-  }).then((res) => res.json());
+  }).then(res => res.json());
 };
