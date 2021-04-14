@@ -1,16 +1,19 @@
 import "./UserLogin.scss";
+import useStore from "../../store/store";
 import React, { useState } from "react";
 import { Button, Form } from "semantic-ui-react";
-import { postUsers, loginUser } from "../../services/backendRequests";
+import { loginUser } from "../../services/backendRequests";
 
 function UserLogin() {
+  let setUser = useStore((state) => state.setUser);
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
 
   function handleChange(event) {
-    setFormData(state => ({
+    setFormData((state) => ({
       ...state,
       [event.target.name]: event.target.value,
     }));
@@ -18,7 +21,14 @@ function UserLogin() {
 
   function handleRegister(event) {
     event.preventDefault();
-    loginUser(formData).then(data => console.log(data));
+    loginUser(formData).then((data) => {
+      console.log(data);
+      if (data.statusCode === 200) {
+        setUser(data.userInfo.username, data.moodifyToken);
+      } else {
+        console.log(data.message);
+      }
+    });
   }
 
   return (
@@ -30,7 +40,7 @@ function UserLogin() {
             <input
               name="username"
               placeholder="Username"
-              onChange={e => handleChange(e)}
+              onChange={(e) => handleChange(e)}
             />
           </Form.Field>
           <Form.Field>
@@ -39,7 +49,7 @@ function UserLogin() {
               name="password"
               placeholder="Password"
               type="password"
-              onChange={e => handleChange(e)}
+              onChange={(e) => handleChange(e)}
             />
           </Form.Field>
           <Button type="submit">Login</Button>
