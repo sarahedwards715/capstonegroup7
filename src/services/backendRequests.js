@@ -14,7 +14,21 @@ export const postUsers = (formData) => {
     body: JSON.stringify({
       username: formData.username,
       displayName: formData.displayName,
-      password: formData.password
+      password: formData.password,
+    }),
+  }).then((res) => res.json());
+};
+
+export const loginUser = (formData) => {
+  return fetch(baseURL + "users/login", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username: formData.username,
+      password: formData.password,
     }),
   }).then((res) => res.json());
 };

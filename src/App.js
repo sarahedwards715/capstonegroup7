@@ -8,6 +8,7 @@ import Browse from "./views/Browse";
 import Playlist from "./views/Playlist";
 import NotFound from "./views/NotFound";
 import Mood from "./views/Mood";
+import UserRegistration from "./components/userRegistration/UserRegistration";
 import Navigation from "./components/navigation/Navigation";
 import PlaylistsCreation from "./components/playlistsCreation/PlaylistsCreation";
 
@@ -16,6 +17,7 @@ function App() {
 
   return (
     <div className="App">
+      Hello From App Wrapper
       <div className="appRightColumn">
         <Navigation />
         {accessToken || <p>You Are Not Authorized! Login with Spotify!</p>}
@@ -25,11 +27,17 @@ function App() {
           <Route path="/browse/:mood" component={Mood} />
           <Route exact path="/playlist/:playlistId" component={Playlist} />
           <Route path="*" component={NotFound} />
+          <Route
+            exact
+            path="/userRegistration"
+            component={UserRegistration}
+          ></Route>
+          <Route path="*" component={NotFound} />
         </Switch>
+      </div>
       <div className="appLeftColumn">
         Hello From App Wrapper
         {accessToken && <PlaylistsCreation />}
-      </div>
       </div>
     </div>
   );
