@@ -9,6 +9,7 @@ import UserLogin from "../components/userLogin/UserLogin";
 import "./views.scss";
 import { Link } from "react-router-dom";
 import { Button } from "semantic-ui-react";
+import DeletionModal from "../components/deletionModal/DeletionModal";
 
 function Landing(props) {
   const accessToken = useStore(state => state.accessToken);
@@ -72,6 +73,8 @@ function Landing(props) {
         <Button onClick={handleClick}>Here</Button>
         to create a new account
       </div>
+      <DeletionModal deleteTarget = "Website"/>
+
     </div>
   );
 }

@@ -93,3 +93,18 @@ export const postPlaylists = (formData, songs, username, moodifyToken) => {
     }),
   }).then((res) => res.json());
 };
+
+
+export const patchPlaylists = (formData, songs, username, moodifyToken) => {};
+
+export const deletePlaylists = (id, moodifyToken) => {
+  return fetch(baseURL + "playlists/" + id, {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + moodifyToken,
+    },
+  })
+    .then((res) => res.json())
+};
