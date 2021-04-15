@@ -15,6 +15,7 @@ function Landing(props) {
   const setAccessToken = useStore(state => state.setAccessToken);
   const setExpiresIn = useStore(state => state.setExpiresIn);
   const authURL = useStore(state => state.authURL);
+  
   const [registerUserVisible, setRegisterUserVisible] = useState(false);
 
   // CITATION: Credit to Joe Karlsson -
@@ -32,8 +33,6 @@ function Landing(props) {
           }
           return initial;
         }, {});
-
-      console.log("Hash:", hash);
 
       let authToken = hash.access_token;
       if (authToken) {
