@@ -19,10 +19,9 @@ function App() {
 
   return (
     <div className="App">
-      Hello From App Wrapper
       <div className="appRightColumn">
         <Navigation />
-        {accessToken || <p>You Are Not Authorized! Login with Spotify!</p>}
+        {!accessToken && <p>You Are Not Authorized! Login with Spotify!</p>}
         <Switch>
           <Route exact path="/" component={Landing} />
           <Route exact path="/browse" component={Browse} />
@@ -34,7 +33,6 @@ function App() {
         </Switch>
       </div>
       <div className="appLeftColumn">
-        Hello From App Wrapper
         {accessToken && <PlaylistsCreation />}
       </div>
     </div>

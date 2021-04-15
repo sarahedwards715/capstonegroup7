@@ -69,27 +69,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-CLIENT ID FOR SPOTIFY API : 7a4ffd2d4afc4f4d876826b6d369ab66
-
-Schema:
-user: {
-username: ,
-createdAt: ,
-
-    }
-
-    playlist: {
-        likes: [
-            {//some Like Object}
-        ]
-    }
-
-    likes: {
-        id: ,
-        username: ,
-        playlistId: ,
-        createdAt:
-    }
 
 Authors :
 Project Owner - Brian Ward
@@ -121,7 +100,6 @@ function Playlist(props) {
 
   return (
     <div>
-      Hello From Playlist
       <Button onClick={getUsers}>Get All Users</Button>
       <Form onSubmit={handleSearch}>
         <Form.Field>

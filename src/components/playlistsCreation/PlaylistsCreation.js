@@ -6,6 +6,7 @@ import { Form, Button } from "semantic-ui-react";
 import { postPlaylists } from "../../services/backendRequests";
 
 function PlaylistsCreation() {
+  let user = useStore((state) => state.user);
   let createdPlaylistSongs = useStore((state) => state.createdPlaylistSongs);
   let setPlaylists = useStore((state) => state.setPlaylists);
   const [formData, setFormData] = useState({
@@ -22,13 +23,20 @@ function PlaylistsCreation() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    postPlaylists(formData, createdPlaylistSongs, "Cherry");
-    setPlaylists();
+    postPlaylists(
+      formData,
+      createdPlaylistSongs,
+      user.username,
+      user.moodifyToken
+    ).then((data) => {
+      console.log(data);
+      if (data.statusCode === 201) setPlaylists();
+    });
   }
 
   return (
     <div className="playlistCreationWrapper">
-      {createdPlaylistSongs.length !== 0 && (
+      {createdPlaylistSongs.length !== 0 && user.moodifyToken && (
         <>
           <SongList
             songs={createdPlaylistSongs}
