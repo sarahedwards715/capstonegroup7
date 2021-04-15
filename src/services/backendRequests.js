@@ -1,5 +1,7 @@
 //Since our backend is still only local, baseURL is port 4000 for now.
 
+import Reviews from "../components/reviews/reviews";
+
 //Just change baseURL whenever we deploy our backend somewhere
 let baseURL = "http://localhost:4000/";
 
@@ -81,5 +83,27 @@ export const postPlaylists = (formData, songs, username) => {
       username: username,
       description: formData.description || "",
     }),
-  });
+
+  }).then((res) => res.json())
+    .then((data) => console.log(data))
 };
+
+export const postReview = (thumbsUp, thumbsDown, description) => {
+  return fetch(baseURL + "reviews", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      playlist_id: null,
+      description: null,
+      thumbsUp: null,
+      thumbsDown: null,
+    })
+  }
+  ).then((res) => res.json()).then((data) => console.log(data))
+}
+
+
+
