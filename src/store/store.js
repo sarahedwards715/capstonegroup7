@@ -8,6 +8,9 @@ const authURL = buildLoginURL();
 
 const useStore = (set, get) => ({
   user: { username: "", moodifyToken: "" },
+  setUser: (username, token) => {
+    set({ user: { username: username, moodifyToken: token } });
+  },
   accessToken: "",
   setAccessToken: (token) => {
     set({ accessToken: token });
@@ -53,7 +56,7 @@ const useStore = (set, get) => ({
       (song) => song.id === songId
     );
     let newArray = [...get().createdPlaylistSongs];
-    newArray.splice(indexForDeletion, 1)
+    newArray.splice(indexForDeletion, 1);
     set({
       createdPlaylistSongs: newArray,
     });
