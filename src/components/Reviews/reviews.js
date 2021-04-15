@@ -8,7 +8,7 @@ function Reviews(props) {
     
 
      useEffect(() => {
-    //   if (like.length == 0 +1)
+    
         
     
 
