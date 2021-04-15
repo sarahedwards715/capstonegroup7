@@ -17,26 +17,19 @@ function App() {
 
   return (
     <div className="App">
-      Hello From App Wrapper
       <div className="appRightColumn">
         <Navigation />
-        {accessToken || <p>You Are Not Authorized! Login with Spotify!</p>}
+        {!accessToken && <p>You Are Not Authorized! Login with Spotify!</p>}
         <Switch>
           <Route exact path="/" component={Landing} />
           <Route exact path="/browse" component={Browse} />
           <Route path="/browse/:mood" component={Mood} />
           <Route exact path="/playlist/:playlistId" component={Playlist} />
-          <Route path="*" component={NotFound} />
-          <Route
-            exact
-            path="/userRegistration"
-            component={UserRegistration}
-          ></Route>
+          <Route exact path="/userRegistration" component={UserRegistration} />
           <Route path="*" component={NotFound} />
         </Switch>
       </div>
       <div className="appLeftColumn">
-        Hello From App Wrapper
         {accessToken && <PlaylistsCreation />}
       </div>
     </div>

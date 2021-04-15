@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { Loader } from "semantic-ui-react";
+import PlaylistsCard from "../components/playlistsCard/PlaylistsCard";
 import SongList from "../components/songList/SongList";
 import useStore from "../store/store";
-import Reviews from "../components/reviews/reviews";
+import Reviews from "../components/reviews/Reviews";
+import { getPlaylistById } from "../services/backendRequests";
 
 function Playlist(props) {
-  const playlists = useStore((state) => state.playlists);
   const [activePlaylist, setActivePlaylist] = useState({});
 
   useEffect(() => {
-    setActivePlaylist(
-      playlists.find(
-        (playlist) => playlist._id === props.match.params.playlistId
-      )
-    );
+    getPlaylistById(props.match.params.playlistId).then((data) => {
+      setActivePlaylist(data);
+    });
   }, []);
 
   return (
     <div className="playlistPageWrapper">
-      Hello From playlist
-      {activePlaylist && Object.keys(activePlaylist).length ? (
+      <PlaylistsCard playlist={activePlaylist} showDescription={true} />
+      {activePlaylist.songs ? (
         <>
           <div className="playlistPageTitle">{activePlaylist.title}</div>
           {activePlaylist.description && (
@@ -36,7 +35,9 @@ function Playlist(props) {
           </>
     
       ) : (
-        <Loader size="big"> Loading... </Loader>
+        <Loader active size="big">
+          Loading...
+        </Loader>
       )}
     </div>
   );

@@ -29,16 +29,20 @@ function Browse(props) {
 
   return (
     <div className="browseWrapper">
-      <p>Hello From Browse</p>
       <Button onClick={togglePlaylists}>{moodsOrPlaylists}</Button>
+      {/* Triple ternary baby. Maybe clean this up? */}
       {moodsArray?.length ? (
-        playlists?.length && moodsOrPlaylists === "playlists" ? (
-          <PlaylistsList />
+        moodsOrPlaylists === "playlists" ? (
+          playlists?.length ? (
+            <PlaylistsList />
+          ) : (
+            <div>There are no Playlists! Try Creating One!</div>
+          )
         ) : (
           <MoodsList />
         )
       ) : (
-        <Loader size="big"> Loading... </Loader>
+        <Loader active size="big"> Loading... </Loader>
       )}
     </div>
   );

@@ -100,7 +100,6 @@ function Playlist(props) {
 
   return (
     <div>
-      Hello From Playlist
       <Button onClick={getUsers}>Get All Users</Button>
       <Form onSubmit={handleSearch}>
         <Form.Field>

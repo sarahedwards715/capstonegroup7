@@ -9,7 +9,6 @@ function PlaylistsList(props) {
 
   return (
     <div className="playlistsListWrapper">
-      Hello from Playlists
       <Card.Group textAlign="center" className="playlistsContainer">
         {playlists.map((playlist) => {
           return <PlaylistsCard playlist={playlist} key={playlist._id} />;
