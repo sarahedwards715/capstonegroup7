@@ -1,12 +1,20 @@
 .playlistsContainer {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .playlistsListWrapper {
-    height: 100%;
-    background: black;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  height: 43vh;
+  width: 100%;
+  // justify-content: center;
+  // align-items: center;
+  overflow-y: scroll;
+  // margin-left: 15%;
+}
+
+.playlistsListWrapper {
+  height: 100%;
+  background: black;
+}
+
+.playlistsListWrapper p {
+  font-size: 4em;
+  padding-left: 2%;
+}
