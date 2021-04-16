@@ -8,11 +8,13 @@ function Playlist(props) {
   const [activePlaylist, setActivePlaylist] = useState({});
 
   useEffect(() => {
-    getPlaylistById(props.match.params.playlistId).then((data) => {
+    getPlaylistById(props.match.params.playlistId).then(data => {
+      console.log(props.match.params.playlistId, "from useEffect");
       setActivePlaylist(data);
     });
   }, []);
-
+  console.log(props);
+  console.log(activePlaylist, "from playlist");
   return (
     <div className="playlistPageWrapper">
       <PlaylistsCard playlist={activePlaylist} showDescription={true} />

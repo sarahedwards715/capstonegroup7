@@ -6,12 +6,12 @@ import useStore from "../../store/store";
 
 function PlaylistsCard(props) {
   const user = useStore(state => state.user);
-
+  console.log(props, "from playlsits card");
   return (
     <Card className="playlistsCard">
       <Card.Content>
         <Card.Header>
-          <Link to={`/playlist/${props.playlist._id}`}>
+          <Link to={`/playlists/${props.playlist._id}`}>
             {props.playlist.title}
           </Link>
         </Card.Header>
