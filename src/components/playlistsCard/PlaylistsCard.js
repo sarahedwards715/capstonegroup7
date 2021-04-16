@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import useStore from "../../store/store";
 
 function PlaylistsCard(props) {
-  const user = useStore((state) => state.user);
+  const user = useStore(state => state.user);
 
   return (
     <Card className="playlistsCard">

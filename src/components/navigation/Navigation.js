@@ -25,13 +25,11 @@ function Navigation(props) {
             Landing
           </Link>
         </Menu.Item>
-        {accessToken && (
-          <Menu.Item name="browse" active={activeItem === "browse"}>
-            <Link to="/browse" onClick={e => handleClick(e, "browse")}>
-              Browse
-            </Link>
-          </Menu.Item>
-        )}
+        <Menu.Item name="home" active={activeItem === "home"}>
+          <Link to="/home" onClick={e => handleClick(e, "home")}>
+            Home
+          </Link>
+        </Menu.Item>
         {accessToken && (
           <Menu.Item name="userProfile" active={activeItem === "userProfile"}>
             <Link
@@ -47,6 +45,14 @@ function Navigation(props) {
               Logout
             </Link>
           </Menu.Item>
+        )}
+        {!accessToken ? (
+          <p>
+            You Are Not Authorized! If you want the full experience, please go
+            to the landing page and authorize with Spotify!
+          </p>
+        ) : (
+          ""
         )}
       </Menu>
     </div>
