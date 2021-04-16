@@ -73,8 +73,6 @@ function Landing(props) {
         <Button onClick={handleClick}>Here</Button>
         to create a new account
       </div>
-      <DeletionModal deleteTarget = "Website"/>
-
     </div>
   );
 }
