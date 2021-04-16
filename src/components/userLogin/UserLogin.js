@@ -1,19 +1,21 @@
 import "./UserLogin.scss";
 import useStore from "../../store/store";
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Button, Form } from "semantic-ui-react";
 import { loginUser } from "../../services/backendRequests";
 
 function UserLogin() {
-  let setUser = useStore((state) => state.setUser);
+  let setUser = useStore(state => state.setUser);
 
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
+  let history = useHistory();
 
   function handleChange(event) {
-    setFormData((state) => ({
+    setFormData(state => ({
       ...state,
       [event.target.name]: event.target.value,
     }));
@@ -21,12 +23,13 @@ function UserLogin() {
 
   function handleRegister(event) {
     event.preventDefault();
-    loginUser(formData).then((data) => {
-      console.log(data);
+
+    loginUser(formData).then(data => {
       if (data.statusCode === 200) {
         setUser(data.userInfo.username, data.moodifyToken);
+        history.push("/home");
       } else {
-        console.log(data.message);
+        console.log("must enter correct username/password");
       }
     });
   }
@@ -40,7 +43,7 @@ function UserLogin() {
             <input
               name="username"
               placeholder="Username"
-              onChange={(e) => handleChange(e)}
+              onChange={e => handleChange(e)}
             />
           </Form.Field>
           <Form.Field>
@@ -49,7 +52,7 @@ function UserLogin() {
               name="password"
               placeholder="Password"
               type="password"
-              onChange={(e) => handleChange(e)}
+              onChange={e => handleChange(e)}
             />
           </Form.Field>
           <Button type="submit">Login</Button>
