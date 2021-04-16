@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Loader } from "semantic-ui-react";
 import PlaylistsCard from "../components/playlistsCard/PlaylistsCard";
+import Navigation from "../components/navigation/Navigation";
 import SongList from "../components/songList/SongList";
 import { getPlaylistById } from "../services/backendRequests";
 
@@ -17,6 +18,7 @@ function Playlist(props) {
   console.log(activePlaylist, "from playlist");
   return (
     <div className="playlistPageWrapper">
+      <Navigation />
       <PlaylistsCard playlist={activePlaylist} showDescription={true} />
       {activePlaylist.songs ? (
         <>
