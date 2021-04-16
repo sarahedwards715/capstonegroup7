@@ -24,7 +24,7 @@ function Browse(props) {
 
       <PlaylistsList />
 
-      <Loader size="big"> Loading... </Loader>
+      <Loader active size="big"> Loading... </Loader>
     </div>
   );
 }
