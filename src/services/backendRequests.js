@@ -97,8 +97,8 @@ export const postPlaylists = (formData, songs, username, moodifyToken) => {
 
 export const patchPlaylists = (formData, songs, username, moodifyToken) => {};
 
-export const deletePlaylists = (id, moodifyToken) => {
-  return fetch(baseURL + "playlists/" + id, {
+export const deletePlaylists = (playlist_id, moodifyToken) => {
+  return fetch(baseURL + "playlists/" + playlist_id, {
     method: "DELETE",
     headers: {
       Accept: "application/json",

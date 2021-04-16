@@ -10,7 +10,6 @@ import NotFound from "./views/NotFound";
 import Mood from "./views/Mood";
 import UserRegistration from "./components/userRegistration/UserRegistration";
 import Profile from "./views/Profile";
-import Navigation from "./components/navigation/Navigation";
 import PlaylistsCreation from "./components/playlistsCreation/PlaylistsCreation";
 import Home from "./views/Home";
 function App() {
