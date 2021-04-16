@@ -7,7 +7,6 @@ import { deletePlaylists } from "../../services/backendRequests";
 import DeletionModal from "../deletionModal/DeletionModal";
 
 function PlaylistsCard(props) {
-<<<<<<< HEAD
   const user = useStore((state) => state.user);
   let setPlaylists = useStore((state) => state.setPlaylists);
 
@@ -19,9 +18,6 @@ function PlaylistsCard(props) {
       if (data.statusCode === 200) setPlaylists();
     });
   }
-=======
-  const user = useStore(state => state.user);
->>>>>>> main
 
   return (
     <Card className="playlistsCard">
