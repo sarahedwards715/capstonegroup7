@@ -23,7 +23,7 @@ function PlaylistsCard(props) {
     <Card className="playlistsCard">
       <Card.Content>
         <Card.Header>
-          <Link to={`/playlist/${props.playlist._id}`}>
+          <Link to={`/playlists/${props.playlist._id}`}>
             {props.playlist.title}
           </Link>
         </Card.Header>

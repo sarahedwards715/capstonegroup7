@@ -94,8 +94,28 @@ export const postPlaylists = (formData, songs, username, moodifyToken) => {
   }).then((res) => res.json());
 };
 
-
-export const patchPlaylists = (formData, songs, username, moodifyToken) => {};
+export const patchPlaylists = (
+  playlist_id,
+  formData,
+  songs,
+  username,
+  moodifyToken
+) => {
+  return fetch(baseURL + "playlists/" + playlist_id, {
+    method: "PATCH",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + moodifyToken,
+    },
+    body: JSON.stringify({
+      title: formData.title || null,
+      songs: songs || null,
+      username: username || null,
+      description: formData.description || null,
+    }),
+  });
+};
 
 export const deletePlaylists = (playlist_id, moodifyToken) => {
   return fetch(baseURL + "playlists/" + playlist_id, {
@@ -105,6 +125,5 @@ export const deletePlaylists = (playlist_id, moodifyToken) => {
       "Content-Type": "application/json",
       Authorization: "Bearer " + moodifyToken,
     },
-  })
-    .then((res) => res.json())
+  }).then((res) => res.json());
 };
