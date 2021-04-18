@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Loader } from "semantic-ui-react";
 import PlaylistsCard from "../components/playlistsCard/PlaylistsCard";
+import Navigation from "../components/navigation/Navigation";
 import SongList from "../components/songList/SongList";
 import { getPlaylistById } from "../services/backendRequests";
 
@@ -8,13 +9,16 @@ function Playlist(props) {
   const [activePlaylist, setActivePlaylist] = useState({});
 
   useEffect(() => {
-    getPlaylistById(props.match.params.playlistId).then((data) => {
+    getPlaylistById(props.match.params.playlistId).then(data => {
+      console.log(props.match.params.playlistId, "from useEffect");
       setActivePlaylist(data);
     });
   }, []);
-
+  console.log(props);
+  console.log(activePlaylist, "from playlist");
   return (
     <div className="playlistPageWrapper">
+      <Navigation />
       <PlaylistsCard playlist={activePlaylist} showDescription={true} />
       {activePlaylist.songs ? (
         <>
