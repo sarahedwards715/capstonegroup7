@@ -17,8 +17,6 @@ function Browse(props) {
 
   return (
     <div className="browseWrapper">
-      <p>Hello From Browse</p>
-
       {(moodsArray.length && playlists.length) ? (
         <>
           <MoodsList />

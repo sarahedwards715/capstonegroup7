@@ -12,11 +12,11 @@ import { Button } from "semantic-ui-react";
 import DeletionModal from "../components/deletionModal/DeletionModal";
 
 function Landing(props) {
-  const accessToken = useStore(state => state.accessToken);
-  const setAccessToken = useStore(state => state.setAccessToken);
-  const setExpiresIn = useStore(state => state.setExpiresIn);
-  const authURL = useStore(state => state.authURL);
-  
+  const accessToken = useStore((state) => state.accessToken);
+  const setAccessToken = useStore((state) => state.setAccessToken);
+  const setExpiresIn = useStore((state) => state.setExpiresIn);
+  const authURL = useStore((state) => state.authURL);
+
   const [registerUserVisible, setRegisterUserVisible] = useState(false);
 
   // CITATION: Credit to Joe Karlsson -
@@ -58,11 +58,17 @@ function Landing(props) {
       {/* This was for launching separate window, may come back to later*/}
       {/* <Button onClick={() => launchLoginSpot(props)}>Click Me!</Button> */}
       {registerUserVisible ? (
-        <span className="landingTitle">new user</span>
+        <div className="landingTitleContainer">
+          <span className="landingTitleText">new user</span>
+        </div>
       ) : (
-        <span className="landingTitle">moodify</span>
+        <div className="landingTitleContainer">
+          <span className="landingTitleText">moodify</span>
+        </div>
       )}
-      {registerUserVisible ? <UserRegistration /> : <UserLogin />}
+      <div className="landingFormWrapper">
+        {registerUserVisible ? <UserRegistration /> : <UserLogin />}
+      </div>
       {!accessToken && (
         <a className="authBtn" href={authURL}>
           Authorize With Spotify

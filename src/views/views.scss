@@ -14,30 +14,50 @@
   background: black;
   color: white;
   text-align: center;
+  margin-top: 10vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.landingFormWrapper {
+  width: 350px;
+  height: 350px;
+  // top: 50%;
+  // left: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  border-radius: 50%;
+  padding: 3%;
 }
 
 .viewContainer {
   display: flex;
 }
 
-.landingTitle {
+.landingTitleContainer {
   font-family: "Fredoka One", cursive;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 6em;
-  position: absolute;
-  top: 20%;
+  top: 50%;
   left: 50%;
   height: 100px;
-  transform: translateX(-50%);
+  width: 350px;
   background-image: var(--gradient);
   color: transparent;
   background-clip: text;
   background-size: 400%;
   animation: bg-animation 3s infinite alternate;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .landingTitleText {
+    // justify-self: flex-end;
+    font-size: 6em;
+  }
 }
 
 // .browseWrapper {
@@ -54,8 +74,26 @@
 }
 
 .newUserButtonWrapper {
-  position: absolute;
   bottom: 15%;
   left: 50%;
-  transform: translateX(-50%);
+}
+
+.moodPageWrapper {
+
+  .moodPageBanner {
+    font-family: "Fredoka One", cursive;
+    top: 50%;
+    left: 50%;
+    height: 100px;
+    background-image: var(--gradient);
+    color: transparent;
+    background-clip: text;
+    background-size: 400%;
+    animation: bg-animation 3s infinite alternate;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 6em;
+  }
 }

@@ -9,6 +9,13 @@ import DeletionModal from "../deletionModal/DeletionModal";
 function PlaylistsCard(props) {
   const user = useStore((state) => state.user);
   let setPlaylists = useStore((state) => state.setPlaylists);
+  let createdPlaylistData = useStore((state) => state.createdPlaylistData);
+  let setCreatedPlaylistEditData = useStore(
+    (state) => state.setCreatedPlaylistEditData
+  );
+  let setCreatedPlaylistEditMode = useStore(
+    (state) => state.setCreatedPlaylistEditMode
+  );
 
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -17,6 +24,11 @@ function PlaylistsCard(props) {
       console.log(data);
       if (data.statusCode === 200) setPlaylists();
     });
+  }
+
+  function startEditMode(e) {
+    setCreatedPlaylistEditMode(props.playlist._id);
+    setCreatedPlaylistEditData(props.playlist);
   }
 
   return (
@@ -34,7 +46,7 @@ function PlaylistsCard(props) {
       </Card.Content>
       {user.username === props.playlist.username && (
         <Card.Content extra>
-          <Button>Edit Playlist</Button>
+          <Button onClick={(e) => startEditMode()}>Edit Playlist</Button>
           <Button onClick={(e) => setModalVisible(true)}>
             Delete Playlist
           </Button>

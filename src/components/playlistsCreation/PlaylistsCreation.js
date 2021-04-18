@@ -1,46 +1,78 @@
 import "./PlaylistsCreation.scss";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useStore from "../../store/store";
 import SongList from "../songList/SongList";
-import { Form, Button } from "semantic-ui-react";
-import { postPlaylists } from "../../services/backendRequests";
+import { Form, Button, Segment, Message, TextArea } from "semantic-ui-react";
+import { postPlaylists, patchPlaylists } from "../../services/backendRequests";
 
 function PlaylistsCreation() {
   let user = useStore((state) => state.user);
-  let createdPlaylistSongs = useStore((state) => state.createdPlaylistSongs);
+  let createdPlaylistData = useStore((state) => state.createdPlaylistData);
+  let createdPlaylistEditMode = useStore(
+    (state) => state.createdPlaylistEditMode
+  );
+  let setCreatedPlaylistData = useStore(
+    (state) => state.setCreatedPlaylistData
+  );
+  let clearCreatedPlaylistData = useStore(
+    (state) => state.clearCreatedPlaylistData
+  );
+  let setCreatedPlaylistEditMode = useStore(
+    (state) => state.setCreatedPlaylistEditMode
+  );
   let setPlaylists = useStore((state) => state.setPlaylists);
-  
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-  });
 
   function handleChange(event) {
-    setFormData((state) => ({
-      ...state,
+    setCreatedPlaylistData({
+      ...createdPlaylistData,
       [event.target.name]: event.target.value,
-    }));
+    });
+  }
+
+  function handleClose(e) {
+    clearCreatedPlaylistData();
+    if (createdPlaylistEditMode.active) setCreatedPlaylistEditMode();
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    postPlaylists(
-      formData,
-      createdPlaylistSongs,
-      user.username,
-      user.moodifyToken
-    ).then((data) => {
-      console.log(data);
-      if (data.statusCode === 201) setPlaylists();
-    });
+    console.log("INPUT", createdPlaylistEditMode.playlist_id);
+    createdPlaylistEditMode.active
+      ? patchPlaylists(
+          createdPlaylistEditMode.playlist_id,
+          createdPlaylistData,
+          user.username,
+          user.moodifyToken
+        ).then((data) => {
+          console.log(data);
+          if (data.statusCode === 200) {
+            setPlaylists();
+            clearCreatedPlaylistData();
+            setCreatedPlaylistEditMode();
+          }
+        })
+      : postPlaylists(
+          createdPlaylistData,
+          user.username,
+          user.moodifyToken
+        ).then((data) => {
+          console.log(data);
+          if (data.statusCode === 201) {
+            setPlaylists();
+            clearCreatedPlaylistData();
+          }
+        });
   }
 
   return (
     <div className="playlistCreationWrapper">
-      {createdPlaylistSongs.length !== 0 && user.moodifyToken && (
-        <>
+      {createdPlaylistData.songs.length !== 0 && user.moodifyToken && (
+        <Segment>
+          {createdPlaylistEditMode.active && (
+            <Message warning>You Are In Edit Mode!</Message>
+          )}
           <SongList
-            songs={createdPlaylistSongs}
+            songs={createdPlaylistData.songs}
             collapsing={true}
             compact={true}
           />
@@ -51,19 +83,31 @@ function PlaylistsCreation() {
                 name="title"
                 placeholder="Title"
                 onChange={(e) => handleChange(e)}
+                value={createdPlaylistData.title}
               />
             </Form.Field>
             <Form.Field>
               <label>Playlist Description</label>
-              <input
+              <TextArea
                 name="description"
                 placeholder="Description"
                 onChange={(e) => handleChange(e)}
+                value={createdPlaylistData.description}
               />
             </Form.Field>
-            <Button type="submit">Upload Playlist</Button>
+            <Button.Group>
+              <Form.Button type="submit">
+                {createdPlaylistEditMode.active
+                  ? "Update Playlist"
+                  : "Upload Playlist"}
+              </Form.Button>
+              <Button.Or />
+              <Button type="reset" onClick={(e) => handleClose()}>
+                Close
+              </Button>
+            </Button.Group>
           </Form>
-        </>
+        </Segment>
       )}
     </div>
   );
