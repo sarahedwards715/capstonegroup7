@@ -10,6 +10,10 @@
   );
 }
 
+.viewContainer {
+  display: flex;
+}
+
 .landingWrapper {
   background: black;
   color: white;
@@ -32,10 +36,10 @@
   background: white;
   border-radius: 50%;
   padding: 3%;
-}
 
-.viewContainer {
-  display: flex;
+  .formLabel {
+    color: black;
+  }
 }
 
 .landingTitleContainer {

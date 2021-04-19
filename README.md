@@ -69,17 +69,17 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-
 Authors :
-Project Owner - Brian Ward
-Scrum Master - Sarah Edwards
-Quality Assurance - Nicholas Dudash
-Contributor - Jeremiah Harris
+  Project Owner - Brian Ward
+  Scrum Master - Sarah Edwards
+  Quality Assurance - Nicholas Dudash
+  Contributor - Jeremiah Harris
 References:
-Spotify API - https://api.spotify.com/v1/
-Spotify API Documentation and Guides - https://developer.spotify.com/
-Thirtify Webapp - Official Spotify API Example - Per-Olov Jernberg, Jose M. Perez, Michael Thelin, and asmitter - https://github.com/possan/webapi-player-example
-How to Build A Spotify Player with React in 15 Minutes - Joe Karlsson - https://levelup.gitconnected.com/how-to-build-a-spotify-player-with-react-in-15-minutes-7e01991bc4b6
+  Spotify API - https://api.spotify.com/v1/
+  Spotify API Documentation and Guides - https://developer.spotify.com/
+  Thirtify Webapp - Official Spotify API Example - Per-Olov Jernberg, Jose M. Perez, Michael Thelin, and asmitter - https://github.com/possan/webapi-player-example
+  How to Build A Spotify Player with React in 15 Minutes - Joe Karlsson - https://levelup.gitconnected.com/how-to-build-a-spotify-player-with-react-in-15-minutes-7e01991bc4b6
+  Brian Design - React Form Validation Using Custom Hooks -https://www.youtube.com/watch?v=KGFG-yQD7Dw
 
 This Get Users and Get Users By Id Stuff Works, putting it here for now!
 
@@ -117,4 +117,3 @@ function Playlist(props) {
 }
 
 export default Playlist; -->
-

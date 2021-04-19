@@ -75,9 +75,12 @@ function Landing(props) {
         </a>
       )}
       <div className="newUserButtonWrapper">
-        Click
-        <Button onClick={handleClick}>Here</Button>
-        to create a new account
+        {/* Click */}
+        <Button onClick={handleClick}>
+          {registerUserVisible
+            ? "Click Here to Login"
+            : "Click Here to Create a New Account"}
+        </Button>
       </div>
     </div>
   );
