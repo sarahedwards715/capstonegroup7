@@ -1,22 +1,21 @@
-import "./PlaylistsList.scss";
 import React from "react";
 import useStore from "../../store/store";
 import { Card } from "semantic-ui-react";
 import PlaylistsCard from "../playlistsCard/PlaylistsCard";
 
-function PlaylistsList(props) {
-  const playlists = useStore(state => state.playlists);
-  console.log(playlists, "from playlistslist");
+const UserPlaylists = props => {
+  const userPlaylists = useStore(state => state.userPlaylists);
+
+  console.log(userPlaylists);
   return (
-    <div className="playlistsListWrapper">
-      <div className = "playlistsListBanner">playlists</div>
+    <div>
       <Card.Group textAlign="center" className="playlistsContainer">
-        {playlists.map(playlist => {
+        {userPlaylists.map(playlist => {
           return <PlaylistsCard playlist={playlist} key={playlist._id} />;
         })}
       </Card.Group>
     </div>
   );
-}
+};
 
-export default PlaylistsList;
+export default UserPlaylists;

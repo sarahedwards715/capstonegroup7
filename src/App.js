@@ -14,11 +14,11 @@ import Home from "./views/Home";
 import Navigation from "./components/navigation/Navigation";
 function App() {
   const accessToken = useStore(state => state.accessToken);
-  const user = useStore(state => state.user)
+  const user = useStore(state => state.user);
 
   return (
     <div className="App">
-      {(accessToken && user.moodifyToken) && <Navigation /> }
+      {accessToken && user.moodifyToken && <Navigation />}
       <div className="appRightColumn">
         <Switch>
           <Route exact path="/" component={Landing} />
