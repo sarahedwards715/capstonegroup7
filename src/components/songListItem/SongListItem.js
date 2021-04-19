@@ -6,6 +6,7 @@ import useStore from "../../store/store";
 function SongListItem(props) {
   // Look at All The Properties of the Song Object, May Need Others Later
   // console.log(props.song);
+  console.log(props.song)
   let { name, album, artists, duration_ms, popularity, id } = props.song;
   let user = useStore((state) => state.user);
   let createdPlaylistData = useStore((state) => state.createdPlaylistData);

@@ -1,7 +1,7 @@
 import "./PlaylistsCard.scss";
 import React, { useState } from "react";
 import { Card, Button, Modal } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import useStore from "../../store/store";
 import { deletePlaylists } from "../../services/backendRequests";
 import DeletionModal from "../deletionModal/DeletionModal";
@@ -17,12 +17,17 @@ function PlaylistsCard(props) {
     (state) => state.setCreatedPlaylistEditMode
   );
 
+  let history = useHistory()
+
   const [modalVisible, setModalVisible] = useState(false);
 
   function handleDelete(e) {
     deletePlaylists(props.playlist._id, user.moodifyToken).then((data) => {
       console.log(data);
-      if (data.statusCode === 200) setPlaylists();
+      if (data.statusCode === 200) {
+        setPlaylists();
+        history.push("/home");
+      }
     });
   }
 
