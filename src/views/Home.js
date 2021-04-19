@@ -1,5 +1,4 @@
 import React from "react";
-import Navigation from "../components/navigation/Navigation";
 import useStore from "../store/store";
 import Browse from "./Browse";
 import "./Home.scss";
@@ -9,7 +8,6 @@ const Home = () => {
 
   return (
     <div>
-      <Navigation />
       <div className="viewContainer">
         <div className="leftContainer"></div>
         <div className="rightContainer">

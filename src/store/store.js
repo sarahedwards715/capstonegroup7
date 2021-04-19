@@ -42,23 +42,73 @@ const useStore = (set, get) => ({
       user: { username: "", moodifyToken: "" },
       accessToken: "",
       accessExpiresIn: "",
+      createdPlaylistData: {
+        title: "",
+        description: "",
+        songs: [],
+      },
     });
   },
-  createdPlaylistSongs: [],
-  addCreatedPlaylistSongs: (newSongObj) => {
-    let currentSongs = get().createdPlaylistSongs;
+  createdPlaylistData: {
+    title: "",
+    description: "",
+    songs: [],
+  },
+  clearCreatedPlaylistData: () => {
     set({
-      createdPlaylistSongs: [...currentSongs, newSongObj],
+      createdPlaylistData: {
+        title: "",
+        description: "",
+        songs: [],
+      },
+    });
+  },
+  setCreatedPlaylistData: (formData) => {
+    let currentData = get().createdPlaylistData;
+    set({
+      createdPlaylistData: {
+        ...currentData,
+        title: formData.title,
+        description: formData.description,
+      },
+    });
+  },
+  addCreatedPlaylistSongs: (newSongObj) => {
+    let currentData = get().createdPlaylistData;
+    let currentSongs = get().createdPlaylistData.songs;
+    set({
+      createdPlaylistData: {
+        ...currentData,
+        songs: [...currentSongs, newSongObj],
+      },
     });
   },
   deleteCreatedPlaylistSongs: (songId) => {
-    let indexForDeletion = get().createdPlaylistSongs.findIndex(
+    let currentData = get().createdPlaylistData;
+    let indexForDeletion = get().createdPlaylistData.songs.findIndex(
       (song) => song.id === songId
     );
-    let newArray = [...get().createdPlaylistSongs];
+    let newArray = [...get().createdPlaylistData.songs];
     newArray.splice(indexForDeletion, 1);
     set({
-      createdPlaylistSongs: newArray,
+      createdPlaylistData: { ...currentData, songs: newArray },
+    });
+  },
+  createdPlaylistEditMode: { active: false, playlist_id: null },
+  setCreatedPlaylistEditMode: (playlist_id) => {
+    get().createdPlaylistEditMode?.active
+      ? set({ createdPlaylistEditMode: { active: false, playlist_id: null } })
+      : set({
+          createdPlaylistEditMode: { active: true, playlist_id: playlist_id },
+        });
+  },
+  setCreatedPlaylistEditData: (playlist) => {
+    set({
+      createdPlaylistData: {
+        title: playlist.title,
+        description: playlist.description,
+        songs: playlist.songs,
+      },
     });
   },
 });

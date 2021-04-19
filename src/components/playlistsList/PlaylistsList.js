@@ -9,7 +9,7 @@ function PlaylistsList(props) {
 
   return (
     <div className="playlistsListWrapper">
-      <p> User Playlists</p>
+      <div className = "playlistsListBanner">playlists</div>
       <Card.Group textAlign="center" className="playlistsContainer">
         {playlists.map(playlist => {
           return <PlaylistsCard playlist={playlist} key={playlist._id} />;

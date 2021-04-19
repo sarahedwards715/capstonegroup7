@@ -2,7 +2,7 @@
 //Just change baseURL whenever we deploy our backend somewhere
 let baseURL = "http://localhost:4000/";
 
-export const postUsers = formData => {
+export const postUsers = (formData) => {
   //Maybe Password Later??
   return fetch(baseURL + "users", {
     method: "POST",
@@ -15,10 +15,10 @@ export const postUsers = formData => {
       displayName: formData.displayName,
       password: formData.password,
     }),
-  }).then(res => res.json());
+  }).then((res) => res.json());
 };
 
-export const loginUser = formData => {
+export const loginUser = (formData) => {
   return fetch(baseURL + "users/login", {
     method: "POST",
     headers: {
@@ -29,7 +29,7 @@ export const loginUser = formData => {
       username: formData.username,
       password: formData.password,
     }),
-  }).then(res => res.json());
+  }).then((res) => res.json());
 };
 
 export const getUsers = () => {
@@ -40,11 +40,11 @@ export const getUsers = () => {
       "Content-Type": "application/json",
     },
   })
-    .then(res => res.json())
-    .then(data => console.log(data));
+    .then((res) => res.json())
+    .then((data) => console.log(data));
 };
 
-export const getUsersById = id => {
+export const getUsersById = (id) => {
   console.log(id);
   return fetch(baseURL + "users/" + id, {
     method: "GET",
@@ -53,8 +53,8 @@ export const getUsersById = id => {
       "Content-Type": "application/json",
     },
   })
-    .then(res => res.json())
-    .then(data => console.log(data));
+    .then((res) => res.json())
+    .then((data) => console.log(data));
 };
 
 export const getPlaylists = () => {
@@ -64,20 +64,20 @@ export const getPlaylists = () => {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-  }).then(res => res.json());
+  }).then((res) => res.json());
 };
 
-export const getPlaylistById = id => {
+export const getPlaylistById = (id) => {
   return fetch(baseURL + "playlists/" + id, {
     method: "GET",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-  }).then(res => res.json());
+  }).then((res) => res.json());
 };
 
-export const postPlaylists = (formData, songs, username, moodifyToken) => {
+export const postPlaylists = (createdPlaylistData, username, moodifyToken) => {
   return fetch(baseURL + "playlists", {
     method: "POST",
     headers: {
@@ -86,10 +86,45 @@ export const postPlaylists = (formData, songs, username, moodifyToken) => {
       Authorization: "Bearer " + moodifyToken,
     },
     body: JSON.stringify({
-      title: formData.title,
-      songs: songs,
+      ...createdPlaylistData,
       username: username,
-      description: formData.description || "",
     }),
-  }).then(res => res.json());
+  }).then((res) => res.json());
+};
+
+export const patchPlaylists = (
+  playlist_id,
+  createdPlaylistData,
+  username,
+  moodifyToken
+) => {
+  let updateData = {};
+  if (createdPlaylistData.title) updateData.title = createdPlaylistData.title;
+  if (createdPlaylistData.description) updateData.description = createdPlaylistData.description;
+  if (createdPlaylistData.songs) updateData.songs = createdPlaylistData.songs;
+  console.log(updateData);
+
+  return fetch(baseURL + "playlists/" + playlist_id, {
+    method: "PATCH",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + moodifyToken,
+    },
+    body: JSON.stringify({
+      ...updateData,
+      username: username,
+    }),
+  }).then((res) => res.json());
+};
+
+export const deletePlaylists = (playlist_id, moodifyToken) => {
+  return fetch(baseURL + "playlists/" + playlist_id, {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + moodifyToken,
+    },
+  }).then((res) => res.json());
 };

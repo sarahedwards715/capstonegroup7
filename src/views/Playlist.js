@@ -1,33 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { Loader } from "semantic-ui-react";
 import PlaylistsCard from "../components/playlistsCard/PlaylistsCard";
-import Navigation from "../components/navigation/Navigation";
 import SongList from "../components/songList/SongList";
 import { getPlaylistById } from "../services/backendRequests";
+import useStore from "../store/store"
 
 function Playlist(props) {
+  let playlists = useStore((state) => state.playlists);
+
   const [activePlaylist, setActivePlaylist] = useState({});
 
   useEffect(() => {
-    getPlaylistById(props.match.params.playlistId).then(data => {
-      console.log(props.match.params.playlistId, "from useEffect");
+    getPlaylistById(props.match.params.playlist_id).then((data) => {
       setActivePlaylist(data);
     });
   }, []);
-  console.log(props);
-  console.log(activePlaylist, "from playlist");
+
+  useEffect(() => {
+    getPlaylistById(props.match.params.playlist_id).then((data) => {
+      setActivePlaylist(data);
+    });
+  }, [playlists]);
+
   return (
     <div className="playlistPageWrapper">
-      <Navigation />
-      <PlaylistsCard playlist={activePlaylist} showDescription={true} />
       {activePlaylist.songs ? (
         <>
-          <div className="playlistPageTitle">{activePlaylist.title}</div>
-          {activePlaylist.description && (
-            <div className="playlistPageDescription">
-              {activePlaylist.description}
-            </div>
-          )}
+          <PlaylistsCard playlist={activePlaylist} showDescription={true} />
           <SongList
             songs={activePlaylist.songs}
             collapsing={false}

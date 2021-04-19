@@ -6,9 +6,10 @@ import useStore from "../../store/store";
 function SongListItem(props) {
   // Look at All The Properties of the Song Object, May Need Others Later
   // console.log(props.song);
+  console.log(props.song)
   let { name, album, artists, duration_ms, popularity, id } = props.song;
   let user = useStore((state) => state.user);
-  let createdPlaylistSongs = useStore((state) => state.createdPlaylistSongs);
+  let createdPlaylistData = useStore((state) => state.createdPlaylistData);
   let addCreatedPlaylistSongs = useStore(
     (state) => state.addCreatedPlaylistSongs
   );
@@ -20,7 +21,7 @@ function SongListItem(props) {
     <Table.Row>
       {user.username && user.moodifyToken && (
         <Table.Cell width="2">
-          {!createdPlaylistSongs.some((song) => song.id === id) ? (
+          {!createdPlaylistData.songs.some((song) => song.id === id) ? (
             <Button
               compact
               size="small"
