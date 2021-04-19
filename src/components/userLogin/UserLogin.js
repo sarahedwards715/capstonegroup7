@@ -32,7 +32,7 @@ function UserLogin() {
   }
 
   function handleLogin(event) {
-    event.preventDefault();
+    // event.preventDefault();
 
     loginUser(formData).then((data) => {
       if (data.statusCode === 200) {
@@ -41,8 +41,13 @@ function UserLogin() {
         setFormSuccess(true);
       }
 
-      if (data.statusCode === 404 || data.statusCode === 400) {
+      if (data.statusCode === 404) {
         let newErrors = { ...errors, username: data.message };
+        setErrors(newErrors);
+      }
+
+      if (data.statusCode === 400) {
+        let newErrors = { ...errors, password: data.message };
         setErrors(newErrors);
       }
     });
@@ -53,8 +58,6 @@ function UserLogin() {
     loginValidation,
     formData
   );
-
-    console.log(errors)
 
   return (
     <div className="userLoginWrapper">

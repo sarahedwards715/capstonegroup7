@@ -8,6 +8,8 @@ function loginValidation(values) {
   if (!values.password) {
     errors.password = "Please Enter Your Password!";
   }
+
+  return errors
 }
 
 export default loginValidation;

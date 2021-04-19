@@ -23,6 +23,8 @@ function UserRegistration() {
   }
 
   function handleRegister(event) {
+    // event.preventDefault();
+
     postUsers(formData).then((data) => {
       console.log(data);
       if (data.statusCode === 201) {

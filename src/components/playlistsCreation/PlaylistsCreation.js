@@ -2,7 +2,8 @@ import "./PlaylistsCreation.scss";
 import React, { useState, useEffect } from "react";
 import useStore from "../../store/store";
 import SongList from "../songList/SongList";
-import { Form, Button, Segment, Message, TextArea } from "semantic-ui-react";
+import { Button, Segment, Message,} from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
 import { postPlaylists, patchPlaylists } from "../../services/backendRequests";
 
 function PlaylistsCreation() {
@@ -77,30 +78,32 @@ function PlaylistsCreation() {
             compact={true}
           />
           <Form onSubmit={(e) => handleSubmit(e)}>
-            <Form.Field>
-              <label>Playlist Title</label>
-              <input
+            <Form.Group>
+              <Form.Label>Playlist Title</Form.Label>
+              <Form.Control
                 name="title"
                 placeholder="Title"
                 onChange={(e) => handleChange(e)}
                 value={createdPlaylistData.title}
               />
-            </Form.Field>
-            <Form.Field>
-              <label>Playlist Description</label>
-              <TextArea
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Playlist Description</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
                 name="description"
                 placeholder="Description"
                 onChange={(e) => handleChange(e)}
                 value={createdPlaylistData.description}
               />
-            </Form.Field>
+            </Form.Group>
             <Button.Group>
-              <Form.Button type="submit">
+              <Button type="submit">
                 {createdPlaylistEditMode.active
                   ? "Update Playlist"
                   : "Upload Playlist"}
-              </Form.Button>
+              </Button>
               <Button.Or />
               <Button type="reset" onClick={(e) => handleClose()}>
                 Close

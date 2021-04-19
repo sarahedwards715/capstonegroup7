@@ -19,6 +19,8 @@ function playlistValidation(values) {
   if (values.description.length > 80) {
     errors.description = "A Description May Not Be Longer Than 80 Characters!";
   }
+
+  return errors
 }
 
 export const playlistValidation;
