@@ -106,7 +106,7 @@ export const getPlaylists = () => {
 };
 
 export const getPlaylistById = id => {
-  return fetch(baseURL + "playlist/" + id, {
+  return fetch(baseURL + "playlists/" + id, {
     method: "GET",
     headers: {
       Accept: "application/json",
