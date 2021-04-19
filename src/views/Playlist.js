@@ -10,6 +10,9 @@ function Playlist(props) {
 
   const [activePlaylist, setActivePlaylist] = useState({});
 
+  //TODO Redundancy on these useEffects
+  // Abstract Function and add error handling for 400 and 404F
+
   useEffect(() => {
     getPlaylistById(props.match.params.playlist_id).then((data) => {
       setActivePlaylist(data);

@@ -40,6 +40,15 @@ function UserRegistration() {
     });
   }
 
+  function handleReset(event) {
+    setFormSuccess(false);
+    setFormData({
+      username: "",
+      displayName: "",
+      password: "",
+    });
+  }
+
   const { handleValidate, errors, setErrors } = useForm(
     handleRegister,
     registrationValidation,
@@ -49,9 +58,15 @@ function UserRegistration() {
   return (
     <div className="userRegistrationWrapper">
       {formSuccess ? (
-        <div className="userRegistrationSuccess">
-          You've Successfully Registered! Try Logging In!
-        </div>
+        <>
+          <div className="userRegistrationSuccessBanner">
+            <p className="userRegistrationSuccessText">
+              You've Successfully Registered!
+            </p>
+            <p className="userRegistrationSuccessText">Try Logging In!</p>
+          </div>
+          <Button className= "userRegistrationResetButton" onClick={(e) => handleReset(e)}>Reset Form</Button>
+        </>
       ) : (
         <div className="formContainer">
           <Form onSubmit={(e) => handleValidate(e)}>

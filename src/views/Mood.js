@@ -9,6 +9,7 @@ function Mood(props) {
 
   useEffect(() => {
     getRecommendations(accessToken, props.match.params.mood).then((data) => {
+      //TODO Success and Error Handling
       setSongs(data.tracks);
     });
   }, []);

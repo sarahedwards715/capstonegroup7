@@ -2,9 +2,11 @@ import "./PlaylistsCreation.scss";
 import React, { useState, useEffect } from "react";
 import useStore from "../../store/store";
 import SongList from "../songList/SongList";
-import { Button, Segment, Message,} from "semantic-ui-react";
-import { Form } from "semantic-ui-react";
+import { Button, Segment, Message } from "semantic-ui-react";
+import { Form } from "react-bootstrap";
 import { postPlaylists, patchPlaylists } from "../../services/backendRequests";
+import useForm from "../../customHooks/useForm";
+import playlistValidation from "../../validationInfo/playlistValidation";
 
 function PlaylistsCreation() {
   let user = useStore((state) => state.user);
@@ -23,6 +25,9 @@ function PlaylistsCreation() {
   );
   let setPlaylists = useStore((state) => state.setPlaylists);
 
+  const [formSuccess, setFormSuccess] = useState(false);
+
+
   function handleChange(event) {
     setCreatedPlaylistData({
       ...createdPlaylistData,
@@ -36,7 +41,7 @@ function PlaylistsCreation() {
   }
 
   function handleSubmit(e) {
-    e.preventDefault();
+    // e.preventDefault();
     console.log("INPUT", createdPlaylistEditMode.playlist_id);
     createdPlaylistEditMode.active
       ? patchPlaylists(
@@ -65,8 +70,20 @@ function PlaylistsCreation() {
         });
   }
 
+  const { handleValidate, errors, setErrors } = useForm(
+    handleSubmit,
+    playlistValidation,
+    createdPlaylistData
+  );
+
+  //This is some logic to determine the component's header,
+  //I wanted to separate it from main JSX
+  let componentHeader
+  if (formSuccess) componentHeader = "Success"
+
   return (
     <div className="playlistCreationWrapper">
+      <div className="playlistCreationHeader">{}</div>
       {createdPlaylistData.songs.length !== 0 && user.moodifyToken && (
         <Segment>
           {createdPlaylistEditMode.active && (
@@ -77,26 +94,36 @@ function PlaylistsCreation() {
             collapsing={true}
             compact={true}
           />
-          <Form onSubmit={(e) => handleSubmit(e)}>
+          <Form onSubmit={(e) => handleValidate(e)}>
             <Form.Group>
-              <Form.Label>Playlist Title</Form.Label>
+              <Form.Label className="formLabel">Playlist Title</Form.Label>
               <Form.Control
                 name="title"
                 placeholder="Title"
+                isInvalid={errors.title}
                 onChange={(e) => handleChange(e)}
                 value={createdPlaylistData.title}
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.title}
+              </Form.Control.Feedback>
             </Form.Group>
             <Form.Group>
-              <Form.Label>Playlist Description</Form.Label>
+              <Form.Label className="formLabel">
+                Playlist Description
+              </Form.Label>
               <Form.Control
-                as="textarea"
-                rows={3}
+                // as="textarea"
+                // rows={3}
                 name="description"
                 placeholder="Description"
+                isInvalid={errors.description}
                 onChange={(e) => handleChange(e)}
                 value={createdPlaylistData.description}
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.description}
+              </Form.Control.Feedback>
             </Form.Group>
             <Button.Group>
               <Button type="submit">

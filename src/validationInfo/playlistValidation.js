@@ -11,7 +11,7 @@ function playlistValidation(values) {
     errors.title = "A Title May Not Be Longer Than 50 Characters!";
   }
 
-  if (values.description.length < 3) {
+  if (values.description.length && values.description.length < 3) {
     errors.description =
       "A Playlist's Description is Optional, but Must Have At Least 3 Characters!";
   }
@@ -23,4 +23,4 @@ function playlistValidation(values) {
   return errors
 }
 
-export const playlistValidation;
+export default playlistValidation;
