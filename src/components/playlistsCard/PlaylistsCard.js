@@ -6,7 +6,7 @@ import useStore from "../../store/store";
 
 function PlaylistsCard(props) {
   const user = useStore(state => state.user);
-
+  console.log(user, "from playlistscard");
   return (
     <Card className="playlistsCard">
       <Card.Content>

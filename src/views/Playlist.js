@@ -3,18 +3,20 @@ import { Loader } from "semantic-ui-react";
 import PlaylistsCard from "../components/playlistsCard/PlaylistsCard";
 import SongList from "../components/songList/SongList";
 import { getPlaylistById } from "../services/backendRequests";
+import Navigation from "../components/navigation/Navigation";
 
 function Playlist(props) {
   const [activePlaylist, setActivePlaylist] = useState({});
 
   useEffect(() => {
-    getPlaylistById(props.match.params.playlistId).then((data) => {
+    getPlaylistById(props.match.params.playlistId).then(data => {
       setActivePlaylist(data);
     });
   }, []);
 
   return (
     <div className="playlistPageWrapper">
+      <Navigation />
       <PlaylistsCard playlist={activePlaylist} showDescription={true} />
       {activePlaylist.songs ? (
         <>

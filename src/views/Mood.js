@@ -5,10 +5,10 @@ import useStore from "../store/store";
 
 function Mood(props) {
   const [songs, setSongs] = useState([]);
-  let accessToken = useStore((state) => state.accessToken);
+  const accessToken = useStore(state => state.accessToken);
 
   useEffect(() => {
-    getRecommendations(accessToken, props.match.params.mood).then((data) => {
+    getRecommendations(accessToken, props.match.params.mood).then(data => {
       setSongs(data.tracks);
     });
   }, []);

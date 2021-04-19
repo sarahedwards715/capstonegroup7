@@ -24,7 +24,10 @@ function Browse(props) {
 
       <PlaylistsList />
 
-      <Loader active size="big"> Loading... </Loader>
+      <Loader active size="big">
+        {" "}
+        Loading...{" "}
+      </Loader>
     </div>
   );
 }
