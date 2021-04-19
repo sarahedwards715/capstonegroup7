@@ -22,10 +22,14 @@ const useStore = (set, get) => ({
       );
     }
   },
-  moodifyUserInfo: { displayName: "", createdAt: "" },
-  setMoodifyUserInfo: (displayName, createdAt) => {
+  moodifyUserInfo: { displayName: "", createdAt: "", _id: "" },
+  setMoodifyUserInfo: (displayName, createdAt, _id) => {
     set({
-      moodifyUserInfo: { displayName: displayName, createdAt: createdAt },
+      moodifyUserInfo: {
+        displayName: displayName,
+        createdAt: createdAt,
+        _id: _id,
+      },
     });
   },
   accessToken: "",

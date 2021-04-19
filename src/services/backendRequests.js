@@ -44,6 +44,31 @@ export const getUsers = () => {
     .then(data => console.log(data));
 };
 
+export const patchUser = (id, displayName, moodifyToken) => {
+  return fetch(baseURL + "users/" + id, {
+    method: "PATCH",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + moodifyToken,
+    },
+    body: JSON.stringify({
+      displayName,
+    }),
+  }).then(res => res.json());
+};
+
+export const deleteUser = (id, moodifyToken) => {
+  return fetch(baseURL + "users/" + id, {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + moodifyToken,
+    },
+  }).then(res => res.json());
+};
+
 export const getUsersById = id => {
   console.log(id);
   return fetch(baseURL + "users/" + id, {
@@ -61,7 +86,7 @@ export const getUserByUsername = username => {
   let name = username;
 
   console.log(name, "from backend");
-  return fetch(baseURL + "users/" + username, {
+  return fetch(baseURL + "userProfile/" + username, {
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -91,7 +116,7 @@ export const getPlaylistById = id => {
 };
 
 export const getPlaylistByUsername = (username, moodifyToken) => {
-  return fetch(baseURL + "playlists/" + username, {
+  return fetch(baseURL + "userPlaylists/" + username, {
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -124,7 +149,8 @@ export const patchPlaylists = (
 ) => {
   let updateData = {};
   if (createdPlaylistData.title) updateData.title = createdPlaylistData.title;
-  if (createdPlaylistData.description) updateData.description = createdPlaylistData.description;
+  if (createdPlaylistData.description)
+    updateData.description = createdPlaylistData.description;
   if (createdPlaylistData.songs) updateData.songs = createdPlaylistData.songs;
   console.log(updateData);
 
@@ -139,7 +165,7 @@ export const patchPlaylists = (
       ...updateData,
       username: username,
     }),
-  }).then((res) => res.json());
+  }).then(res => res.json());
 };
 
 export const deletePlaylists = (playlist_id, moodifyToken) => {
@@ -150,5 +176,5 @@ export const deletePlaylists = (playlist_id, moodifyToken) => {
       "Content-Type": "application/json",
       Authorization: "Bearer " + moodifyToken,
     },
-  }).then((res) => res.json());
+  }).then(res => res.json());
 };
