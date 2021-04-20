@@ -22,8 +22,8 @@ function PlaylistsCard(props) {
   const [modalVisible, setModalVisible] = useState(false);
 
   function handleDelete(e) {
-    deletePlaylists(props.playlist._id, user.moodifyToken).then(data => {
-      console.log(data);
+    deletePlaylists(props.playlist._id, user.moodifyToken).then((data) => {
+      // console.log(data);
       if (data.statusCode === 200) {
         setPlaylists();
         history.push("/home");
