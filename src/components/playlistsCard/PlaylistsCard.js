@@ -7,22 +7,22 @@ import { deletePlaylists } from "../../services/backendRequests";
 import DeletionModal from "../deletionModal/DeletionModal";
 
 function PlaylistsCard(props) {
-  const user = useStore((state) => state.user);
-  let setPlaylists = useStore((state) => state.setPlaylists);
-  let createdPlaylistData = useStore((state) => state.createdPlaylistData);
+  const user = useStore(state => state.user);
+  let setPlaylists = useStore(state => state.setPlaylists);
+  let createdPlaylistData = useStore(state => state.createdPlaylistData);
   let setCreatedPlaylistEditData = useStore(
-    (state) => state.setCreatedPlaylistEditData
+    state => state.setCreatedPlaylistEditData
   );
   let setCreatedPlaylistEditMode = useStore(
-    (state) => state.setCreatedPlaylistEditMode
+    state => state.setCreatedPlaylistEditMode
   );
 
-  let history = useHistory()
+  let history = useHistory();
 
   const [modalVisible, setModalVisible] = useState(false);
 
   function handleDelete(e) {
-    deletePlaylists(props.playlist._id, user.moodifyToken).then((data) => {
+    deletePlaylists(props.playlist._id, user.moodifyToken).then(data => {
       console.log(data);
       if (data.statusCode === 200) {
         setPlaylists();
@@ -51,10 +51,8 @@ function PlaylistsCard(props) {
       </Card.Content>
       {user.username === props.playlist.username && (
         <Card.Content extra>
-          <Button onClick={(e) => startEditMode()}>Edit Playlist</Button>
-          <Button onClick={(e) => setModalVisible(true)}>
-            Delete Playlist
-          </Button>
+          <Button onClick={e => startEditMode()}>Edit Playlist</Button>
+          <Button onClick={e => setModalVisible(true)}>Delete Playlist</Button>
         </Card.Content>
       )}
       <DeletionModal

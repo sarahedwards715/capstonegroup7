@@ -5,7 +5,7 @@ import { Table } from "semantic-ui-react";
 import SongListItem from "../songListItem/SongListItem";
 
 function SongList(props) {
-  let user = useStore((state) => state.user);
+  let user = useStore(state => state.user);
 
   return (
     <div className="songListWrapper">
@@ -23,7 +23,7 @@ function SongList(props) {
         </Table.Header>
         <Table.Body>
           {props.songs &&
-            props.songs.map((song) => {
+            props.songs.map(song => {
               return (
                 <SongListItem
                   song={song}

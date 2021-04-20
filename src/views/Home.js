@@ -4,7 +4,7 @@ import Browse from "./Browse";
 import "./Home.scss";
 
 const Home = () => {
-  const accessToken = useStore(state => state.accessToken);
+  let accessToken = useStore(state => state.accessToken);
 
   return (
     <div>

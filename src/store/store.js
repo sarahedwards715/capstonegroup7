@@ -1,7 +1,10 @@
 import create from "zustand";
 import { devtools } from "zustand/middleware";
 import { buildLoginURL } from "../services/authSpot";
-import { getPlaylists } from "../services/backendRequests";
+import {
+  getPlaylists,
+  getPlaylistByUsername,
+} from "../services/backendRequests";
 import { getMoods } from "../services/spotAPIRequests";
 
 const authURL = buildLoginURL();
@@ -11,19 +14,37 @@ const useStore = (set, get) => ({
   setUser: (username, token) => {
     set({ user: { username: username, moodifyToken: token } });
   },
+  userPlaylists: [],
+  setUserPlaylists: () => {
+    if (get().accessToken) {
+      getPlaylistByUsername(get().user.username).then(data =>
+        set({ userPlaylists: data })
+      );
+    }
+  },
+  moodifyUserInfo: { displayName: "", createdAt: "", _id: "" },
+  setMoodifyUserInfo: (displayName, createdAt, _id) => {
+    set({
+      moodifyUserInfo: {
+        displayName: displayName,
+        createdAt: createdAt,
+        _id: _id,
+      },
+    });
+  },
   accessToken: "",
-  setAccessToken: (token) => {
+  setAccessToken: token => {
     set({ accessToken: token });
   },
   accessExpiresIn: null,
-  setExpiresIn: (time) => {
+  setExpiresIn: time => {
     set({ accessExpiresIn: time });
   },
   authURL: authURL,
   moodsArray: [],
   setMoodsArray: () => {
     if (get().accessToken) {
-      getMoods(get().accessToken).then((data) => {
+      getMoods(get().accessToken).then(data => {
         set({ moodsArray: data.genres });
       });
     }
@@ -31,7 +52,7 @@ const useStore = (set, get) => ({
   playlists: [],
   setPlaylists: () => {
     if (get().accessToken) {
-      getPlaylists().then((data) => {
+      getPlaylists().then(data => {
         console.log("Playlists", data);
         set({ playlists: data });
       });
@@ -63,7 +84,7 @@ const useStore = (set, get) => ({
       },
     });
   },
-  setCreatedPlaylistData: (formData) => {
+  setCreatedPlaylistData: formData => {
     let currentData = get().createdPlaylistData;
     set({
       createdPlaylistData: {
@@ -73,7 +94,7 @@ const useStore = (set, get) => ({
       },
     });
   },
-  addCreatedPlaylistSongs: (newSongObj) => {
+  addCreatedPlaylistSongs: newSongObj => {
     let currentData = get().createdPlaylistData;
     let currentSongs = get().createdPlaylistData.songs;
     set({
@@ -83,10 +104,10 @@ const useStore = (set, get) => ({
       },
     });
   },
-  deleteCreatedPlaylistSongs: (songId) => {
+  deleteCreatedPlaylistSongs: songId => {
     let currentData = get().createdPlaylistData;
     let indexForDeletion = get().createdPlaylistData.songs.findIndex(
-      (song) => song.id === songId
+      song => song.id === songId
     );
     let newArray = [...get().createdPlaylistData.songs];
     newArray.splice(indexForDeletion, 1);
@@ -95,14 +116,14 @@ const useStore = (set, get) => ({
     });
   },
   createdPlaylistEditMode: { active: false, playlist_id: null },
-  setCreatedPlaylistEditMode: (playlist_id) => {
+  setCreatedPlaylistEditMode: playlist_id => {
     get().createdPlaylistEditMode?.active
       ? set({ createdPlaylistEditMode: { active: false, playlist_id: null } })
       : set({
           createdPlaylistEditMode: { active: true, playlist_id: playlist_id },
         });
   },
-  setCreatedPlaylistEditData: (playlist) => {
+  setCreatedPlaylistEditData: playlist => {
     set({
       createdPlaylistData: {
         title: playlist.title,
