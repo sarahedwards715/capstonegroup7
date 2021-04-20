@@ -8,7 +8,7 @@ import { getPlaylistById } from "../services/backendRequests";
 import useStore from "../store/store";
 
 function Playlist(props) {
-  let playlists = useStore((state) => state.playlists);
+  let playlists = useStore(state => state.playlists);
 
   const [errors, setErrors] = useState("");
   const [activePlaylist, setActivePlaylist] = useState({});

@@ -5,10 +5,10 @@ import MoodsList from "../components/moodsList/MoodsList";
 import PlaylistsList from "../components/playlistsList/PlaylistsList";
 
 function Browse(props) {
-  let moodsArray = useStore((state) => state.moodsArray);
-  let setMoodsArray = useStore((state) => state.setMoodsArray);
-  let playlists = useStore((state) => state.playlists);
-  let setPlaylists = useStore((state) => state.setPlaylists);
+  let moodsArray = useStore(state => state.moodsArray);
+  let setMoodsArray = useStore(state => state.setMoodsArray);
+  let playlists = useStore(state => state.playlists);
+  let setPlaylists = useStore(state => state.setPlaylists);
 
   useEffect(() => {
     setMoodsArray();
@@ -17,7 +17,7 @@ function Browse(props) {
 
   return (
     <div className="browseWrapper">
-      {(moodsArray.length && playlists.length) ? (
+      {moodsArray.length && playlists.length ? (
         <>
           <MoodsList />
 
