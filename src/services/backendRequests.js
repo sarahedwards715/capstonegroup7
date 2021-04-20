@@ -77,7 +77,7 @@ export const getPlaylistById = (id) => {
   }).then((res) => res.json());
 };
 
-export const postPlaylists = (formData, songs, username, moodifyToken) => {
+export const postPlaylists = (createdPlaylistData, username, moodifyToken) => {
   return fetch(baseURL + "playlists", {
     method: "POST",
     headers: {
@@ -86,14 +86,11 @@ export const postPlaylists = (formData, songs, username, moodifyToken) => {
       Authorization: "Bearer " + moodifyToken,
     },
     body: JSON.stringify({
-      title: formData.title,
-      songs: songs,
+      ...createdPlaylistData,
       username: username,
-      description: formData.description || "",
     }),
   }).then((res) => res.json());
 };
-
 export const postReview = (
   playlist_id,
   description,
@@ -102,7 +99,7 @@ export const postReview = (
   moodifyToken,
   username
 ) => {
-  console.log(playlist_id)
+  console.log(playlist_id);
   return fetch(baseURL + "reviews", {
     method: "POST",
     headers: {
@@ -110,14 +107,47 @@ export const postReview = (
       "Content-Type": "application/json",
       Authorization: "Bearer " + moodifyToken,
     },
-      body: JSON.stringify({
+    body: JSON.stringify({
       playlist_id: playlist_id,
       username: username,
       description: description,
       thumbsUp: thumbsUp,
-      thumbsDown: thumbsDown
+      thumbsDown: thumbsDown,
     }),
   })
     .then((res) => res.json())
     .then((data) => console.log(data));
+};
+
+export const patchPlaylists = (
+  playlist_id,
+  createdPlaylistData,
+  username,
+  moodifyToken
+) => {
+  let updateData = {};
+  if (createdPlaylistData.title) updateData.title = createdPlaylistData.title;
+  if (createdPlaylistData.description)
+    updateData.description = createdPlaylistData.description;
+  if (createdPlaylistData.songs) updateData.songs = createdPlaylistData.songs;
+  console.log(updateData);
+
+  return fetch(baseURL + "playlists/" + playlist_id, {
+    method: "PATCH",
+    body: JSON.stringify({
+      ...updateData,
+      username: username,
+    }),
+  }).then((res) => res.json());
+};
+
+export const deletePlaylists = (playlist_id, moodifyToken) => {
+  return fetch(baseURL + "playlists/" + playlist_id, {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + moodifyToken,
+    },
+  }).then((res) => res.json());
 };

@@ -4,27 +4,30 @@ import PlaylistsCard from "../components/playlistsCard/PlaylistsCard";
 import SongList from "../components/songList/SongList";
 import { getPlaylistById } from "../services/backendRequests";
 import Reviews from "../components/reviews/Reviews";
+import useStore from "../store/store"
 
 function Playlist(props) {
+  let playlists = useStore((state) => state.playlists);
+
   const [activePlaylist, setActivePlaylist] = useState({});
 
   useEffect(() => {
-    getPlaylistById(props.match.params.playlistId).then((data) => {
+    getPlaylistById(props.match.params.playlist_id).then((data) => {
       setActivePlaylist(data);
     });
   }, []);
 
+  useEffect(() => {
+    getPlaylistById(props.match.params.playlist_id).then((data) => {
+      setActivePlaylist(data);
+    });
+  }, [playlists]);
+
   return (
     <div className="playlistPageWrapper">
-      <PlaylistsCard playlist={activePlaylist} showDescription={true} />
       {activePlaylist.songs ? (
         <>
-          <div className="playlistPageTitle">{activePlaylist.title}</div>
-          {activePlaylist.description && (
-            <div className="playlistPageDescription">
-              {activePlaylist.description}
-            </div>
-          )}
+          <PlaylistsCard playlist={activePlaylist} showDescription={true} />
           <SongList
             songs={activePlaylist.songs}
             collapsing={false}

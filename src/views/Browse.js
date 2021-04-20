@@ -10,39 +10,23 @@ function Browse(props) {
   let playlists = useStore((state) => state.playlists);
   let setPlaylists = useStore((state) => state.setPlaylists);
 
-  const [moodsOrPlaylists, setMoodsOrPlaylists] = useState("moods");
-
   useEffect(() => {
     setMoodsArray();
     setPlaylists();
   }, []);
 
-  function togglePlaylists(e) {
-    console.log("clicky");
-    if (moodsOrPlaylists === "moods") {
-      setMoodsOrPlaylists("playlists");
-    }
-    if (moodsOrPlaylists === "playlists") {
-      setMoodsOrPlaylists("moods");
-    }
-  }
-
   return (
     <div className="browseWrapper">
-      <Button onClick={togglePlaylists}>{moodsOrPlaylists}</Button>
-      {/* Triple ternary baby. Maybe clean this up? */}
-      {moodsArray?.length ? (
-        moodsOrPlaylists === "playlists" ? (
-          playlists?.length ? (
-            <PlaylistsList />
-          ) : (
-            <div>There are no Playlists! Try Creating One!</div>
-          )
-        ) : (
+      {(moodsArray.length && playlists.length) ? (
+        <>
           <MoodsList />
-        )
+
+          <PlaylistsList />
+        </>
       ) : (
-        <Loader active size="big"> Loading... </Loader>
+        <Loader active size="big">
+          Loading...
+        </Loader>
       )}
     </div>
   );

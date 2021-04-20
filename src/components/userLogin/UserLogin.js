@@ -1,6 +1,7 @@
 import "./UserLogin.scss";
 import useStore from "../../store/store";
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Button, Form } from "semantic-ui-react";
 import { loginUser } from "../../services/backendRequests";
 
@@ -11,6 +12,7 @@ function UserLogin() {
     username: "",
     password: "",
   });
+  let history = useHistory();
 
   function handleChange(event) {
     setFormData((state) => ({
@@ -21,12 +23,14 @@ function UserLogin() {
 
   function handleRegister(event) {
     event.preventDefault();
+
     loginUser(formData).then((data) => {
-      console.log(data);
       if (data.statusCode === 200) {
+        console.log(data.moodifyToken);
         setUser(data.userInfo.username, data.moodifyToken);
+        history.push("/home");
       } else {
-        console.log(data.message);
+        console.log("must enter correct username/password");
       }
     });
   }
