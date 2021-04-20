@@ -7,9 +7,7 @@ import useStore from "../store/store";
 import UserRegistration from "../components/userRegistration/UserRegistration";
 import UserLogin from "../components/userLogin/UserLogin";
 import "./views.scss";
-import { Link } from "react-router-dom";
-import { Button } from "semantic-ui-react";
-import DeletionModal from "../components/deletionModal/DeletionModal";
+import { Button } from "react-bootstrap";
 
 function Landing(props) {
   const accessToken = useStore((state) => state.accessToken);
@@ -67,17 +65,24 @@ function Landing(props) {
         </div>
       )}
       <div className="landingFormWrapper">
-        {registerUserVisible ? <UserRegistration /> : <UserLogin />}
-      </div>
-      {!accessToken && (
-        <a className="authBtn" href={authURL}>
-          Authorize With Spotify
-        </a>
-      )}
-      <div className="newUserButtonWrapper">
-        Click
-        <Button onClick={handleClick}>Here</Button>
-        to create a new account
+        {accessToken ? (
+          <>
+            <div className="newUserButtonWrapper">
+              <Button onClick={handleClick}>
+                {registerUserVisible
+                  ? "Click Here to Login"
+                  : "Create a New Account"}
+              </Button>
+            </div>
+            {registerUserVisible ? <UserRegistration /> : <UserLogin />}
+          </>
+        ) : (
+          <div className="spotAuthWrapper">
+            <a className="authBtn" href={authURL}>
+              Authorize With Spotify
+            </a>
+          </div>
+        )}
       </div>
     </div>
   );

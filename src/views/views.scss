@@ -10,6 +10,10 @@
   );
 }
 
+.viewContainer {
+  display: flex;
+}
+
 .landingWrapper {
   background: black;
   color: white;
@@ -19,6 +23,21 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  .spotAuthWrapper {
+    background-image: var(--gradient);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .authBtn {
+      font-family: "Fredoka One", cursive;
+      font-size: 1.5em;
+    }
+  }
 }
 
 .landingFormWrapper {
@@ -27,16 +46,23 @@
   // top: 50%;
   // left: 50%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background: white;
   border-radius: 50%;
-  padding: 3%;
+  padding: 0;
+
+  .formLabel {
+    color: black;
+  }
 }
 
-.viewContainer {
-  display: flex;
-}
+// .landingFormWrapper:after {
+//   content: "";
+//   display: block;
+//   padding-bottom: 100%;
+// }
 
 .landingTitleContainer {
   font-family: "Fredoka One", cursive;
@@ -74,6 +100,7 @@
 }
 
 .newUserButtonWrapper {
+  margin: 5% auto;
   bottom: 15%;
   left: 50%;
 }
@@ -113,5 +140,25 @@
     justify-content: center;
     align-items: flex-start;
     font-size: 6em;
+  }
+}
+
+.viewsErrorWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .viewsErrorBanner {
+    font-family: "Fredoka One", cursive;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    height: 200px;
+    background-image: var(--gradient);
+    color: transparent;
+    background-clip: text;
+    background-size: 400%;
+    animation: bg-animation 3s infinite alternate;
+    font-size: 3em;
   }
 }
