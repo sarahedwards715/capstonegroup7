@@ -45,7 +45,6 @@ export const getUsers = () => {
 };
 
 export const getUsersById = (id) => {
-  console.log(id);
   return fetch(baseURL + "users/" + id, {
     method: "GET",
     headers: {

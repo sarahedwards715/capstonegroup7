@@ -26,14 +26,11 @@ function UserRegistration() {
     // event.preventDefault();
 
     postUsers(formData).then((data) => {
-      console.log(data);
       if (data.statusCode === 201) {
-        console.log("Success");
         setFormSuccess(true);
       }
 
       if (data.statusCode === 400 && data.databaseErrorCode === 11000) {
-        console.log("Duplicate");
         let newErrors = { ...errors, username: data.message };
         setErrors(newErrors);
       }

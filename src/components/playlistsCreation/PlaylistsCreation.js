@@ -42,7 +42,6 @@ function PlaylistsCreation() {
 
   function handleSubmit(e) {
     // e.preventDefault();
-    console.log("INPUT", createdPlaylistEditMode.playlist_id);
     createdPlaylistEditMode.active
       ? patchPlaylists(
           createdPlaylistEditMode.playlist_id,
@@ -50,7 +49,6 @@ function PlaylistsCreation() {
           user.username,
           user.moodifyToken
         ).then((data) => {
-          console.log(data);
           if (data.statusCode === 200) {
             setPlaylists();
             clearCreatedPlaylistData();
@@ -62,7 +60,6 @@ function PlaylistsCreation() {
           user.username,
           user.moodifyToken
         ).then((data) => {
-          console.log(data);
           if (data.statusCode === 201) {
             setPlaylists();
             clearCreatedPlaylistData();

@@ -15,9 +15,7 @@ const useForm = (handleSubmit, validate, values, confirmPassword = "") => {
   };
 
   useEffect(() => {
-    console.log("Submitting", isSubmitting);
     if (Object.keys(errors).length === 0 && isSubmitting) {
-      console.log("Am I Running?");
       handleSubmit();
     }
   }, [errors]);

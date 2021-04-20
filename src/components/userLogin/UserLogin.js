@@ -36,7 +36,6 @@ function UserLogin() {
 
     loginUser(formData).then((data) => {
       if (data.statusCode === 200) {
-        console.log(data.moodifyToken);
         setUser(data.userInfo.username, data.moodifyToken);
         setFormSuccess(true);
       }

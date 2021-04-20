@@ -1,4 +1,10 @@
 .userRegistrationWrapper {
+  .formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
   .userRegistrationSuccessBanner {
     font-family: "Fredoka One", cursive;
     top: 50%;
@@ -17,6 +23,6 @@
   }
 
   .userRegistrationResetButton {
-      margin: 5% auto;
+    margin: 5% auto;
   }
 }

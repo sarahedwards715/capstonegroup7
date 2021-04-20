@@ -51,12 +51,18 @@
   align-items: center;
   background: white;
   border-radius: 50%;
-  padding: 3%;
+  padding: 0;
 
   .formLabel {
     color: black;
   }
 }
+
+// .landingFormWrapper:after {
+//   content: "";
+//   display: block;
+//   padding-bottom: 100%;
+// }
 
 .landingTitleContainer {
   font-family: "Fredoka One", cursive;
@@ -134,5 +140,25 @@
     justify-content: center;
     align-items: flex-start;
     font-size: 6em;
+  }
+}
+
+.viewsErrorWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .viewsErrorBanner {
+    font-family: "Fredoka One", cursive;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    height: 200px;
+    background-image: var(--gradient);
+    color: transparent;
+    background-clip: text;
+    background-size: 400%;
+    animation: bg-animation 3s infinite alternate;
+    font-size: 3em;
   }
 }
