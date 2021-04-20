@@ -94,7 +94,15 @@ export const postPlaylists = (formData, songs, username, moodifyToken) => {
   }).then((res) => res.json());
 };
 
-export const postReview = (playlist_id, description, thumbsUp, thumbsDown, moodifyToken, username) => {
+export const postReview = (
+  playlist_id,
+  description,
+  thumbsUp,
+  thumbsDown,
+  moodifyToken,
+  username
+) => {
+  console.log(playlist_id)
   return fetch(baseURL + "reviews", {
     method: "POST",
     headers: {
@@ -102,16 +110,14 @@ export const postReview = (playlist_id, description, thumbsUp, thumbsDown, moodi
       "Content-Type": "application/json",
       Authorization: "Bearer " + moodifyToken,
     },
-    body: JSON.stringify({
+      body: JSON.stringify({
       playlist_id: playlist_id,
+      username: username,
       description: description,
       thumbsUp: thumbsUp,
-      thumbsDown: thumbsDown,
-      username: username
-    })
-  }
-  ).then((res) => res.json()).then((data) => console.log(data))
-}
-
-
-
+      thumbsDown: thumbsDown
+    }),
+  })
+    .then((res) => res.json())
+    .then((data) => console.log(data));
+};

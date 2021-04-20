@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Loader } from "semantic-ui-react";
 import PlaylistsCard from "../components/playlistsCard/PlaylistsCard";
 import SongList from "../components/songList/SongList";
-import useStore from "../store/store";
-import Reviews from "../components/reviews/Reviews";
 import { getPlaylistById } from "../services/backendRequests";
+import Reviews from "../components/reviews/Reviews";
 
 function Playlist(props) {
   const [activePlaylist, setActivePlaylist] = useState({});
@@ -31,7 +30,7 @@ function Playlist(props) {
             collapsing={false}
             compact={false}
           />
-          <Reviews />
+          <Reviews playlist_id = {props.match.params.playlistId} />
           </>
     
       ) : (
