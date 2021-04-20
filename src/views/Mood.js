@@ -14,8 +14,7 @@ function Mood(props) {
 
   useEffect(() => {
     getRecommendations(accessToken, props.match.params.mood).then((data) => {
-      //TODO Success and Error Handling
-      if (data.error.status === 400 || data.error.status === 404) {
+      if (data.error?.status === 400 || data.error?.status === 404) {
         setErrors(data.error.message);
       }
 
