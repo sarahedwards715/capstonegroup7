@@ -33,7 +33,7 @@ function Playlist(props) {
             collapsing={false}
             compact={false}
           />
-          <Reviews playlist_id = {props.match.params.playlistId} />
+          <Reviews playlist_id = {props.match.params.playlist_id} />
           </>
     
       ) : (

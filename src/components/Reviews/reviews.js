@@ -50,6 +50,8 @@ function Reviews(props) {
           control={TextArea}
           label="Playlist Review"
           placeholder="Playlist Review"
+          onChange={(e) => setDescription(e.target.value)}
+          value={description}
         />
 
         {/* <Form.Field
@@ -60,23 +62,25 @@ function Reviews(props) {
       /> */}
 
         <Button as="Love" labelPosition="right">
-          <Button onClick="click" color="red">
+          <Button onClick="click" type="submit" color="red">
+            <Button onChange={(e)=> setLike(e.target.value)} type= "submit"/> 
             <Icon name="heart" />I love !
           </Button>
           <Label as="a" basic color="red" pointing="left">
-            2,048
+            {/* 2,048 */}
           </Label>
         </Button>
         <Button as="div" labelPosition="right">
-          <Button basic color="blue">
+          <Button onChange={(e)=> setDislike(e.target.value)} type= "submit" basic color="blue">
             <Icon name="thumbs d" />
             Not a fan !
           </Button>
           <Label as="Dislike" basic color="blue" pointing="left">
-            2,048
+            
+            {/* 2,048 */}
           </Label>
         </Button>
-        <Button type="submit"> Send my Review </Button>
+        <Button onClick= "click" type="submit" > Send my Review </Button>
       </Form>
     </div>
   );
