@@ -12,6 +12,8 @@ import Profile from "./views/Profile";
 import PlaylistsCreation from "./components/playlistsCreation/PlaylistsCreation";
 import Home from "./views/Home";
 import Navigation from "./components/navigation/Navigation";
+import SongPlayer from "./components/songPlayer/SongPlayer";
+
 function App() {
   const accessToken = useStore(state => state.accessToken);
   const user = useStore(state => state.user);
@@ -33,6 +35,9 @@ function App() {
       </div>
       <div className="appLeftColumn">
         {accessToken && <PlaylistsCreation />}
+      </div>
+      <div>
+        <SongPlayer accessToken={accessToken} />
       </div>
     </div>
   );

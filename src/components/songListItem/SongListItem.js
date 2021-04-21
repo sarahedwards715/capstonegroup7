@@ -6,37 +6,50 @@ import useStore from "../../store/store";
 function SongListItem(props) {
   // Look at All The Properties of the Song Object, May Need Others Later
   // console.log(props.song);
-  console.log(props.song)
+  console.log(props.song, "from songlistitem");
   let { name, album, artists, duration_ms, popularity, id } = props.song;
-  let user = useStore((state) => state.user);
-  let createdPlaylistData = useStore((state) => state.createdPlaylistData);
+  let user = useStore(state => state.user);
+  let createdPlaylistData = useStore(state => state.createdPlaylistData);
+  let setSelectedTrackToPlay = useStore(state => state.setSelectedTrackToPlay);
   let addCreatedPlaylistSongs = useStore(
-    (state) => state.addCreatedPlaylistSongs
+    state => state.addCreatedPlaylistSongs
   );
   let deleteCreatedPlaylistSongs = useStore(
-    (state) => state.deleteCreatedPlaylistSongs
+    state => state.deleteCreatedPlaylistSongs
   );
+
+  function handlePlaySong() {
+    setSelectedTrackToPlay(props.song.uri);
+  }
 
   return (
     <Table.Row>
       {user.username && user.moodifyToken && (
         <Table.Cell width="2">
-          {!createdPlaylistData.songs.some((song) => song.id === id) ? (
-            <Button
-              compact
-              size="small"
-              onClick={() => addCreatedPlaylistSongs(props.song)}
-            >
-              {!props.compact ? "Add to Playlist" : "Add"}
-            </Button>
+          {!createdPlaylistData.songs.some(song => song.id === id) ? (
+            <>
+              <Button
+                compact
+                size="small"
+                onClick={() => addCreatedPlaylistSongs(props.song)}>
+                {!props.compact ? "Add to Playlist" : "Add"}
+              </Button>
+            </>
           ) : (
             <Button
               compact
               size="small"
-              onClick={() => deleteCreatedPlaylistSongs(id)}
-            >
+              onClick={() => deleteCreatedPlaylistSongs(id)}>
               {!props.compact ? "Delete from Playlist" : "Delete"}
             </Button>
+          )}
+
+          {props.song.uri ? (
+            <Button size="small" onClick={handlePlaySong}>
+              Play Song
+            </Button>
+          ) : (
+            ""
           )}
         </Table.Cell>
       )}

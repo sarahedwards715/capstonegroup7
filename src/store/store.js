@@ -132,6 +132,10 @@ const useStore = (set, get) => ({
       },
     });
   },
+  selectedTrackToPlay: "",
+  setSelectedTrackToPlay: trackUri => {
+    set({ selectedTrackToPlay: trackUri });
+  },
 });
 
 //Define zustand's useStore hook

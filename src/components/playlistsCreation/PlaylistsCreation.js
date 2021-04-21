@@ -6,21 +6,19 @@ import { Form, Button, Segment, Message, TextArea } from "semantic-ui-react";
 import { postPlaylists, patchPlaylists } from "../../services/backendRequests";
 
 function PlaylistsCreation() {
-  let user = useStore((state) => state.user);
-  let createdPlaylistData = useStore((state) => state.createdPlaylistData);
+  let user = useStore(state => state.user);
+  let createdPlaylistData = useStore(state => state.createdPlaylistData);
   let createdPlaylistEditMode = useStore(
-    (state) => state.createdPlaylistEditMode
+    state => state.createdPlaylistEditMode
   );
-  let setCreatedPlaylistData = useStore(
-    (state) => state.setCreatedPlaylistData
-  );
+  let setCreatedPlaylistData = useStore(state => state.setCreatedPlaylistData);
   let clearCreatedPlaylistData = useStore(
-    (state) => state.clearCreatedPlaylistData
+    state => state.clearCreatedPlaylistData
   );
   let setCreatedPlaylistEditMode = useStore(
-    (state) => state.setCreatedPlaylistEditMode
+    state => state.setCreatedPlaylistEditMode
   );
-  let setPlaylists = useStore((state) => state.setPlaylists);
+  let setPlaylists = useStore(state => state.setPlaylists);
 
   function handleChange(event) {
     setCreatedPlaylistData({
@@ -43,7 +41,7 @@ function PlaylistsCreation() {
           createdPlaylistData,
           user.username,
           user.moodifyToken
-        ).then((data) => {
+        ).then(data => {
           console.log(data);
           if (data.statusCode === 200) {
             setPlaylists();
@@ -55,7 +53,7 @@ function PlaylistsCreation() {
           createdPlaylistData,
           user.username,
           user.moodifyToken
-        ).then((data) => {
+        ).then(data => {
           console.log(data);
           if (data.statusCode === 201) {
             setPlaylists();
@@ -76,13 +74,13 @@ function PlaylistsCreation() {
             collapsing={true}
             compact={true}
           />
-          <Form onSubmit={(e) => handleSubmit(e)}>
+          <Form onSubmit={e => handleSubmit(e)}>
             <Form.Field>
               <label>Playlist Title</label>
               <input
                 name="title"
                 placeholder="Title"
-                onChange={(e) => handleChange(e)}
+                onChange={e => handleChange(e)}
                 value={createdPlaylistData.title}
               />
             </Form.Field>
@@ -91,7 +89,7 @@ function PlaylistsCreation() {
               <TextArea
                 name="description"
                 placeholder="Description"
-                onChange={(e) => handleChange(e)}
+                onChange={e => handleChange(e)}
                 value={createdPlaylistData.description}
               />
             </Form.Field>
@@ -102,7 +100,7 @@ function PlaylistsCreation() {
                   : "Upload Playlist"}
               </Form.Button>
               <Button.Or />
-              <Button type="reset" onClick={(e) => handleClose()}>
+              <Button type="reset" onClick={e => handleClose()}>
                 Close
               </Button>
             </Button.Group>

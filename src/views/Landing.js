@@ -12,10 +12,10 @@ import { Button } from "semantic-ui-react";
 import DeletionModal from "../components/deletionModal/DeletionModal";
 
 function Landing(props) {
-  const accessToken = useStore((state) => state.accessToken);
-  const setAccessToken = useStore((state) => state.setAccessToken);
-  const setExpiresIn = useStore((state) => state.setExpiresIn);
-  const authURL = useStore((state) => state.authURL);
+  const accessToken = useStore(state => state.accessToken);
+  const setAccessToken = useStore(state => state.setAccessToken);
+  const setExpiresIn = useStore(state => state.setExpiresIn);
+  const authURL = useStore(state => state.authURL);
 
   const [registerUserVisible, setRegisterUserVisible] = useState(false);
 
