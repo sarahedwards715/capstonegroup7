@@ -10,10 +10,10 @@ import "./views.scss";
 import { Button } from "react-bootstrap";
 
 function Landing(props) {
-  const accessToken = useStore((state) => state.accessToken);
-  const setAccessToken = useStore((state) => state.setAccessToken);
-  const setExpiresIn = useStore((state) => state.setExpiresIn);
-  const authURL = useStore((state) => state.authURL);
+  const accessToken = useStore(state => state.accessToken);
+  const setAccessToken = useStore(state => state.setAccessToken);
+  const setExpiresIn = useStore(state => state.setExpiresIn);
+  const authURL = useStore(state => state.authURL);
 
   const [registerUserVisible, setRegisterUserVisible] = useState(false);
 

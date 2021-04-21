@@ -8,8 +8,12 @@ function Navigation(props) {
   const accessToken = useStore(state => state.accessToken);
   const logout = useStore(state => state.logout);
   const [activeItem, setActiveItem] = useState("landing");
+  const setSelectedTrackToPlay = useStore(
+    state => state.setSelectedTrackToPlay
+  );
 
   const logoutOnClick = e => {
+    setSelectedTrackToPlay([]);
     logout();
   };
 

@@ -11,6 +11,7 @@ import DeletionModal from "../deletionModal/DeletionModal";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
+import "./UserProfile.scss";
 
 const UserProfile = () => {
   let user = useStore(state => state.user);
@@ -19,8 +20,11 @@ const UserProfile = () => {
   let setUserPlaylists = useStore(state => state.setUserPlaylists);
   let userPlaylists = useStore(state => state.userPlaylists);
   const [displayName, setDisplayName] = useState("");
-
   const [modalVisible, setModalVisible] = useState(false);
+  const [
+    editDisplayNameInputVisibility,
+    setEditDisplayNameInputVisibility,
+  ] = useState(false);
 
   useEffect(async () => {
     let moodifyUser = await getUserByUsername(user.username);
@@ -30,7 +34,7 @@ const UserProfile = () => {
       moodifyUser[0].createdAt,
       moodifyUser[0]._id
     );
-  }, []);
+  }, [displayName]);
 
   useEffect(async () => {
     let selectedUserPlaylist = await getPlaylistByUsername(user.username);
@@ -43,18 +47,57 @@ const UserProfile = () => {
 
   function handleEditDisplayName() {
     patchUser(moodifyUserInfo._id, displayName, user.moodifyToken);
+    setEditDisplayNameInputVisibility(!editDisplayNameInputVisibility);
   }
 
-  console.log(JSON.stringify(moodifyUserInfo), "from userprofile");
-  console.log(displayName);
+  function toggleEditDisplayName() {
+    setEditDisplayNameInputVisibility(!editDisplayNameInputVisibility);
+  }
+
   return (
-    <div>
-      <div>username: {user.username}</div>
-      <div> displayName: {moodifyUserInfo.displayName}</div>
-      <div> createdAt: {moodifyUserInfo.createdAt}</div>
-      <div>Id: {moodifyUserInfo._id}</div>
-      <button onClick={e => setModalVisible(true)}>Delete User</button>
-      <button>Edit Display Name</button>
+    <div className="userProfileWrapper">
+      <div className="userProfileBanner">{user.username}'s profile</div>
+      <div className="displayNameBanner"> @{moodifyUserInfo.displayName}</div>
+      <button className="deleteUserButton" onClick={e => setModalVisible(true)}>
+        Delete User
+      </button>
+
+      {!editDisplayNameInputVisibility ? (
+        <button
+          onClick={toggleEditDisplayName}
+          className="editDisplayNameButton">
+          Edit
+        </button>
+      ) : (
+        ""
+      )}
+
+      {editDisplayNameInputVisibility ? (
+        <div className="editDisplayNameWrapper">
+          <InputGroup className="mb-3 displayNameInputWrapper ">
+            <InputGroup.Prepend>
+              <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
+            </InputGroup.Prepend>
+            <FormControl
+              placeholder="Username"
+              aria-label="Username"
+              aria-describedby="basic-addon1"
+              onChange={e => setDisplayName(e.target.value)}
+            />
+          </InputGroup>
+          <Button
+            variant="success"
+            className="submitDisplayNameButton"
+            onClick={handleEditDisplayName}>
+            Submit
+          </Button>
+        </div>
+      ) : (
+        ""
+      )}
+
+      <div className="userPlaylistsBanner">my playlists</div>
+
       <UserPlaylists userPlaylists={userPlaylists} />
       <DeletionModal
         deleteTarget="User"
@@ -62,25 +105,6 @@ const UserProfile = () => {
         setVisible={setModalVisible}
         visible={modalVisible}
       />
-      <div className="editDisplayNameWrapper">
-        <InputGroup className="mb-3">
-          <InputGroup.Prepend>
-            <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
-          </InputGroup.Prepend>
-          <FormControl
-            placeholder="Username"
-            aria-label="Username"
-            aria-describedby="basic-addon1"
-            onChange={e => setDisplayName(e.target.value)}
-          />
-        </InputGroup>
-        <Button
-          variant="success"
-          className="editDisplayNameButton"
-          onClick={handleEditDisplayName}>
-          Submit
-        </Button>
-      </div>
     </div>
   );
 };
