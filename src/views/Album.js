@@ -1,10 +1,14 @@
-import React from 'react'
+import React from "react";
+import useStore from "../store/store";
 
 function Album() {
-    return (
-        <div>
-        </div>
-    )
+  const accessToken = useStore((state) => state.accessToken);
+
+  return (
+  <div className = "albumPageWrapper">
+      <div className = "albumPageBanner"></div>
+  </div>
+  )
 }
 
-export default Album
+export default Album;

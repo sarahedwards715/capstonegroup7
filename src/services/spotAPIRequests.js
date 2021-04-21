@@ -57,10 +57,10 @@ export const getArtistAlbums = (
     baseURL +
     "artists/" +
     artist_id +
-    "/albums?offset=" +
-    encodeURIComponent(offset) +
-    "&limit=" +
-    encodeURIComponent(limit);
+    "/albums?market=US&limit=" +
+    encodeURIComponent(limit) +
+    "&offset=" +
+    encodeURIComponent(offset);
 
   return fetch(reqURL, {
     method: "GET",
