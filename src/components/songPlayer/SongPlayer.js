@@ -16,12 +16,12 @@ export default function SongPlayer({ accessToken }) {
       <SpotifyPlayer
         style={{ color: "black" }}
         token={accessToken}
-        // autoPlay="true"
-        // showSaveIcon
-        // callback={state => {
-        //   if (!state.isPlaying) setPlay(false);
-        // }}
-        // play={play}
+        autoPlay="true"
+        showSaveIcon
+        callback={state => {
+          if (!state.isPlaying) setPlay(false);
+        }}
+        play={play}
         uris={selectedTrackToPlay ? [selectedTrackToPlay] : []}
       />
     </div>

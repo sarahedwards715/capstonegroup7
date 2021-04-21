@@ -6,7 +6,6 @@ import { Card } from "semantic-ui-react";
 
 function MoodsList(props) {
   let moodsArray = useStore(state => state.moodsArray);
-
   return (
     <div className="moodsListWrapper">
       <div className="moodsListBanner">moods</div>

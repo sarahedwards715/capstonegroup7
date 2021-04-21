@@ -136,6 +136,10 @@ const useStore = (set, get) => ({
   setSelectedTrackToPlay: trackUri => {
     set({ selectedTrackToPlay: trackUri });
   },
+  premiumLoginCode: "",
+  setPremiumLoginCode: code => {
+    set({ premiumLoginCode: code });
+  },
 });
 
 //Define zustand's useStore hook

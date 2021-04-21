@@ -9,7 +9,7 @@ import "./Home.scss";
 const Home = () => {
   const accessToken = useStore(state => state.accessToken);
   const user = useStore(state => state.user);
-
+  const premiumLoginCode = useStore(state => state.premiumLoginCode);
   let history = useHistory();
 
   return (

@@ -55,56 +55,61 @@ const UserProfile = () => {
   }
 
   return (
-    <div className="userProfileWrapper">
-      <div className="userProfileBanner">{user.username}'s profile</div>
-      <div className="displayNameBanner"> @{moodifyUserInfo.displayName}</div>
-      <button className="deleteUserButton" onClick={e => setModalVisible(true)}>
-        Delete User
-      </button>
-
-      {!editDisplayNameInputVisibility ? (
+    <div>
+      <div className="playlistCreationWrapper"></div>
+      <div className="userProfileWrapper">
+        <div className="userProfileBanner">{user.username}'s profile</div>
+        <div className="displayNameBanner"> @{moodifyUserInfo.displayName}</div>
         <button
-          onClick={toggleEditDisplayName}
-          className="editDisplayNameButton">
-          Edit
+          className="deleteUserButton"
+          onClick={e => setModalVisible(true)}>
+          Delete User
         </button>
-      ) : (
-        ""
-      )}
 
-      {editDisplayNameInputVisibility ? (
-        <div className="editDisplayNameWrapper">
-          <InputGroup className="mb-3 displayNameInputWrapper ">
-            <InputGroup.Prepend>
-              <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
-            </InputGroup.Prepend>
-            <FormControl
-              placeholder="Username"
-              aria-label="Username"
-              aria-describedby="basic-addon1"
-              onChange={e => setDisplayName(e.target.value)}
-            />
-          </InputGroup>
-          <Button
-            variant="success"
-            className="submitDisplayNameButton"
-            onClick={handleEditDisplayName}>
-            Submit
-          </Button>
-        </div>
-      ) : (
-        ""
-      )}
+        {!editDisplayNameInputVisibility ? (
+          <button
+            onClick={toggleEditDisplayName}
+            className="editDisplayNameButton">
+            Edit
+          </button>
+        ) : (
+          ""
+        )}
 
-      <div className="userPlaylistsBanner">my playlists</div>
+        {editDisplayNameInputVisibility ? (
+          <div className="editDisplayNameWrapper">
+            <InputGroup className="mb-3 displayNameInputWrapper ">
+              <InputGroup.Prepend>
+                <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
+              </InputGroup.Prepend>
+              <FormControl
+                placeholder="Username"
+                aria-label="Username"
+                aria-describedby="basic-addon1"
+                onChange={e => setDisplayName(e.target.value)}
+              />
+            </InputGroup>
+            <Button
+              variant="success"
+              className="submitDisplayNameButton"
+              onClick={handleEditDisplayName}>
+              Submit
+            </Button>
+          </div>
+        ) : (
+          ""
+        )}
 
-      <UserPlaylists userPlaylists={userPlaylists} />
-      <DeletionModal
-        deleteTarget="User"
-        deleteFunction={handleDelete}
-        setVisible={setModalVisible}
-        visible={modalVisible}
-      />
+        <div className="userPlaylistsBanner">my playlists</div>
+
+        <UserPlaylists userPlaylists={userPlaylists} />
+        <DeletionModal
+          deleteTarget="User"
+          deleteFunction={handleDelete}
+          setVisible={setModalVisible}
+          visible={modalVisible}
+        />
+      </div>
     </div>
   );
 };

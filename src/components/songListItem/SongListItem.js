@@ -18,9 +18,9 @@ function SongListItem(props) {
   );
 
   function handlePlaySong() {
-    setSelectedTrackToPlay(props.song.uri);
+    setSelectedTrackToPlay(props.song.preview_url);
   }
-
+  console.log(props.song.preview_url, "from songlistitem");
   return (
     <Table.Row>
       {user.username && user.moodifyToken && (
@@ -43,9 +43,9 @@ function SongListItem(props) {
             </Button>
           )}
 
-          {props.song.uri ? (
+          {props.song.preview_url ? (
             <Button size="small" onClick={handlePlaySong}>
-              Play Song
+              Preview
             </Button>
           ) : (
             ""

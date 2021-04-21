@@ -8,6 +8,7 @@ import UserRegistration from "../components/userRegistration/UserRegistration";
 import UserLogin from "../components/userLogin/UserLogin";
 import "./views.scss";
 import { Button } from "react-bootstrap";
+import SpotifyLogin from "../components/spotifyLogin/SpotifyLogin";
 
 function Landing(props) {
   const accessToken = useStore(state => state.accessToken);

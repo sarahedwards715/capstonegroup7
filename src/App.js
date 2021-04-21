@@ -13,10 +13,12 @@ import PlaylistsCreation from "./components/playlistsCreation/PlaylistsCreation"
 import Home from "./views/Home";
 import Navigation from "./components/navigation/Navigation";
 import SongPlayer from "./components/songPlayer/SongPlayer";
+import ReactAudioPlayer from "react-audio-player";
 
 function App() {
   const accessToken = useStore(state => state.accessToken);
   const user = useStore(state => state.user);
+  const selectedTrackToPlay = useStore(state => state.selectedTrackToPlay);
 
   return (
     <div className="App">
@@ -36,8 +38,12 @@ function App() {
       <div className="appLeftColumn">
         {accessToken && <PlaylistsCreation />}
       </div>
-      <div>
-        <SongPlayer accessToken={accessToken} />
+      <div className="playerContainer">
+        {/* <SongPlayer accessToken={accessToken} /> */}
+
+        {accessToken && (
+          <ReactAudioPlayer src={selectedTrackToPlay} autoPlay controls />
+        )}
       </div>
     </div>
   );

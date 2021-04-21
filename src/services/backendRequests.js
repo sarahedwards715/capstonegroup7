@@ -32,6 +32,21 @@ export const loginUser = formData => {
   }).then(res => res.json());
 };
 
+export const premiumLogin = code => {
+  return fetch(baseURL + "login", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      code,
+    }),
+  }).then(res => {
+    console.log(res.data, "from premium login");
+  });
+};
+
 export const getUsers = () => {
   return fetch(baseURL + "users", {
     method: "GET",
