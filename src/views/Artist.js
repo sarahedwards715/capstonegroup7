@@ -51,11 +51,13 @@ function Artist(props) {
       <div className="artistPageHeader">
         <div className="headerLeftRow">
           {artistInfo.image ? (
-            <img
-              className="artistPageMainImage"
-              src={artistInfo.image}
-              alt="img"
-            />
+            <div className="artistPageMainArt">
+              <img
+                className="artistPageMainImage"
+                src={artistInfo.image}
+                alt="img"
+              />
+            </div>
           ) : (
             <Placeholder.Image />
           )}

@@ -46,7 +46,11 @@ function SongListItem(props) {
       </Table.Cell>
       {props.compact || (
         <Table.Cell>
-          <Link to={"/albums/" + album.id}>{album.name}</Link>
+          {album ? (
+            <Link to={"/albums/" + album.id}>{album.name}</Link>
+          ) : (
+            <p>{props.albumName}</p>
+          )}
         </Table.Cell>
       )}
       {props.compact || <Table.Cell>{duration_ms}</Table.Cell>}
