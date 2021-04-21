@@ -62,6 +62,8 @@ function Artist(props) {
           <div className="artistPageBanner">{artistInfo.name}</div>
         </div>
         <div className="headerRightRow">
+          <div className="artistPageSubBanner">top tracks</div>
+
           {artistTracks.length ? (
             <SongList songs={artistTracks} />
           ) : (
@@ -72,7 +74,6 @@ function Artist(props) {
         </div>
       </div>
       <AlbumsList albums={artistAlbums} />
-      <div className="artistPageSubBanner">top tracks</div>
       <ArtistsList artists={artistRelatedArtists} />
     </div>
   );

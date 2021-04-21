@@ -181,6 +181,10 @@
       align-items: center;
       justify-content: center;
     }
+
+    .headerRightRow {
+      flex-grow: 1;
+    }
   }
 
   .artistPageMainImage {
@@ -195,6 +199,7 @@
     left: 50%;
     line-height: 1em;
     text-align: center;
+    margin-top: 5%;
     // height: 75px;
     // width: 340px;
     background-image: var(--gradient);
