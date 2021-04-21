@@ -1,0 +1,17 @@
+.artistsCardWrapper {
+    .artistPageCard {
+        max-height: 381px;
+        min-height: 381px;
+        overflow-y: hidden;
+        background-size: cover;
+    }
+
+    .card-img, .card-img-bottom, .card-img-top {
+        flex-grow: 1;
+    }
+
+    #id-card-img {
+        height: 500%;
+
+    }
+}

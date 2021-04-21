@@ -2,10 +2,11 @@ import "./SongListItem";
 import { Button, Table } from "semantic-ui-react";
 import React from "react";
 import useStore from "../../store/store";
+import { Link } from "react-router-dom";
 
 function SongListItem(props) {
   // Look at All The Properties of the Song Object, May Need Others Later
-  console.log(props.song)
+  console.log(props.song);
   let { name, album, artists, duration_ms, popularity, id } = props.song;
   let user = useStore((state) => state.user);
   let createdPlaylistData = useStore((state) => state.createdPlaylistData);
@@ -40,8 +41,18 @@ function SongListItem(props) {
         </Table.Cell>
       )}
       <Table.Cell>{name}</Table.Cell>
-      <Table.Cell>{artists[0].name}</Table.Cell>
-      {props.compact || <Table.Cell>{album.name}</Table.Cell>}
+      <Table.Cell>
+        <Link to={"/artists/" + artists[0].id}>{artists[0].name}</Link>
+      </Table.Cell>
+      {props.compact || (
+        <Table.Cell>
+          {album ? (
+            <Link to={"/albums/" + album.id}>{album.name}</Link>
+          ) : (
+            <p>{props.albumName}</p>
+          )}
+        </Table.Cell>
+      )}
       {props.compact || <Table.Cell>{duration_ms}</Table.Cell>}
     </Table.Row>
   );

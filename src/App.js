@@ -7,14 +7,17 @@ import Browse from "./views/Browse";
 import Playlist from "./views/Playlist";
 import NotFound from "./views/NotFound";
 import Mood from "./views/Mood";
-import UserRegistration from "./components/userRegistration/UserRegistration";
 import Profile from "./views/Profile";
 import PlaylistsCreation from "./components/playlistsCreation/PlaylistsCreation";
 import Home from "./views/Home";
 import Navigation from "./components/navigation/Navigation";
+import Album from "./views/Album";
+import Artist from "./views/Artist";
+import Search from "./views/Search";
+
 function App() {
-  const accessToken = useStore(state => state.accessToken);
-  const user = useStore(state => state.user);
+  const accessToken = useStore((state) => state.accessToken);
+  const user = useStore((state) => state.user);
 
   return (
     <div className="App">
@@ -26,7 +29,9 @@ function App() {
           <Route exact path="/browse" component={Browse} />
           <Route path="/browse/:mood" component={Mood} />
           <Route exact path="/playlists/:playlist_id" component={Playlist} />
-          <Route exact path="/userRegistration" component={UserRegistration} />
+          <Route exact path="/albums/:album_id" component={Album} />
+          <Route exact path="/artists/:artist_id" component={Artist} />
+          <Route exact path="/search/:query" component={Search} />
           <Route exact path="/userProfile" component={Profile} />
           <Route path="*" component={NotFound} />
         </Switch>
