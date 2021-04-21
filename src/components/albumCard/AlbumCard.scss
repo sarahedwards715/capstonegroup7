@@ -1,5 +1,13 @@
 .albumCardsWrapper {
-    .artistPageCard {
-        height: 398px;
-    }
+  height: 398px;
+
+  .albumCard {
+    flex: 0 0 auto;
+    flex-basis: 350px;
+    width: 340px;
+    margin-right: 15px;
+    font-size: 1.5em;
+    height: 100%;
+    overflow-y: hidden;
+  }
 }

@@ -67,6 +67,7 @@ function Landing(props) {
       <div className="landingFormWrapper">
         {accessToken ? (
           <>
+            {registerUserVisible ? <UserRegistration /> : <UserLogin />}
             <div className="newUserButtonWrapper">
               <Button onClick={handleClick}>
                 {registerUserVisible
@@ -74,7 +75,6 @@ function Landing(props) {
                   : "Create a New Account"}
               </Button>
             </div>
-            {registerUserVisible ? <UserRegistration /> : <UserLogin />}
           </>
         ) : (
           <div className="spotAuthWrapper">

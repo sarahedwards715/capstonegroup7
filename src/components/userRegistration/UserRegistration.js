@@ -57,12 +57,12 @@ function UserRegistration() {
       {formSuccess ? (
         <>
           <div className="userRegistrationSuccessBanner">
+          <Button className= "userRegistrationResetButton" onClick={(e) => handleReset(e)}>Reset Form</Button>
             <p className="userRegistrationSuccessText">
               You've Successfully Registered!
             </p>
             <p className="userRegistrationSuccessText">Try Logging In!</p>
           </div>
-          <Button className= "userRegistrationResetButton" onClick={(e) => handleReset(e)}>Reset Form</Button>
         </>
       ) : (
         <div className="formContainer">

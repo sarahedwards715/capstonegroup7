@@ -123,3 +123,31 @@ export const getAlbumTracks = (accessToken, album_id) => {
     },
   }).then((res) => res.json());
 };
+
+export const searchQuery = (
+  accessToken,
+  query,
+  type,
+  limit = 10,
+  offset = 0
+) => {
+  let qryURL =
+    baseURL +
+    "search?query=" +
+    encodeURIComponent(query) +
+    "&type=" +
+    encodeURIComponent(type) +
+    "&offset=" +
+    encodeURIComponent(offset) +
+    "&limit=" +
+    encodeURIComponent(limit);
+
+  return fetch(qryURL, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + accessToken,
+    },
+  }).then((res) => res.json());
+};

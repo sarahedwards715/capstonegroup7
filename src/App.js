@@ -14,6 +14,7 @@ import Navigation from "./components/navigation/Navigation";
 import Album from "./views/Album";
 import Artist from "./views/Artist";
 import Search from "./views/Search";
+import SearchBar from "./components/searchBar/SearchBar";
 
 function App() {
   const accessToken = useStore((state) => state.accessToken);
@@ -37,7 +38,12 @@ function App() {
         </Switch>
       </div>
       <div className="appLeftColumn">
-        {accessToken && <PlaylistsCreation />}
+        {accessToken && user.moodifyToken && (
+          <>
+            <SearchBar />
+            <PlaylistsCreation />
+          </>
+        )}
       </div>
     </div>
   );

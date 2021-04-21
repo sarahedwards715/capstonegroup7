@@ -1,1 +1,7 @@
-
+.albumsListCardContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-color: var(--gradient);
+}

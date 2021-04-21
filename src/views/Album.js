@@ -53,7 +53,7 @@ function Album(props) {
     <div className="albumPageWrapper">
       <div className="albumPageHeader">
         <div className="albumPageBanner">{albumInfo.name}</div>
-        <div className="albumPageSubBanner">
+        <div className="viewsSubBanner">
           <Link to={"/artists/" + albumInfo.artist.id}>
             {albumInfo.artist.name}
           </Link>
@@ -83,7 +83,10 @@ function Album(props) {
           )}
         </div>
       </div>
-      <AlbumsList albums={artistAlbums} />
+      <div className="albumPageAlbumsColumn">
+        <div className="viewsSubBanner">Albums By {albumInfo.artist.name} </div>
+        <AlbumsList albums={artistAlbums} />
+      </div>
     </div>
   );
 }

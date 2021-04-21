@@ -1,0 +1,11 @@
+.songListWrapper {
+    overflow-y: scroll;
+    max-height: 600px;
+
+    //CITATION: Thank you to Ashkan from Stack Overflow for Sticky Table Header
+    .ui.table thead tr:first-child > th {
+        position: sticky !important;
+        top: 0;
+        z-index: 2;
+   }
+}
