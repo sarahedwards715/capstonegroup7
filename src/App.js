@@ -24,6 +24,9 @@ function App() {
   return (
     <div className="App">
       {accessToken && user.moodifyToken && <Navigation />}
+
+      {/* {accessToken && <PlaylistsCreation />} */}
+
       <div className="appRightColumn">
         <Switch>
           <Route exact path="/" component={Landing} />
@@ -38,16 +41,7 @@ function App() {
           <Route path="*" component={NotFound} />
         </Switch>
       </div>
-      <div className="appLeftColumn">
-        {accessToken && <PlaylistsCreation />}
-      </div>
-      <div className="playerContainer">
-        {/* <SongPlayer accessToken={accessToken} /> */}
-
-        {accessToken && (
-          <ReactAudioPlayer src={selectedTrackToPlay} autoPlay controls />
-        )}
-      </div>
+      <div className="playerContainer"></div>
     </div>
   );
 }

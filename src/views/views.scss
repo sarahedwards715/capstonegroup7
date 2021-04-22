@@ -163,19 +163,66 @@
   }
 }
 
+.albumPagePlayerWrapper {
+  position: absolute;
+  top: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20%;
+}
+
+.albumPagePlayerWrapper1 {
+  position: absolute;
+  top: 18%;
+  left: 70%;
+  transform: translateX(-50%);
+  width: 20%;
+}
+
+.albumsPagePlaylistCreationWrapper {
+  position: absolute;
+  top: 30%;
+  left: 15%;
+}
+
+.artistPagePlaylistCreationWrapper {
+  position: absolute;
+  top: 30%;
+  left: 5%;
+  width: 300px;
+}
+
+.artistSongListWrapper {
+  // width: 70%;
+}
+
+.browsePageWrapper {
+  position: sticky;
+  top: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20%;
+  // z-index: 100;
+}
+
+.browsePagePlayer {
+  z-index: 5;
+}
+
 .artistPageWrapper {
   padding-bottom: 5%;
 
   .artistPageHeader {
+    margin-top: 2%;
     padding: 2%;
     display: flex;
     flex-direction: row;
     align-items: center;
-    // justify-content: space-evenly;
+    justify-content: space-between;
 
     .headerLeftRow {
       margin-right: 3%;
-      width: 360px;
+      width: 800px;
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -196,7 +243,6 @@
     border-radius: 50%;
     max-height: 340px;
     max-width: 100%;
-
   }
 
   .artistPageBanner {
