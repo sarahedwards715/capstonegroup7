@@ -9,21 +9,19 @@ import useForm from "../../customHooks/useForm";
 import playlistValidation from "../../validationInfo/playlistValidation";
 
 function PlaylistsCreation() {
-  let user = useStore((state) => state.user);
-  let createdPlaylistData = useStore((state) => state.createdPlaylistData);
+  let user = useStore(state => state.user);
+  let createdPlaylistData = useStore(state => state.createdPlaylistData);
   let createdPlaylistEditMode = useStore(
-    (state) => state.createdPlaylistEditMode
+    state => state.createdPlaylistEditMode
   );
-  let setCreatedPlaylistData = useStore(
-    (state) => state.setCreatedPlaylistData
-  );
+  let setCreatedPlaylistData = useStore(state => state.setCreatedPlaylistData);
   let clearCreatedPlaylistData = useStore(
-    (state) => state.clearCreatedPlaylistData
+    state => state.clearCreatedPlaylistData
   );
   let setCreatedPlaylistEditMode = useStore(
-    (state) => state.setCreatedPlaylistEditMode
+    state => state.setCreatedPlaylistEditMode
   );
-  let setPlaylists = useStore((state) => state.setPlaylists);
+  let setPlaylists = useStore(state => state.setPlaylists);
 
   const [formSuccess, setFormSuccess] = useState(false);
 
@@ -47,7 +45,7 @@ function PlaylistsCreation() {
           createdPlaylistData,
           user.username,
           user.moodifyToken
-        ).then((data) => {
+        ).then(data => {
           if (data.statusCode === 200) {
             setPlaylists();
             clearCreatedPlaylistData();
@@ -58,7 +56,7 @@ function PlaylistsCreation() {
           createdPlaylistData,
           user.username,
           user.moodifyToken
-        ).then((data) => {
+        ).then(data => {
           if (data.statusCode === 201) {
             setPlaylists();
             clearCreatedPlaylistData();

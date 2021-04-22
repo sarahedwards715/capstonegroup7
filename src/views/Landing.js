@@ -9,12 +9,13 @@ import UserLogin from "../components/userLogin/UserLogin";
 import "./views.scss";
 import { Button } from "react-bootstrap";
 import { Loader } from "semantic-ui-react";
+import SpotifyLogin from "../components/spotifyLogin/SpotifyLogin";
 
 function Landing(props) {
-  const accessToken = useStore((state) => state.accessToken);
-  const setAccessToken = useStore((state) => state.setAccessToken);
-  const setExpiresIn = useStore((state) => state.setExpiresIn);
-  const authURL = useStore((state) => state.authURL);
+  const accessToken = useStore(state => state.accessToken);
+  const setAccessToken = useStore(state => state.setAccessToken);
+  const setExpiresIn = useStore(state => state.setExpiresIn);
+  const authURL = useStore(state => state.authURL);
 
   const [registerUserVisible, setRegisterUserVisible] = useState(false);
   const [loginInProgress, setLoginInProgress] = useState(false);
