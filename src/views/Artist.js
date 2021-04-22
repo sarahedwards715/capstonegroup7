@@ -10,11 +10,14 @@ import {
   getRelatedArtists,
 } from "../services/spotAPIRequests";
 import useStore from "../store/store";
+import PlaylistsCreation from "../components/playlistsCreation/PlaylistsCreation";
+import "./views.scss";
+import ReactAudioPlayer from "react-audio-player";
 
 function Artist(props) {
   const accessToken = useStore((state) => state.accessToken);
   const artist_id = props.match.params.artist_id;
-
+  const selectedTrackToPlay = useStore((state) => state.selectedTrackToPlay);
   const [artistInfo, setArtistInfo] = useState({
     genres: [],
     name: "",
@@ -73,6 +76,9 @@ function Artist(props) {
 
   return (
     <div className="artistPageWrapper">
+      <div className="albumPagePlayerWrapper">
+        <ReactAudioPlayer src={selectedTrackToPlay} controls />
+      </div>
       <div className="artistPageHeader">
         <div className="headerLeftRow">
           {artistInfo.image ? (
@@ -98,7 +104,9 @@ function Artist(props) {
           <div className="viewsSubBanner">top tracks</div>
 
           {artistTracks.length ? (
-            <SongList songs={artistTracks} />
+            <div className="artistSongListWrapper">
+              <SongList songs={artistTracks} />
+            </div>
           ) : (
             <Loader active size="big">
               Loading . . .
@@ -118,6 +126,10 @@ function Artist(props) {
       <div className="artistPageArtistsColumn">
         <div className="viewsSubBanner">related artists</div>
         <ArtistsList artists={artistRelatedArtists} />
+        <AlbumsList albums={artistAlbums} />
+      </div>
+      <div className="artistPagePlaylistCreationWrapper">
+        <PlaylistsCreation />
       </div>
     </div>
   );

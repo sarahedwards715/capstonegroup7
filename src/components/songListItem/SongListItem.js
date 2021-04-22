@@ -29,22 +29,30 @@ function SongListItem(props) {
             <>
               <Button
                 compact
-                size="small"
+                size="mini"
+                className="blue"
+                style={{ padding: "7%", margin: "1%", width: "80px" }}
                 onClick={() => addCreatedPlaylistSongs(props.song)}>
-                {!props.compact ? "Add to Playlist" : "Add"}
+                {!props.compact ? "Add Song" : "Add"}
               </Button>
             </>
           ) : (
             <Button
               compact
-              size="small"
+              size="mini"
+              className="blue"
+              style={{ padding: "7%", margin: "1%", width: "80px" }}
               onClick={() => deleteCreatedPlaylistSongs(id)}>
               {!props.compact ? "Delete from Playlist" : "Delete"}
             </Button>
           )}
 
           {props.song.preview_url ? (
-            <Button size="small" onClick={handlePlaySong}>
+            <Button
+              size="mini"
+              className="green"
+              style={{ padding: "7%", margin: "1%", width: "80px" }}
+              onClick={handlePlaySong}>
               Preview
             </Button>
           ) : (

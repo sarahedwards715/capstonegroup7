@@ -1,0 +1,20 @@
+.playlistPageWrapper {
+  //   display: flex;
+}
+
+.playlistTitleBanner {
+  font-family: "Fredoka One", cursive;
+  top: 50%;
+  left: 50%;
+  height: 100px;
+  background-image: var(--gradient);
+  color: transparent;
+  background-clip: text;
+  background-size: 400%;
+  animation: bg-animation 3s infinite alternate;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 6em;
+}

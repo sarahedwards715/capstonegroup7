@@ -1,7 +1,7 @@
 //Since our backend is still only local, baseURL is port 4000 for now.
 //Just change baseURL whenever we deploy our backend somewhere
 // let baseURL = "http://localhost:4000/";
-let baseURL = "https://flicker-tropical-umbra.glitch.me/"
+let baseURL = "https://flicker-tropical-umbra.glitch.me/";
 
 export const postUsers = formData => {
   //Maybe Password Later??
@@ -157,13 +157,9 @@ export const postPlaylists = (createdPlaylistData, username, moodifyToken) => {
   }).then(res => res.json());
 };
 
-export const getReview = (id) => {
-return fetch(baseURL + `reviews/${id}`)
-.then(res => res.json());
-}
-
-
-
+export const getReview = id => {
+  return fetch(baseURL + `reviews/${id}`).then(res => res.json());
+};
 
 export const postReview = (
   playlist_id,
@@ -187,8 +183,8 @@ export const postReview = (
       thumbsUp: thumbsUp,
     }),
   })
-    .then((res) => res.json())
-    .then((data) => console.log(data));
+    .then(res => res.json())
+    .then(data => console.log(data));
 };
 
 export const patchPlaylists = (

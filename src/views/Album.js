@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import placeholder from "./../assets/images/albumPlaceholder.jpg"
+import placeholder from "./../assets/images/albumPlaceholder.jpg";
 import { Link } from "react-router-dom";
 import { Loader, Placeholder } from "semantic-ui-react";
 import AlbumsList from "../components/albumsList/AlbumsList";
@@ -10,6 +10,9 @@ import {
   getArtistAlbums,
 } from "../services/spotAPIRequests";
 import useStore from "../store/store";
+import ReactAudioPlayer from "react-audio-player";
+import "./views.scss";
+import PlaylistsCreation from "../components/playlistsCreation/PlaylistsCreation";
 
 function Album(props) {
   const [albumInfo, setAlbumInfo] = useState({
@@ -23,6 +26,7 @@ function Album(props) {
 
   const album_id = props.match.params.album_id;
   const accessToken = useStore((state) => state.accessToken);
+  const selectedTrackToPlay = useStore((state) => state.selectedTrackToPlay);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -52,6 +56,9 @@ function Album(props) {
 
   return (
     <div className="albumPageWrapper">
+      <div className="albumPagePlayerWrapper1">
+        <ReactAudioPlayer src={selectedTrackToPlay} controls />
+      </div>
       <div className="albumPageHeader">
         <div className="albumPageBanner">{albumInfo.name}</div>
         <div className="viewsSubBanner">
@@ -87,6 +94,9 @@ function Album(props) {
       <div className="albumPageAlbumsColumn">
         <div className="viewsSubBanner">Albums By {albumInfo.artist.name} </div>
         <AlbumsList albums={artistAlbums} />
+      </div>
+      <div className="albumsPagePlaylistCreationWrapper">
+        <PlaylistsCreation />
       </div>
     </div>
   );

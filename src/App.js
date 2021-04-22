@@ -8,16 +8,12 @@ import Playlist from "./views/Playlist";
 import NotFound from "./views/NotFound";
 import Mood from "./views/Mood";
 import Profile from "./views/Profile";
-import PlaylistsCreation from "./components/playlistsCreation/PlaylistsCreation";
 import Home from "./views/Home";
 import Navigation from "./components/navigation/Navigation";
-import SongPlayer from "./components/songPlayer/SongPlayer";
-import ReactAudioPlayer from "react-audio-player";
 import Album from "./views/Album";
 import Artist from "./views/Artist";
 import Search from "./views/Search";
 import SearchBar from "./components/searchBar/SearchBar";
-
 
 function App() {
   const accessToken = useStore(state => state.accessToken);
@@ -26,7 +22,7 @@ function App() {
 
   return (
     <div className="App">
-      {<Navigation />}
+      <Navigation />
       <div className="appRightColumn">
         <Switch>
           <Route exact path="/" component={Landing} />
@@ -41,7 +37,7 @@ function App() {
           <Route path="*" component={NotFound} />
         </Switch>
       </div>
-      <div className="appLeftColumn">
+      {/* <div className="appLeftColumn">
         {accessToken && user.moodifyToken && (
           <>
             <SearchBar />
@@ -52,10 +48,11 @@ function App() {
       <div className="playerContainer">
         {/* <SongPlayer accessToken={accessToken} /> */}
 
-        {accessToken && (
+        {/* {accessToken && (
           <ReactAudioPlayer src={selectedTrackToPlay} autoPlay controls />
-        )}
-      </div>
+        )}  */}
+      {/* </div> */}
+      <div className="playerContainer"></div>
     </div>
   );
 }
