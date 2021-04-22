@@ -12,7 +12,7 @@ export const getMoods = (accessToken) => {
   }).then((res) => res.json());
 };
 
-export const getRecommendations = (accessToken, mood, limit = 10) => {
+export const getRecommendations = (accessToken, mood, limit = 15) => {
   let recURL =
     baseURL +
     "recommendations?limit=" +

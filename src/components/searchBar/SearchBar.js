@@ -11,7 +11,7 @@ function SearchBar() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    history.push("/search/" + query);
+    history.push("/search/" + encodeURIComponent(query));
   }
 
   return (

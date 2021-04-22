@@ -2,7 +2,8 @@
     overflow-y: scroll;
     max-height: 600px;
 
-    //CITATION: Thank you to Ashkan from Stack Overflow for Sticky Table Header
+    // CITATION: Thank you to Ashkan from Stack Overflow for Sticky Table Header
+    // https://stackoverflow.com/questions/29906134/semantic-ui-keep-thead-visible-when-scrolling-tbody
     .ui.table thead tr:first-child > th {
         position: sticky !important;
         top: 0;

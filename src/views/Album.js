@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import placeholder from "./../assets/images/albumPlaceholder.jpg"
 import { Link } from "react-router-dom";
 import { Loader, Placeholder } from "semantic-ui-react";
 import AlbumsList from "../components/albumsList/AlbumsList";
@@ -30,7 +31,7 @@ function Album(props) {
       setAlbumInfo({
         name: data.name,
         artist: data.artists[0],
-        image: data.images[0].url,
+        image: data.images[0]?.url || placeholder,
         genres: data.genres,
       });
     });

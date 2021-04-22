@@ -22,6 +22,24 @@ function Mood(props) {
     });
   }, []);
 
+  function infiniteScrollRecommendation() {
+    return getRecommendations(accessToken, props.match.params.mood).then(
+      (data) => {
+        if (data.error?.status === 400 || data.error?.status === 404) {
+          setErrors(data.error.message);
+        }
+
+        // CITATATION: Remove Duplicates By Comparing Two Arrays
+        // https://stackoverflow.com/questions/14930516/compare-two-javascript-arrays-and-remove-duplicates
+        let newSongs = data.tracks.filter(track => !songs.includes(track))
+
+        let moreSongs = [...songs, ...newSongs]
+
+        setSongs(moreSongs);
+      }
+    );
+  }
+
   return (
     <div className="moodPageWrapper">
       {errors ? (
@@ -35,7 +53,12 @@ function Mood(props) {
       ) : (
         <>
           <div className="moodPageBanner">{props.match.params.mood}</div>
-          <SongList songs={songs} collapsing={false} compact={false} />
+          <SongList
+            infiniteScrollCallback={infiniteScrollRecommendation}
+            songs={songs}
+            collapsing={false}
+            compact={false}
+          />
         </>
       )}
     </div>

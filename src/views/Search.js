@@ -30,7 +30,9 @@ function Search(props) {
   return (
     <div className="searchPageWrapper">
       <div className="searchPageHeader">
-        <div className="viewsSubBanner">Showing Results For {query}</div>
+        <div className="viewsSubBanner">
+          Showing Results For {decodeURIComponent(query)}
+        </div>
       </div>
       <div className="searchPageBody">
         <div className="searchPageArtistsColumn">

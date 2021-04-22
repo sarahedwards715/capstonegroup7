@@ -17,6 +17,8 @@ References:
   Free Code Camp - How to implement horizontal scrolling using Flexbox - https://www.freecodecamp.org/news/horizontal-scrolling-using-flexbox-f9d16817f742/
   Web Dev Simplified - How To Build A Better Spotify With React - https://www.youtube.com/watch?v=Xcet6msf3eE
   Ashkan - Sticky Table Header for Semantic UI - https://stackoverflow.com/questions/29906134/semantic-ui-keep-thead-visible-when-scrolling-tbody
+  Handling Scroll Events In React - https://kempsterrrr.xyz/articles/handling-scroll-events-in-react
+  Aesthete and Madara's Ghost - Compare Two Arrays and Remove Duplicates - https://stackoverflow.com/questions/14930516/compare-two-javascript-arrays-and-remove-duplicates
 
 This Get Users and Get Users By Id Stuff Works, putting it here for now!
 

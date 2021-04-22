@@ -1,5 +1,5 @@
 import "./ArtistsCard.scss";
-import placeholder from "../../assets/images/Placeholder.png"
+import placeholder from "../../assets/images/artistPlaceholder.png"
 import React from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
