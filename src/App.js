@@ -11,13 +11,17 @@ import Profile from "./views/Profile";
 import PlaylistsCreation from "./components/playlistsCreation/PlaylistsCreation";
 import Home from "./views/Home";
 import Navigation from "./components/navigation/Navigation";
+import SongPlayer from "./components/songPlayer/SongPlayer";
+import ReactAudioPlayer from "react-audio-player";
 import Album from "./views/Album";
 import Artist from "./views/Artist";
 import Search from "./views/Search";
 
+
 function App() {
-  const accessToken = useStore((state) => state.accessToken);
-  const user = useStore((state) => state.user);
+  const accessToken = useStore(state => state.accessToken);
+  const user = useStore(state => state.user);
+  const selectedTrackToPlay = useStore(state => state.selectedTrackToPlay);
 
   return (
     <div className="App">
@@ -38,6 +42,13 @@ function App() {
       </div>
       <div className="appLeftColumn">
         {accessToken && <PlaylistsCreation />}
+      </div>
+      <div className="playerContainer">
+        {/* <SongPlayer accessToken={accessToken} /> */}
+
+        {accessToken && (
+          <ReactAudioPlayer src={selectedTrackToPlay} autoPlay controls />
+        )}
       </div>
     </div>
   );

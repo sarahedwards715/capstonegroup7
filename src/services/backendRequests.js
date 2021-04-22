@@ -33,6 +33,21 @@ export const loginUser = formData => {
   }).then(res => res.json());
 };
 
+export const premiumLogin = code => {
+  return fetch(baseURL + "login", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      code,
+    }),
+  }).then(res => {
+    console.log(res.data, "from premium login");
+  });
+};
+
 export const getUsers = () => {
   return fetch(baseURL + "users", {
     method: "GET",
@@ -106,8 +121,7 @@ export const getPlaylists = () => {
   }).then(res => res.json());
 };
 
-export const getPlaylistById = (id) => {
-  console.log(id)
+export const getPlaylistById = id => {
   return fetch(baseURL + "playlists/" + id, {
     method: "GET",
     headers: {

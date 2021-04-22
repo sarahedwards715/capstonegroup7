@@ -9,24 +9,21 @@ import useForm from "../../customHooks/useForm";
 import playlistValidation from "../../validationInfo/playlistValidation";
 
 function PlaylistsCreation() {
-  let user = useStore((state) => state.user);
-  let createdPlaylistData = useStore((state) => state.createdPlaylistData);
+  let user = useStore(state => state.user);
+  let createdPlaylistData = useStore(state => state.createdPlaylistData);
   let createdPlaylistEditMode = useStore(
-    (state) => state.createdPlaylistEditMode
+    state => state.createdPlaylistEditMode
   );
-  let setCreatedPlaylistData = useStore(
-    (state) => state.setCreatedPlaylistData
-  );
+  let setCreatedPlaylistData = useStore(state => state.setCreatedPlaylistData);
   let clearCreatedPlaylistData = useStore(
-    (state) => state.clearCreatedPlaylistData
+    state => state.clearCreatedPlaylistData
   );
   let setCreatedPlaylistEditMode = useStore(
-    (state) => state.setCreatedPlaylistEditMode
+    state => state.setCreatedPlaylistEditMode
   );
-  let setPlaylists = useStore((state) => state.setPlaylists);
+  let setPlaylists = useStore(state => state.setPlaylists);
 
   const [formSuccess, setFormSuccess] = useState(false);
-
 
   function handleChange(event) {
     setCreatedPlaylistData({
@@ -48,7 +45,7 @@ function PlaylistsCreation() {
           createdPlaylistData,
           user.username,
           user.moodifyToken
-        ).then((data) => {
+        ).then(data => {
           if (data.statusCode === 200) {
             setPlaylists();
             clearCreatedPlaylistData();
@@ -59,7 +56,7 @@ function PlaylistsCreation() {
           createdPlaylistData,
           user.username,
           user.moodifyToken
-        ).then((data) => {
+        ).then(data => {
           if (data.statusCode === 201) {
             setPlaylists();
             clearCreatedPlaylistData();
@@ -75,8 +72,8 @@ function PlaylistsCreation() {
 
   //This is some logic to determine the component's header,
   //I wanted to separate it from main JSX
-  let componentHeader
-  if (formSuccess) componentHeader = "Success"
+  let componentHeader;
+  if (formSuccess) componentHeader = "Success";
 
   return (
     <div className="playlistCreationWrapper">
@@ -91,14 +88,14 @@ function PlaylistsCreation() {
             collapsing={true}
             compact={true}
           />
-          <Form onSubmit={(e) => handleValidate(e)}>
+          <Form onSubmit={e => handleValidate(e)}>
             <Form.Group>
               <Form.Label className="formLabel">Playlist Title</Form.Label>
               <Form.Control
                 name="title"
                 placeholder="Title"
                 isInvalid={errors.title}
-                onChange={(e) => handleChange(e)}
+                onChange={e => handleChange(e)}
                 value={createdPlaylistData.title}
               />
               <Form.Control.Feedback type="invalid">
@@ -115,7 +112,7 @@ function PlaylistsCreation() {
                 name="description"
                 placeholder="Description"
                 isInvalid={errors.description}
-                onChange={(e) => handleChange(e)}
+                onChange={e => handleChange(e)}
                 value={createdPlaylistData.description}
               />
               <Form.Control.Feedback type="invalid">
@@ -129,7 +126,7 @@ function PlaylistsCreation() {
                   : "Upload Playlist"}
               </Button>
               <Button.Or />
-              <Button type="reset" onClick={(e) => handleClose()}>
+              <Button type="reset" onClick={e => handleClose()}>
                 Close
               </Button>
             </Button.Group>
