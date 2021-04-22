@@ -12,6 +12,8 @@ if (window.location.host === "localhost:3000") {
 }
 
 export function buildLoginURL() {
+  let scopes =
+    "streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state";
   return (
     "https://accounts.spotify.com/authorize?client_id=" +
     client_ID +

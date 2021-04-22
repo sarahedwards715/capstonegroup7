@@ -11,3 +11,12 @@
   //   align-items: center;
   // }
 }
+
+.playerContainer {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}

@@ -1,6 +1,6 @@
 .moodCard {
-  background-color: white;
-  width: 160px;
+  // background-color: white;
+  width: 180px;
   min-width: 10%;
   height: 100px;
   padding: 1%;
@@ -8,5 +8,9 @@
   margin: 1%;
   text-align: center;
   border-radius: 5%;
+  font-size: 2em;
+}
+
+.moodTitles {
   font-size: 2em;
 }
