@@ -27,7 +27,6 @@ function PlaylistsCreation() {
 
   const [formSuccess, setFormSuccess] = useState(false);
 
-
   function handleChange(event) {
     setCreatedPlaylistData({
       ...createdPlaylistData,
@@ -75,67 +74,75 @@ function PlaylistsCreation() {
 
   //This is some logic to determine the component's header,
   //I wanted to separate it from main JSX
-  let componentHeader
-  if (formSuccess) componentHeader = "Success"
+  let playlistCreationHeader;
+  if (formSuccess) playlistCreationHeader = "Success!";
+  else if (createdPlaylistEditMode.active) playlistCreationHeader = "Editing!";
+  else if (!createdPlaylistEditMode.active && createdPlaylistData.songs.length)
+    playlistCreationHeader = "Creating!";
+  else playlistCreationHeader = "Standby!";
 
   return (
     <div className="playlistCreationWrapper">
-      <div className="playlistCreationHeader">{}</div>
-      {createdPlaylistData.songs.length !== 0 && user.moodifyToken && (
-        <Segment>
-          {createdPlaylistEditMode.active && (
-            <Message warning>You Are In Edit Mode!</Message>
-          )}
-          <SongList
-            songs={createdPlaylistData.songs}
-            collapsing={true}
-            compact={true}
-          />
-          <Form onSubmit={(e) => handleValidate(e)}>
-            <Form.Group>
-              <Form.Label className="formLabel">Playlist Title</Form.Label>
-              <Form.Control
-                name="title"
-                placeholder="Title"
-                isInvalid={errors.title}
-                onChange={(e) => handleChange(e)}
-                value={createdPlaylistData.title}
-              />
-              <Form.Control.Feedback type="invalid">
-                {errors.title}
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group>
-              <Form.Label className="formLabel">
-                Playlist Description
-              </Form.Label>
-              <Form.Control
-                // as="textarea"
-                // rows={3}
-                name="description"
-                placeholder="Description"
-                isInvalid={errors.description}
-                onChange={(e) => handleChange(e)}
-                value={createdPlaylistData.description}
-              />
-              <Form.Control.Feedback type="invalid">
-                {errors.description}
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Button.Group>
-              <Button type="submit">
-                {createdPlaylistEditMode.active
-                  ? "Update Playlist"
-                  : "Upload Playlist"}
-              </Button>
-              <Button.Or />
-              <Button type="reset" onClick={(e) => handleClose()}>
-                Close
-              </Button>
-            </Button.Group>
-          </Form>
-        </Segment>
-      )}
+      <Segment>
+        {user.moodifyToken && (
+          <div className="playlistCreationHeader">{playlistCreationHeader}</div>
+        )}
+        {createdPlaylistData.songs.length !== 0 && user.moodifyToken && (
+          <>
+            {createdPlaylistEditMode.active && (
+              <Message warning>You Are In Edit Mode!</Message>
+            )}
+            <SongList
+              songs={createdPlaylistData.songs}
+              collapsing={true}
+              compact={true}
+            />
+            <Form onSubmit={(e) => handleValidate(e)}>
+              <Form.Group>
+                <Form.Label className="formLabel">Playlist Title</Form.Label>
+                <Form.Control
+                  name="title"
+                  placeholder="Title"
+                  isInvalid={errors.title}
+                  onChange={(e) => handleChange(e)}
+                  value={createdPlaylistData.title}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {errors.title}
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label className="formLabel">
+                  Playlist Description
+                </Form.Label>
+                <Form.Control
+                  // as="textarea"
+                  // rows={3}
+                  name="description"
+                  placeholder="Description"
+                  isInvalid={errors.description}
+                  onChange={(e) => handleChange(e)}
+                  value={createdPlaylistData.description}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {errors.description}
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Button.Group>
+                <Button type="submit">
+                  {createdPlaylistEditMode.active
+                    ? "Update Playlist"
+                    : "Upload Playlist"}
+                </Button>
+                <Button.Or />
+                <Button type="reset" onClick={(e) => handleClose()}>
+                  Close
+                </Button>
+              </Button.Group>
+            </Form>
+          </>
+        )}
+      </Segment>
     </div>
   );
 }

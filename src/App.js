@@ -22,7 +22,7 @@ function App() {
 
   return (
     <div className="App">
-      {accessToken && user.moodifyToken && <Navigation />}
+      {<Navigation />}
       <div className="appRightColumn">
         <Switch>
           <Route exact path="/" component={Landing} />
