@@ -5,7 +5,8 @@ import { Button } from "react-bootstrap";
 import PlaylistsCard from "../components/playlistsCard/PlaylistsCard";
 import SongList from "../components/songList/SongList";
 import { getPlaylistById } from "../services/backendRequests";
-import useStore from "../store/store";
+import Reviews from "../components/reviews/Reviews";
+import useStore from "../store/store"
 
 function Playlist(props) {
   let playlists = useStore(state => state.playlists);
@@ -52,7 +53,9 @@ function Playlist(props) {
             collapsing={false}
             compact={false}
           />
-        </>
+          <Reviews playlist_id = {props.match.params.playlist_id} />
+          </>
+    
       ) : (
         <Loader active size="big">
           Loading...
