@@ -6,15 +6,18 @@ import PlaylistsCard from "../playlistsCard/PlaylistsCard";
 
 function PlaylistsList(props) {
   const playlists = useStore(state => state.playlists);
-  console.log(playlists, "from playlistslist");
+  const moodifyUserInfo = useStore(state => state.moodifyUserInfo);
+
   return (
     <div className="playlistsListWrapper">
-      <div className = "playlistsListBanner">playlists</div>
-      <Card.Group textAlign="center" className="playlistsContainer">
-        {playlists.map(playlist => {
-          return <PlaylistsCard playlist={playlist} key={playlist._id} />;
-        })}
-      </Card.Group>
+      <div className="playlistsListBanner">playlists</div>
+      <div className="playlistsContainer">
+        <Card.Group textAlign="center">
+          {playlists.map(playlist => {
+            return <PlaylistsCard playlist={playlist} key={playlist._id} />;
+          })}
+        </Card.Group>
+      </div>
     </div>
   );
 }

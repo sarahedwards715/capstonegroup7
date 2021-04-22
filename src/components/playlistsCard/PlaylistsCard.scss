@@ -1,12 +1,32 @@
-.playlistCard {
-  background-color: white;
-  width: 160px;
-  min-width: 10%;
-  height: 100px;
-  padding: 1%;
-  padding-top: 2.3%;
-  margin: 1%;
+.playlistCard .card {
+  position: relative;
+  width: 120px;
+  min-width: 100%;
   text-align: center;
   border-radius: 5%;
   font-size: 2em;
+  height: 220px !important;
+}
+
+.ui.cards > .card {
+  color: black;
+  background-image: url("../../images/cardBackground.png");
+  background-size: cover;
+  // height: 150px;
+}
+
+.playlistTitles {
+  font-size: 1.2em;
+}
+
+.editPlaylistButton {
+  position: absolute;
+  bottom: 2%;
+  left: 2%;
+}
+
+.deletePlaylistButton {
+  position: absolute;
+  bottom: 2%;
+  right: 2%;
 }
