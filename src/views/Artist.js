@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Loader, Placeholder } from "semantic-ui-react";
 import AlbumsList from "../components/albumsList/AlbumsList";
 import ArtistsList from "../components/artistsList/ArtistsList";
+import placeholder from "./../assets/images/albumPlaceholder.jpg"
 import SongList from "../components/songList/SongList";
 import {
   getArtist,
@@ -33,7 +34,7 @@ function Artist(props) {
       setArtistInfo({
         genres: data.genres,
         name: data.name,
-        image: data.images[1].url,
+        image: data.images[1]?.url || placeholder,
         followers: data.followers,
       });
     });

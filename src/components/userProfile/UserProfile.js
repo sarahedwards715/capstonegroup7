@@ -12,13 +12,20 @@ import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 import "./UserProfile.scss";
+import { useHistory } from "react-router";
+import useForm from "../../customHooks/useForm";
+import patchUserValidation from "../../validationInfo/patchUserValidation";
 
 const UserProfile = () => {
-  let user = useStore(state => state.user);
-  let moodifyUserInfo = useStore(state => state.moodifyUserInfo);
-  let setMoodifyUserInfo = useStore(state => state.setMoodifyUserInfo);
-  let setUserPlaylists = useStore(state => state.setUserPlaylists);
-  let userPlaylists = useStore(state => state.userPlaylists);
+  let user = useStore((state) => state.user);
+  let moodifyUserInfo = useStore((state) => state.moodifyUserInfo);
+  let setMoodifyUserInfo = useStore((state) => state.setMoodifyUserInfo);
+  let setUserPlaylists = useStore((state) => state.setUserPlaylists);
+  let userPlaylists = useStore((state) => state.userPlaylists);
+  const logout = useStore((state) => state.logout);
+
+  let history = useHistory();
+
   const [displayName, setDisplayName] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const [
@@ -42,13 +49,45 @@ const UserProfile = () => {
   }, []);
 
   function handleDelete(event) {
-    deleteUser(moodifyUserInfo._id, user.moodifyToken);
+    deleteUser(moodifyUserInfo._id, user.moodifyToken).then((data) => {
+      if (data.statusCode === 200) {
+        history.push("/");
+        logout();
+      }
+    });
   }
 
   function handleEditDisplayName() {
-    patchUser(moodifyUserInfo._id, displayName, user.moodifyToken);
-    setEditDisplayNameInputVisibility(!editDisplayNameInputVisibility);
+    patchUser(moodifyUserInfo._id, displayName, user.moodifyToken).then(
+      (data) => {
+        if (data.statusCode === 200) {
+          console.log(data);
+
+          let updatedDisplayName = data.displayName;
+
+          console.log(updatedDisplayName);
+
+          let newMoodifyUserInfo = {
+            displayName: updatedDisplayName,
+            ...moodifyUserInfo,
+          };
+          setMoodifyUserInfo(
+            newMoodifyUserInfo.displayName,
+            newMoodifyUserInfo.createdAt,
+            newMoodifyUserInfo._id
+          );
+          setDisplayName(moodifyUserInfo.displayName);
+          setEditDisplayNameInputVisibility(!editDisplayNameInputVisibility);
+        }
+      }
+    );
   }
+
+  const { handleValidate, errors, setErrors } = useForm(
+    handleEditDisplayName,
+    patchUserValidation,
+    displayName
+  );
 
   function toggleEditDisplayName() {
     setEditDisplayNameInputVisibility(!editDisplayNameInputVisibility);
@@ -62,14 +101,16 @@ const UserProfile = () => {
         <div className="displayNameBanner"> @{moodifyUserInfo.displayName}</div>
         <button
           className="deleteUserButton"
-          onClick={e => setModalVisible(true)}>
+          onClick={(e) => setModalVisible(true)}
+        >
           Delete User
         </button>
 
         {!editDisplayNameInputVisibility ? (
           <button
             onClick={toggleEditDisplayName}
-            className="editDisplayNameButton">
+            className="editDisplayNameButton"
+          >
             Edit
           </button>
         ) : (
@@ -86,13 +127,18 @@ const UserProfile = () => {
                 placeholder="Username"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                onChange={e => setDisplayName(e.target.value)}
+                isInvalid={errors.displayName}
+                onChange={(e) => setDisplayName(e.target.value)}
               />
+              <FormControl.Feedback type="invalid">
+                {errors.displayName}
+              </FormControl.Feedback>
             </InputGroup>
             <Button
               variant="success"
               className="submitDisplayNameButton"
-              onClick={handleEditDisplayName}>
+              onClick={(e) => handleValidate(e)}
+            >
               Submit
             </Button>
           </div>
