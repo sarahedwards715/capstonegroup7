@@ -8,8 +8,8 @@ function AlbumsList(props) {
     const scrollable = event.target;
 
     if (
-      scrollable.scrollHeight - scrollable.scrollTop ===
-      scrollable.clientHeight
+      scrollable.scrollWidth - scrollable.scrollLeft ===
+      scrollable.clientWidth
     ) {
       setAtBottom(true);
     }

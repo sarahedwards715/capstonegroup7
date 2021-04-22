@@ -12,13 +12,14 @@ import { Loader } from "semantic-ui-react";
 import SpotifyLogin from "../components/spotifyLogin/SpotifyLogin";
 
 function Landing(props) {
-  const accessToken = useStore(state => state.accessToken);
-  const setAccessToken = useStore(state => state.setAccessToken);
-  const setExpiresIn = useStore(state => state.setExpiresIn);
-  const authURL = useStore(state => state.authURL);
+  const accessToken = useStore((state) => state.accessToken);
+  const setAccessToken = useStore((state) => state.setAccessToken);
+  const setExpiresIn = useStore((state) => state.setExpiresIn);
+  const authURL = useStore((state) => state.authURL);
 
   const [registerUserVisible, setRegisterUserVisible] = useState(false);
   const [loginInProgress, setLoginInProgress] = useState(false);
+  const [registerInProgress, setRegisterInProgress] = useState(false);
 
   // CITATION: Credit to Joe Karlsson -
   // https://levelup.gitconnected.com/how-to-build-a-spotify-player-with-react-in-15-minutes-7e01991bc4b6
@@ -69,7 +70,7 @@ function Landing(props) {
         </div>
       )}
       <div className="landingFormWrapper">
-        {loginInProgress && (
+        {(loginInProgress || registerInProgress) && (
           <div className="loginLoaderWrapper">
             <div className="loaderDefiner">
               <Loader active size="big">
@@ -81,7 +82,7 @@ function Landing(props) {
         {accessToken ? (
           <>
             {registerUserVisible ? (
-              <UserRegistration />
+              <UserRegistration setRegisterInProgress = {setRegisterInProgress}/>
             ) : (
               <UserLogin setLoginInProgress={setLoginInProgress} />
             )}
