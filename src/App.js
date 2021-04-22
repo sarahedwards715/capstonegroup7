@@ -41,7 +41,6 @@ function App() {
             <div className="playlistCreationWrapper">
               <PlaylistsCreation />
             </div>
-            <div>Hello from Left</div>
           </div>
         )}
         <div className="appRightColumn">
