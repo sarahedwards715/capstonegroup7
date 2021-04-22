@@ -1,26 +1,24 @@
-.playlistsContainer {
-  padding: 1%;
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  height: 33vh;
-  width: 90%;
-  overflow-y: scroll;
-  border-radius: 10px;
-  margin-left: 3%;
-}
+.playlistPageWrapper {
+  //   display: flex;
+  .bodyLeftRow {
+    margin: 0 5% 5% 2%;
+    flex-shrink: 1;
+    flex-basis: 33%;
+    max-width: 33%;
+    display: flex;
+    align-items: center;
+  }
 
-.playlistsListWrapper {
-  height: 100%;
-  background: black;
+  .bodyRightRow {
+    flex-grow: 1;
+    margin-right: 2%;
+  }
 
-  .playlistsListBanner {
+  .playlistTitleBanner {
     font-family: "Fredoka One", cursive;
-    font-size: 4em;
     top: 50%;
     left: 50%;
-    height: 100px;
-    width: 500px;
+    line-height: 1em;
     background-image: var(--gradient);
     color: transparent;
     background-clip: text;
@@ -30,5 +28,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    font-size: 6em;
   }
 }

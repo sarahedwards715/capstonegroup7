@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import placeholder from "./../assets/images/albumPlaceholder.jpg";
 import { Link } from "react-router-dom";
 import { Loader, Placeholder } from "semantic-ui-react";
 import AlbumsList from "../components/albumsList/AlbumsList";
@@ -9,6 +10,8 @@ import {
   getArtistAlbums,
 } from "../services/spotAPIRequests";
 import useStore from "../store/store";
+import "./views.scss";
+import PlaylistsCreation from "../components/playlistsCreation/PlaylistsCreation";
 
 function Album(props) {
   const [albumInfo, setAlbumInfo] = useState({
@@ -22,6 +25,7 @@ function Album(props) {
 
   const album_id = props.match.params.album_id;
   const accessToken = useStore((state) => state.accessToken);
+  const selectedTrackToPlay = useStore((state) => state.selectedTrackToPlay);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -30,7 +34,7 @@ function Album(props) {
       setAlbumInfo({
         name: data.name,
         artist: data.artists[0],
-        image: data.images[0].url,
+        image: data.images[0]?.url || placeholder,
         genres: data.genres,
       });
     });
@@ -53,7 +57,7 @@ function Album(props) {
     <div className="albumPageWrapper">
       <div className="albumPageHeader">
         <div className="albumPageBanner">{albumInfo.name}</div>
-        <div className="albumPageSubBanner">
+        <div className="viewsSubBanner">
           <Link to={"/artists/" + albumInfo.artist.id}>
             {albumInfo.artist.name}
           </Link>
@@ -83,7 +87,10 @@ function Album(props) {
           )}
         </div>
       </div>
-      <AlbumsList albums={artistAlbums} />
+      <div className="albumPageAlbumsColumn">
+        <div className="viewsSubBanner">Albums By {albumInfo.artist.name} </div>
+        <AlbumsList albums={artistAlbums} />
+      </div>
     </div>
   );
 }

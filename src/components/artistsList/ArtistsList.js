@@ -5,8 +5,7 @@ import ArtistsCard from "../artistsCard/ArtistsCard";
 function ArtistsList(props) {
   return (
     <div className="artistsListWrapper">
-      <div className="artistPageSubBanner">related artists</div>
-      <div className="artistPageCardContainer">
+      <div className="artistsListCardContainer">
         {props.artists.map((artist) => {
           return <ArtistsCard artist={artist} key={artist.id} />;
         })}

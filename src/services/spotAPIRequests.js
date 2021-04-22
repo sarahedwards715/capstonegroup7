@@ -12,7 +12,7 @@ export const getMoods = (accessToken) => {
   }).then((res) => res.json());
 };
 
-export const getRecommendations = (accessToken, mood, limit = 10) => {
+export const getRecommendations = (accessToken, mood, limit = 15) => {
   let recURL =
     baseURL +
     "recommendations?limit=" +
@@ -115,6 +115,34 @@ export const getAlbumTracks = (accessToken, album_id) => {
   let reqURL = baseURL + "albums/" + album_id + "/tracks?limit=50";
 
   return fetch(reqURL, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + accessToken,
+    },
+  }).then((res) => res.json());
+};
+
+export const searchQuery = (
+  accessToken,
+  query,
+  type,
+  limit = 10,
+  offset = 0
+) => {
+  let qryURL =
+    baseURL +
+    "search?query=" +
+    encodeURIComponent(query) +
+    "&type=" +
+    encodeURIComponent(type) +
+    "&offset=" +
+    encodeURIComponent(offset) +
+    "&limit=" +
+    encodeURIComponent(limit);
+
+  return fetch(qryURL, {
     method: "GET",
     headers: {
       Accept: "application/json",

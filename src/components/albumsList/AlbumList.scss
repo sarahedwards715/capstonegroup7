@@ -1,1 +1,8 @@
-
+.albumsListCardContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    scrollbar-color: var(--gradient);
+    max-width: 75vw;
+}

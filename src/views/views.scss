@@ -16,6 +16,7 @@
 
 .landingWrapper {
   background: black;
+  position: relative;
   color: white;
   text-align: center;
   margin-top: 10vh;
@@ -53,6 +54,24 @@
   border-radius: 50%;
   padding: 0;
 
+  .loginLoaderWrapper {
+    background-image: var(--gradient);
+    opacity: 0.85;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    z-index: 55;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    position: absolute;
+
+    .loaderDefiner {
+      opacity: 0.99;
+    }
+  }
+
   .formLabel {
     color: black;
   }
@@ -86,9 +105,6 @@
   }
 }
 
-// .browseWrapper {
-//   height: 100;
-// }
 
 @keyframes bg-animation {
   0% {
@@ -110,7 +126,8 @@
     font-family: "Fredoka One", cursive;
     top: 50%;
     left: 50%;
-    height: 100px;
+    line-height: 1em;
+    // height: 100px;
     background-image: var(--gradient);
     color: transparent;
     background-clip: text;
@@ -121,6 +138,23 @@
     justify-content: center;
     align-items: flex-start;
     font-size: 6em;
+    margin-left: 5%;
+    margin-top: 1%;
+  }
+
+  .moodPageBody {
+    display: flex;
+           
+    justify-content: space-evenly;
+    margin-top: 5%;
+  }
+
+  .bodyLeftRow {
+    min-width: 33%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 }
 
@@ -163,40 +197,88 @@
   }
 }
 
+.albumPagePlayerWrapper {
+  position: sticky;
+  top: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20%;
+  z-index: 100;
+}
+
+.albumPagePlayerWrapper1 {
+  position: absolute;
+  top: 18%;
+  left: 70%;
+  transform: translateX(-50%);
+  width: 20%;
+}
+
+.albumsPagePlaylistCreationWrapper {
+  position: absolute;
+  top: 30%;
+  left: 15%;
+}
+
+.artistPagePlaylistCreationWrapper {
+  position: absolute;
+  top: 30%;
+  left: 5%;
+  width: 300px;
+}
+
+.artistSongListWrapper {
+  // max-width: 66%;
+}
+
+.audioPlayerWrapper {
+  // position: absolute;
+  align-self:flex-start;
+  top: 6%;
+  left: 50%;
+  // transform: translateX(-50%);
+  width: 20%;
+  // z-index: 100;
+}
+
+.browsePagePlayer {
+  z-index: 5;
+}
+
 .artistPageWrapper {
-  padding-bottom: 5%;
+  padding: 5%;
+  max-width: 100%;
 
   .artistPageHeader {
-    padding: 2%;
+    margin-top: 2%;
     display: flex;
     flex-direction: row;
     align-items: center;
-    // justify-content: space-evenly;
+    justify-content: space-between;
 
     .headerLeftRow {
       margin-right: 3%;
-      width: 360px;
+      width: 800px;
       height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-end;
+      max-width: 33%;
 
       .artistPageMainArt {
         flex-shrink: 1;
+        border-radius: 50%;
+        max-height: 340px;
+        max-width: 340px;
+        flex-basis: 340px;
+        min-width: 340px;
       }
     }
 
     .headerRightRow {
       flex-grow: 1;
     }
-  }
-
-  .artistPageMainImage {
-    border-radius: 50%;
-    max-height: 340px;
-    max-width: 100%;
-
   }
 
   .artistPageBanner {
@@ -237,24 +319,29 @@
     font-size: 3em;
   }
 
-  .artistPageCardContainer {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-  }
-
-  .artistPageCard {
-    flex: 0 0 auto;
-    flex-basis: 350px;
-    width: 340px;
-    margin-right: 15px;
-    font-size: 1.5em;
+  .artistPageBody {
+    padding-right: 5%;
+    
+    .artistPageCardContainer {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+    }
+  
+    .artistPageCard {
+      flex: 0 0 auto;
+      flex-basis: 350px;
+      width: 340px;
+      margin-right: 15px;
+      font-size: 1.5em;
+    }
   }
 }
 
 .albumPageWrapper {
   padding-bottom: 5%;
+  max-width: 100%;
 
   .albumPageHeader {
     margin-left: 3%;
@@ -271,7 +358,7 @@
     left: 50%;
     line-height: 1em;
     text-align: center;
-    height: 1.25em;
+    height: 100%;
     // height: 75px;
     // width: 340px;
     background-image: var(--gradient);
@@ -284,27 +371,6 @@
     justify-content: center;
     align-items: flex-start;
     font-size: 5em;
-  }
-
-  .albumPageSubBanner {
-    font-family: "Fredoka One", cursive;
-    top: 50%;
-    left: 50%;
-    line-height: 1em;
-    text-align: center;
-    // height: 3em;
-    // height: 75px;
-    // width: 340px;
-    background-image: var(--gradient);
-    color: transparent;
-    background-clip: text;
-    background-size: 400%;
-    animation: bg-animation 3s infinite alternate;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    font-size: 3em;
   }
 
   .albumPageBody {
@@ -338,21 +404,6 @@
     }
   }
 
-  .artistPageCardContainer {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-  }
-
-  .artistPageCard {
-    flex: 0 0 auto;
-    flex-basis: 350px;
-    width: 340px;
-    margin-right: 15px;
-    font-size: 1.5em;
-  }
-
   .artistPageSubBanner {
     font-family: "Fredoka One", cursive;
     top: 50%;
@@ -368,5 +419,42 @@
     justify-content: center;
     align-items: flex-start;
     font-size: 3em;
+  }
+}
+
+.viewsSubBanner {
+  font-family: "Fredoka One", cursive;
+  top: 50%;
+  left: 50%;
+  height: 75px;
+  background-image: var(--gradient);
+  color: transparent;
+  background-clip: text;
+  background-size: 400%;
+  animation: bg-animation 3s infinite alternate;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 3em;
+}
+
+.browseWrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+
+  .sideBarWrapper {
+    min-width: 20%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .browseBodyWrapper {
+    display: flex;
+    flex-direction: column;
   }
 }

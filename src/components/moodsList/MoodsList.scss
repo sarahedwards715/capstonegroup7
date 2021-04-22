@@ -1,11 +1,12 @@
 .moodsContainer {
   padding: 1%;
   display: flex;
+  justify-content: space-evenly;
+  align-items: center;
   flex-wrap: wrap;
   height: 35vh;
-  width: 77.8%;
+  width: 90%;
   overflow-y: scroll;
-  border: 2px solid white;
   border-radius: 10px;
   margin-left: 3%;
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { premiumLogin } from "./backendRequests";
+import { premiumLogin } from "../services/backendRequests";
 
 export default function usePremiumAuth(code) {
   const [premiumAccessToken, setPremiumAccessToken] = useState();

@@ -20,7 +20,14 @@ function SongListItem(props) {
   function handlePlaySong() {
     setSelectedTrackToPlay(props.song.preview_url);
   }
-  console.log(props.song.preview_url, "from songlistitem");
+
+  function millisToMinutesAndSeconds(duration_ms) {
+    var minutes = Math.floor(duration_ms / 60000);
+    var seconds = ((duration_ms % 60000) / 1000).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+  }
+  let songDuration = millisToMinutesAndSeconds(duration_ms)
+
   return (
     <Table.Row>
       {user.username && user.moodifyToken && (
@@ -29,22 +36,30 @@ function SongListItem(props) {
             <>
               <Button
                 compact
-                size="small"
+                size="mini"
+                className="blue"
+                style={{ padding: "7%", margin: "1%", width: "80px" }}
                 onClick={() => addCreatedPlaylistSongs(props.song)}>
-                {!props.compact ? "Add to Playlist" : "Add"}
+                {!props.compact ? "Add Song" : "Add"}
               </Button>
             </>
           ) : (
             <Button
               compact
-              size="small"
+              size="mini"
+              className="blue"
+              style={{ padding: "7%", margin: "1%", width: "80px" }}
               onClick={() => deleteCreatedPlaylistSongs(id)}>
               {!props.compact ? "Delete from Playlist" : "Delete"}
             </Button>
           )}
 
           {props.song.preview_url ? (
-            <Button size="small" onClick={handlePlaySong}>
+            <Button
+              size="mini"
+              className="green"
+              style={{ padding: "7%", margin: "1%", width: "80px" }}
+              onClick={handlePlaySong}>
               Preview
             </Button>
           ) : (
@@ -65,7 +80,7 @@ function SongListItem(props) {
           )}
         </Table.Cell>
       )}
-      {props.compact || <Table.Cell>{duration_ms}</Table.Cell>}
+      {props.compact || <Table.Cell>{songDuration}</Table.Cell>}
     </Table.Row>
   );
 }

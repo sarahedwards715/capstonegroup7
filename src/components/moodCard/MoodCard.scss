@@ -9,8 +9,14 @@
   text-align: center;
   border-radius: 5%;
   font-size: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .moodTitles {
+  font-family: "Fredoka One", cursive;
   font-size: 2em;
+  color: var(--gradient);
+  justify-self: flex;
 }

@@ -16,10 +16,7 @@ const Home = () => {
     <div className="viewContainer">
       {accessToken && user.moodifyToken ? (
         <>
-          <div className="leftContainer"></div>
-          <div className="rightContainer">
             <Browse />
-          </div>
         </>
       ) : (
         <div className="viewsErrorWrapper">

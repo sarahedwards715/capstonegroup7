@@ -38,6 +38,7 @@ function PlaylistsCard(props) {
     setCreatedPlaylistEditData(props.playlist);
   }
 
+  console.log(props.playlist)
   let totalLikes = props.playlist.reviews.reduce(
     (total, currentValue, index, reviews) => {
       if (reviews[index].thumbsUp === true) total += 1;
@@ -60,19 +61,13 @@ function PlaylistsCard(props) {
         </Card.Title>
         <Card.Text>by {props.playlist.username}</Card.Text>
         <Card.Text>
-          <Label
-            as="a"
-            content={totalLikes}
-            basic
-            color="red"
-            pointing="left"
-          />
+          <div className="playlistTotalLikes">{totalLikes} likes</div>
         </Card.Text>
         {props.showDescription && (
           <Card.Text>{props.playlist.description}</Card.Text>
         )}
         {user.username === props.playlist.username && (
-          <Card.Text>
+          <Card.Footer>
             <Button
               variant="success"
               className="editPlaylistButton"
@@ -87,7 +82,7 @@ function PlaylistsCard(props) {
             >
               Delete
             </Button>
-          </Card.Text>
+          </Card.Footer>
         )}
         <DeletionModal
           deleteTarget="Playlist"

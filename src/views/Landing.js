@@ -8,15 +8,18 @@ import UserRegistration from "../components/userRegistration/UserRegistration";
 import UserLogin from "../components/userLogin/UserLogin";
 import "./views.scss";
 import { Button } from "react-bootstrap";
+import { Loader } from "semantic-ui-react";
 import SpotifyLogin from "../components/spotifyLogin/SpotifyLogin";
 
 function Landing(props) {
-  const accessToken = useStore(state => state.accessToken);
-  const setAccessToken = useStore(state => state.setAccessToken);
-  const setExpiresIn = useStore(state => state.setExpiresIn);
-  const authURL = useStore(state => state.authURL);
+  const accessToken = useStore((state) => state.accessToken);
+  const setAccessToken = useStore((state) => state.setAccessToken);
+  const setExpiresIn = useStore((state) => state.setExpiresIn);
+  const authURL = useStore((state) => state.authURL);
 
   const [registerUserVisible, setRegisterUserVisible] = useState(false);
+  const [loginInProgress, setLoginInProgress] = useState(false);
+  const [registerInProgress, setRegisterInProgress] = useState(false);
 
   // CITATION: Credit to Joe Karlsson -
   // https://levelup.gitconnected.com/how-to-build-a-spotify-player-with-react-in-15-minutes-7e01991bc4b6
@@ -56,6 +59,7 @@ function Landing(props) {
     <div className="landingWrapper">
       {/* This was for launching separate window, may come back to later*/}
       {/* <Button onClick={() => launchLoginSpot(props)}>Click Me!</Button> */}
+
       {registerUserVisible ? (
         <div className="landingTitleContainer">
           <span className="landingTitleText">new user</span>
@@ -66,8 +70,22 @@ function Landing(props) {
         </div>
       )}
       <div className="landingFormWrapper">
+        {(loginInProgress || registerInProgress) && (
+          <div className="loginLoaderWrapper">
+            <div className="loaderDefiner">
+              <Loader active size="big">
+                Communicating With Server . . .
+              </Loader>
+            </div>
+          </div>
+        )}
         {accessToken ? (
           <>
+            {registerUserVisible ? (
+              <UserRegistration setRegisterInProgress = {setRegisterInProgress}/>
+            ) : (
+              <UserLogin setLoginInProgress={setLoginInProgress} />
+            )}
             <div className="newUserButtonWrapper">
               <Button onClick={handleClick}>
                 {registerUserVisible
@@ -75,7 +93,6 @@ function Landing(props) {
                   : "Create a New Account"}
               </Button>
             </div>
-            {registerUserVisible ? <UserRegistration /> : <UserLogin />}
           </>
         ) : (
           <div className="spotAuthWrapper">

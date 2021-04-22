@@ -1,0 +1,7 @@
+.artistsListCardContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    max-width: 75vw;
+}

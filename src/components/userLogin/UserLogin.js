@@ -8,7 +8,7 @@ import { loginUser } from "../../services/backendRequests";
 import useForm from "../../customHooks/useForm";
 import loginValidation from "../../validationInfo/loginValidation";
 
-function UserLogin() {
+function UserLogin(props) {
   let setUser = useStore((state) => state.setUser);
   const [formSuccess, setFormSuccess] = useState(false);
   const [formData, setFormData] = useState({
@@ -32,22 +32,25 @@ function UserLogin() {
   }
 
   function handleLogin(event) {
-    // event.preventDefault();
+    props.setLoginInProgress(true);
 
     loginUser(formData).then((data) => {
       if (data.statusCode === 200) {
         setUser(data.userInfo.username, data.moodifyToken);
+        props.setLoginInProgress(false);
         setFormSuccess(true);
       }
 
       if (data.statusCode === 404) {
         let newErrors = { ...errors, username: data.message };
+        props.setLoginInProgress(false);
         setErrors(newErrors);
       }
 
       if (data.statusCode === 400) {
         let newErrors = { ...errors, password: data.message };
         setErrors(newErrors);
+        props.setLoginInProgress(false);
       }
     });
   }

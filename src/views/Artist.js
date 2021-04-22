@@ -10,11 +10,13 @@ import {
   getRelatedArtists,
 } from "../services/spotAPIRequests";
 import useStore from "../store/store";
+import PlaylistsCreation from "../components/playlistsCreation/PlaylistsCreation";
+import "./views.scss";
 
 function Artist(props) {
   const accessToken = useStore((state) => state.accessToken);
   const artist_id = props.match.params.artist_id;
-
+  const selectedTrackToPlay = useStore((state) => state.selectedTrackToPlay);
   const [artistInfo, setArtistInfo] = useState({
     genres: [],
     name: "",
@@ -24,6 +26,8 @@ function Artist(props) {
   const [artistAlbums, setArtistAlbums] = useState([]);
   const [artistTracks, setArtistTracks] = useState([]);
   const [artistRelatedArtists, setArtistRelatedArtists] = useState([]);
+  const [artistTotalAlbums, setArtistTotalAlbums] = useState(0);
+  const [artistAlbumsOffset, setArtistAlbumsOffset] = useState(0);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -37,6 +41,7 @@ function Artist(props) {
     });
     getArtistAlbums(accessToken, artist_id).then((data) => {
       setArtistAlbums(data.items);
+      setArtistTotalAlbums(data.total);
     });
     getArtistTracks(accessToken, artist_id).then((data) => {
       setArtistTracks(data.tracks);
@@ -46,28 +51,52 @@ function Artist(props) {
     });
   }, [props]);
 
+  function infiniteScrollAlbums() {
+    if (artistAlbums.length < artistTotalAlbums) {
+      return getArtistAlbums(accessToken, artist_id, 10, artistAlbumsOffset)
+        .then((data) => {
+          let newAlbums = data.items.filter(
+            (album) => !artistAlbums.includes(album)
+          );
+
+          let moreAlbums = [...artistAlbums, ...newAlbums];
+
+          console.log(newAlbums);
+
+          setArtistAlbums(moreAlbums);
+        })
+        .then(
+          setArtistAlbumsOffset(
+            (artistAlbumsOffset) => (artistAlbumsOffset += 10)
+          )
+        );
+    }
+  }
+
   return (
     <div className="artistPageWrapper">
       <div className="artistPageHeader">
         <div className="headerLeftRow">
           {artistInfo.image ? (
-            <div className="artistPageMainArt">
-              <img
-                className="artistPageMainImage"
-                src={artistInfo.image}
-                alt="img"
-              />
-            </div>
+            <div
+              className="artistPageMainArt"
+              style={{
+                backgroundImage: `url(${artistInfo.image})`,
+                backgroundSize: "cover",
+              }}
+            ></div>
           ) : (
             <Placeholder.Image />
           )}
           <div className="artistPageBanner">{artistInfo.name}</div>
         </div>
         <div className="headerRightRow">
-          <div className="artistPageSubBanner">top tracks</div>
+          <div className="viewsSubBanner">top tracks</div>
 
           {artistTracks.length ? (
-            <SongList songs={artistTracks} />
+            <div className="artistSongListWrapper">
+              <SongList songs={artistTracks} />
+            </div>
           ) : (
             <Loader active size="big">
               Loading . . .
@@ -75,8 +104,21 @@ function Artist(props) {
           )}
         </div>
       </div>
-      <AlbumsList albums={artistAlbums} />
-      <ArtistsList artists={artistRelatedArtists} />
+      <div className="artistPageBody">
+        <div className="artistPageAlbumsColumn">
+          <div className="viewsSubBanner">
+            appears on {artistTotalAlbums} albums
+          </div>
+          <AlbumsList
+            albums={artistAlbums}
+            infiniteScrollCallback={infiniteScrollAlbums}
+          />
+        </div>
+        <div className="artistPageArtistsColumn">
+          <div className="viewsSubBanner">related artists</div>
+          <ArtistsList artists={artistRelatedArtists} />
+        </div>
+      </div>
     </div>
   );
 }

@@ -6,7 +6,7 @@ import { postUsers } from "../../services/backendRequests";
 import useForm from "../../customHooks/useForm";
 import registrationValidation from "../../validationInfo/registrationValidation";
 
-function UserRegistration() {
+function UserRegistration(props) {
   // TODO Confirm Password const [confirmPassword, setConfirmPassword] = useState("");
   const [formSuccess, setFormSuccess] = useState(false);
   const [formData, setFormData] = useState({
@@ -24,14 +24,18 @@ function UserRegistration() {
 
   function handleRegister(event) {
     // event.preventDefault();
+    props.setRegisterInProgress(true);
 
     postUsers(formData).then((data) => {
       if (data.statusCode === 201) {
+        props.setRegisterInProgress(false);
         setFormSuccess(true);
       }
 
       if (data.statusCode === 400 && data.databaseErrorCode === 11000) {
         let newErrors = { ...errors, username: data.message };
+        props.setRegisterInProgress(false);
+
         setErrors(newErrors);
       }
     });
@@ -57,12 +61,17 @@ function UserRegistration() {
       {formSuccess ? (
         <>
           <div className="userRegistrationSuccessBanner">
+            <Button
+              className="userRegistrationResetButton"
+              onClick={(e) => handleReset(e)}
+            >
+              Reset Form
+            </Button>
             <p className="userRegistrationSuccessText">
               You've Successfully Registered!
             </p>
             <p className="userRegistrationSuccessText">Try Logging In!</p>
           </div>
-          <Button className= "userRegistrationResetButton" onClick={(e) => handleReset(e)}>Reset Form</Button>
         </>
       ) : (
         <div className="formContainer">

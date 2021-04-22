@@ -11,7 +11,8 @@ function MoodCard(props) {
         <Link
           className="moodTitles"
           to={`/browse/${props.mood}`}
-          style={{ color: "black" }}>
+          // style={{ color: "black" }}
+          >
           {props.mood}
         </Link>
       </Card.Body>

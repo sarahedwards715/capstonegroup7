@@ -12,6 +12,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 import "./UserProfile.scss";
+import PlaylistsCreation from "../playlistsCreation/PlaylistsCreation";
 
 const UserProfile = () => {
   let user = useStore(state => state.user);
@@ -56,7 +57,6 @@ const UserProfile = () => {
 
   return (
     <div>
-      <div className="playlistCreationWrapper"></div>
       <div className="userProfileWrapper">
         <div className="userProfileBanner">{user.username}'s profile</div>
         <div className="displayNameBanner"> @{moodifyUserInfo.displayName}</div>

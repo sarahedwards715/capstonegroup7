@@ -1,1 +1,17 @@
+.userLoginWrapper {
+  position: relative;
+}
 
+.userLoginLoaderWrapper {
+  background-image: var(--gradient);
+  opacity: 0.5;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  z-index: 55;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  position: absolute;
+}

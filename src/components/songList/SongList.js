@@ -3,12 +3,26 @@ import React from "react";
 import useStore from "../../store/store";
 import { Table } from "semantic-ui-react";
 import SongListItem from "../songListItem/SongListItem";
+import useInfiniteScroll from "../../customHooks/useInfiniteScroll";
 
 function SongList(props) {
   let user = useStore((state) => state.user);
 
+  function handleScroll(event) {
+    const scrollable = event.target;
+
+    if (
+      scrollable.scrollHeight - scrollable.scrollTop ===
+      scrollable.clientHeight
+    ) {
+      setAtBottom(true);
+    }
+  }
+
+  const [atBottom, setAtBottom] = useInfiniteScroll(props.infiniteScrollCallback || null);
+
   return (
-    <div className="songListWrapper">
+    <div onScroll={(e) => handleScroll(e)} className="songListWrapper">
       <Table collapsing={props.collapsing} compact={props.compact} size="small">
         <Table.Header>
           <Table.Row>
