@@ -6,17 +6,18 @@ import { deletePlaylists } from "../../services/backendRequests";
 import DeletionModal from "../deletionModal/DeletionModal";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import { Label } from "semantic-ui-react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function PlaylistsCard(props) {
-  const user = useStore(state => state.user);
-  let setPlaylists = useStore(state => state.setPlaylists);
-  let createdPlaylistData = useStore(state => state.createdPlaylistData);
+  const user = useStore((state) => state.user);
+  let setPlaylists = useStore((state) => state.setPlaylists);
+  let createdPlaylistData = useStore((state) => state.createdPlaylistData);
   let setCreatedPlaylistEditData = useStore(
-    state => state.setCreatedPlaylistEditData
+    (state) => state.setCreatedPlaylistEditData
   );
   let setCreatedPlaylistEditMode = useStore(
-    state => state.setCreatedPlaylistEditMode
+    (state) => state.setCreatedPlaylistEditMode
   );
 
   let history = useHistory();
@@ -24,7 +25,7 @@ function PlaylistsCard(props) {
   const [modalVisible, setModalVisible] = useState(false);
 
   function handleDelete(e) {
-    deletePlaylists(props.playlist._id, user.moodifyToken).then(data => {
+    deletePlaylists(props.playlist._id, user.moodifyToken).then((data) => {
       if (data.statusCode === 200) {
         setPlaylists();
         history.push("/home");
@@ -37,6 +38,14 @@ function PlaylistsCard(props) {
     setCreatedPlaylistEditData(props.playlist);
   }
 
+  let totalLikes = props.playlist.reviews.reduce(
+    (total, currentValue, index, reviews) => {
+      if (reviews[index].thumbsUp === true) total += 1;
+      return total;
+    },
+    0
+  );
+
   return (
     <Card className="playlistsCard">
       <Card.Body>
@@ -44,11 +53,21 @@ function PlaylistsCard(props) {
           <Link
             className="playlistTitles"
             to={`/playlists/${props.playlist._id}`}
-            style={{ color: "black" }}>
+            style={{ color: "black" }}
+          >
             {props.playlist.title}
           </Link>
         </Card.Title>
         <Card.Text>by {props.playlist.username}</Card.Text>
+        <Card.Text>
+          <Label
+            as="a"
+            content={totalLikes}
+            basic
+            color="red"
+            pointing="left"
+          />
+        </Card.Text>
         {props.showDescription && (
           <Card.Text>{props.playlist.description}</Card.Text>
         )}
@@ -57,13 +76,15 @@ function PlaylistsCard(props) {
             <Button
               variant="success"
               className="editPlaylistButton"
-              onClick={e => startEditMode()}>
+              onClick={(e) => startEditMode()}
+            >
               Edit
             </Button>
             <Button
               variant="danger"
               className="deletePlaylistButton"
-              onClick={e => setModalVisible(true)}>
+              onClick={(e) => setModalVisible(true)}
+            >
               Delete
             </Button>
           </Card.Text>

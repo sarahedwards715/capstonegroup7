@@ -1,7 +1,7 @@
 //Since our backend is still only local, baseURL is port 4000 for now.
 //Just change baseURL whenever we deploy our backend somewhere
-// let baseURL = "http://localhost:4000/";
-let baseURL = "https://flicker-tropical-umbra.glitch.me/"
+let baseURL = "http://localhost:4000/";
+// let baseURL = "https://flicker-tropical-umbra.glitch.me/"
 
 export const postUsers = formData => {
   //Maybe Password Later??

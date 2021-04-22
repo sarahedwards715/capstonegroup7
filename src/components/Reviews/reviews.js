@@ -60,15 +60,14 @@ function Reviews(props) {
         >
           <Icon name="heart" />I love !
         </Button>
-        <Label as="a"content={reviews.length} basic color="red" pointing="left" />
+        {/* <Label as="a"content={reviews.length} basic color="red" pointing="left" /> */}
 
         {/* content={reviews.map(l => l.thumbsUp).filter(l=>l).length} */}
 
         {/* </Button> */}
 
         <Button onClick="click" type="submit">
-          {" "}
-          Send my Review{" "}
+          Send my Review
         </Button>
       </Form>
     </div>
