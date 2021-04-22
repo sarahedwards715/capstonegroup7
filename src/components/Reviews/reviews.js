@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from "react";
 import useStore from "../../store/store";
+import './Reviews.scss';
 import { Button, Icon, Label, Form, Input, TextArea } from "semantic-ui-react";
-import { postReview } from "../../services/backendRequests";
+import { getReview, postReview } from "../../services/backendRequests";
 
 function Reviews(props) {
   let user = useStore((state) => state.user);
 
   const [like, setLike] = useState(false);
-  const [dislike, setDislike] = useState(false);
   const [description, setDescription] = useState(" ");
   const [change, setChange] = useState(false);
-  const [submit, setSubmit] = useState(false);
+  const [reviews, setReviews] = useState([]);
 
   function handleLike() {
-    if (dislike === true) setDislike(false);
-  }
-
-  function handleDislike() {
-    if (like === true) setLike(false);
+    if (like === true) setLike(true);
   }
 
   function handleChange(event) {
@@ -25,25 +21,26 @@ function Reviews(props) {
   }
 
   function handleSubmit(event) {
-    console.log(props.playlist_id)
-    event.preventDefault()
-    //playlist_id, description, thumbsUp, thumbsDown, username
+    event.preventDefault();
     postReview(
       props.playlist_id,
       description,
       like,
-      dislike,
       user.moodifyToken,
       user.username
     );
-
-    if (submit === false) setSubmit(true);
+    setDescription("");
   }
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    getReview(props.playlist_id).then((data) => {
+      setReviews(data);
+    });
+  }, []);
 
   return (
     <div className="reviewsWrapper">
+      How is The Playlist? 
       <Form onSubmit={(e) => handleSubmit(e)}>
         <Form.Field
           id="form-textarea-control-opinion"
@@ -53,34 +50,26 @@ function Reviews(props) {
           onChange={(e) => setDescription(e.target.value)}
           value={description}
         />
-
-        {/* <Form.Field
-        id="form-button-control-public"
-        control={Button}
-        content="Confirm"
-        label="Label with htmlFor"
-      /> */}
-
-        <Button as="Love" labelPosition="right">
-          <Button onClick="click" type="submit" color="red">
-            <Button onChange={(e)=> setLike(e.target.value)} type= "submit"/> 
-            <Icon name="heart" />I love !
-          </Button>
-          <Label as="a" basic color="red" pointing="left">
-            {/* 2,048 */}
-          </Label>
+           <Button
+          className={`icon ${like ? "default_like" : "active_like"}`}
+          as="Love"
+          labelPosition="left"
+          onClick={(e) => setLike(!like)}
+          type="submit"
+          color="red"
+        >
+          <Icon name="heart" />I love !
         </Button>
-        <Button as="div" labelPosition="right">
-          <Button onChange={(e)=> setDislike(e.target.value)} type= "submit" basic color="blue">
-            <Icon name="thumbs d" />
-            Not a fan !
-          </Button>
-          <Label as="Dislike" basic color="blue" pointing="left">
-            
-            {/* 2,048 */}
-          </Label>
+        <Label as="a"content={reviews.length} basic color="red" pointing="left" />
+
+        {/* content={reviews.map(l => l.thumbsUp).filter(l=>l).length} */}
+
+        {/* </Button> */}
+
+        <Button onClick="click" type="submit">
+          {" "}
+          Send my Review{" "}
         </Button>
-        <Button onClick= "click" type="submit" > Send my Review </Button>
       </Form>
     </div>
   );

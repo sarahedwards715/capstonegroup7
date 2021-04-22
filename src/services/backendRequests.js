@@ -141,11 +141,19 @@ export const postPlaylists = (createdPlaylistData, username, moodifyToken) => {
     }),
   }).then(res => res.json());
 };
+
+export const getReview = (id) => {
+return fetch(baseURL + `reviews/${id}`)
+.then(res => res.json());
+}
+
+
+
+
 export const postReview = (
   playlist_id,
   description,
   thumbsUp,
-  thumbsDown,
   moodifyToken,
   username
 ) => {
@@ -162,7 +170,6 @@ export const postReview = (
       username: username,
       description: description,
       thumbsUp: thumbsUp,
-      thumbsDown: thumbsDown,
     }),
   })
     .then((res) => res.json())
