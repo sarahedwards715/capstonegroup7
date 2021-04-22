@@ -1,7 +1,7 @@
 //Since our backend is still only local, baseURL is port 4000 for now.
 //Just change baseURL whenever we deploy our backend somewhere
-// let baseURL = "http://localhost:4000/";
-let baseURL = "https://flicker-tropical-umbra.glitch.me/"
+let baseURL = "http://localhost:4000/";
+// let baseURL = "https://flicker-tropical-umbra.glitch.me/"
 
 export const postUsers = formData => {
   //Maybe Password Later??
@@ -31,6 +31,21 @@ export const loginUser = formData => {
       password: formData.password,
     }),
   }).then(res => res.json());
+};
+
+export const premiumLogin = code => {
+  return fetch(baseURL + "login", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      code,
+    }),
+  }).then(res => {
+    console.log(res.data, "from premium login");
+  });
 };
 
 export const getUsers = () => {
@@ -106,8 +121,7 @@ export const getPlaylists = () => {
   }).then(res => res.json());
 };
 
-export const getPlaylistById = (id) => {
-  console.log(id)
+export const getPlaylistById = id => {
   return fetch(baseURL + "playlists/" + id, {
     method: "GET",
     headers: {
@@ -143,6 +157,40 @@ export const postPlaylists = (createdPlaylistData, username, moodifyToken) => {
   }).then(res => res.json());
 };
 
+export const getReview = (id) => {
+return fetch(baseURL + `reviews/${id}`)
+.then(res => res.json());
+}
+
+
+
+
+export const postReview = (
+  playlist_id,
+  description,
+  thumbsUp,
+  moodifyToken,
+  username
+) => {
+  console.log(playlist_id);
+  return fetch(baseURL + "reviews", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + moodifyToken,
+    },
+    body: JSON.stringify({
+      playlist_id: playlist_id,
+      username: username,
+      description: description,
+      thumbsUp: thumbsUp,
+    }),
+  })
+    .then((res) => res.json())
+    .then((data) => console.log(data));
+};
+
 export const patchPlaylists = (
   playlist_id,
   createdPlaylistData,
@@ -158,11 +206,6 @@ export const patchPlaylists = (
 
   return fetch(baseURL + "playlists/" + playlist_id, {
     method: "PATCH",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + moodifyToken,
-    },
     body: JSON.stringify({
       ...updateData,
       username: username,

@@ -1,0 +1,93 @@
+.userProfileWrapper {
+  height: 100%;
+  background: black;
+
+  .userProfileBanner {
+    font-family: "Fredoka One", cursive;
+    font-size: 4em;
+    top: 50%;
+    left: 50%;
+    height: 100px;
+    width: 800px;
+    background-image: var(--gradient);
+    color: transparent;
+    background-clip: text;
+    background-size: 400%;
+    animation: bg-animation 3s infinite alternate;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .displayNameBanner {
+    font-family: "Fredoka One", cursive;
+    font-size: 2em;
+    top: 50%;
+    left: 50%;
+    height: 100px;
+    width: 800px;
+    background-image: var(--gradient);
+    color: transparent;
+    background-clip: text;
+    background-size: 400%;
+    animation: bg-animation 3s infinite alternate;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+}
+
+.editDisplayNameButton {
+  position: absolute;
+  top: 23.8%;
+  left: 30%;
+  background: transparent;
+  box-shadow: 0px 0px 0px transparent;
+  border: 0px solid transparent;
+  text-shadow: 0px 0px 0px transparent;
+  color: white;
+}
+
+.displayNameInputWrapper {
+  position: absolute;
+  top: 23.8%;
+  left: 30%;
+  width: 200px;
+}
+
+.submitDisplayNameButton {
+  position: absolute;
+  top: 23.8%;
+  left: 41%;
+}
+
+.deleteUserButton {
+  position: absolute;
+  top: 13.5%;
+  left: 50%;
+  background: transparent;
+  box-shadow: 0px 0px 0px transparent;
+  border: 0px solid transparent;
+  text-shadow: 0px 0px 0px transparent;
+  color: white;
+}
+
+.userPlaylistsBanner {
+  font-family: "Fredoka One", cursive;
+  font-size: 3em;
+  top: 50%;
+  left: 50%;
+  height: 100px;
+  width: 800px;
+  background-image: var(--gradient);
+  color: transparent;
+  background-clip: text;
+  background-size: 400%;
+  animation: bg-animation 3s infinite alternate;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 3%;
+}

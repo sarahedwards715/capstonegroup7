@@ -1,20 +1,23 @@
 import "./PlaylistsCard.scss";
 import React, { useState } from "react";
-import { Card, Button, Modal } from "semantic-ui-react";
 import { Link, useHistory } from "react-router-dom";
 import useStore from "../../store/store";
 import { deletePlaylists } from "../../services/backendRequests";
 import DeletionModal from "../deletionModal/DeletionModal";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import { Label } from "semantic-ui-react";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function PlaylistsCard(props) {
-  const user = useStore(state => state.user);
-  let setPlaylists = useStore(state => state.setPlaylists);
-  let createdPlaylistData = useStore(state => state.createdPlaylistData);
+  const user = useStore((state) => state.user);
+  let setPlaylists = useStore((state) => state.setPlaylists);
+  let createdPlaylistData = useStore((state) => state.createdPlaylistData);
   let setCreatedPlaylistEditData = useStore(
-    state => state.setCreatedPlaylistEditData
+    (state) => state.setCreatedPlaylistEditData
   );
   let setCreatedPlaylistEditMode = useStore(
-    state => state.setCreatedPlaylistEditMode
+    (state) => state.setCreatedPlaylistEditMode
   );
 
   let history = useHistory();
@@ -23,7 +26,6 @@ function PlaylistsCard(props) {
 
   function handleDelete(e) {
     deletePlaylists(props.playlist._id, user.moodifyToken).then((data) => {
-      // console.log(data);
       if (data.statusCode === 200) {
         setPlaylists();
         history.push("/home");
@@ -36,31 +38,64 @@ function PlaylistsCard(props) {
     setCreatedPlaylistEditData(props.playlist);
   }
 
+  let totalLikes = props.playlist.reviews.reduce(
+    (total, currentValue, index, reviews) => {
+      if (reviews[index].thumbsUp === true) total += 1;
+      return total;
+    },
+    0
+  );
+
   return (
     <Card className="playlistsCard">
-      <Card.Content>
-        <Card.Header>
-          <Link to={`/playlists/${props.playlist._id}`}>
+      <Card.Body>
+        <Card.Title>
+          <Link
+            className="playlistTitles"
+            to={`/playlists/${props.playlist._id}`}
+            style={{ color: "black" }}
+          >
             {props.playlist.title}
           </Link>
-        </Card.Header>
-        <Card.Meta>by {props.playlist.username}</Card.Meta>
+        </Card.Title>
+        <Card.Text>by {props.playlist.username}</Card.Text>
+        <Card.Text>
+          <Label
+            as="a"
+            content={totalLikes}
+            basic
+            color="red"
+            pointing="left"
+          />
+        </Card.Text>
         {props.showDescription && (
-          <Card.Description>{props.playlist.description}</Card.Description>
+          <Card.Text>{props.playlist.description}</Card.Text>
         )}
-      </Card.Content>
-      {user.username === props.playlist.username && (
-        <Card.Content extra>
-          <Button onClick={e => startEditMode()}>Edit Playlist</Button>
-          <Button onClick={e => setModalVisible(true)}>Delete Playlist</Button>
-        </Card.Content>
-      )}
-      <DeletionModal
-        deleteTarget="Playlist"
-        deleteFunction={handleDelete}
-        setVisible={setModalVisible}
-        visible={modalVisible}
-      />
+        {user.username === props.playlist.username && (
+          <Card.Text>
+            <Button
+              variant="success"
+              className="editPlaylistButton"
+              onClick={(e) => startEditMode()}
+            >
+              Edit
+            </Button>
+            <Button
+              variant="danger"
+              className="deletePlaylistButton"
+              onClick={(e) => setModalVisible(true)}
+            >
+              Delete
+            </Button>
+          </Card.Text>
+        )}
+        <DeletionModal
+          deleteTarget="Playlist"
+          deleteFunction={handleDelete}
+          setVisible={setModalVisible}
+          visible={modalVisible}
+        />
+      </Card.Body>
     </Card>
   );
 }
