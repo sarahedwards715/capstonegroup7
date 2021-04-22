@@ -10,11 +10,14 @@ import {
   getRelatedArtists,
 } from "../services/spotAPIRequests";
 import useStore from "../store/store";
+import PlaylistsCreation from "../components/playlistsCreation/PlaylistsCreation";
+import "./views.scss";
+import ReactAudioPlayer from "react-audio-player";
 
 function Artist(props) {
-  const accessToken = useStore((state) => state.accessToken);
+  const accessToken = useStore(state => state.accessToken);
   const artist_id = props.match.params.artist_id;
-
+  const selectedTrackToPlay = useStore(state => state.selectedTrackToPlay);
   const [artistInfo, setArtistInfo] = useState({
     genres: [],
     name: "",
@@ -27,7 +30,7 @@ function Artist(props) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    getArtist(accessToken, artist_id).then((data) => {
+    getArtist(accessToken, artist_id).then(data => {
       setArtistInfo({
         genres: data.genres,
         name: data.name,
@@ -35,19 +38,22 @@ function Artist(props) {
         followers: data.followers,
       });
     });
-    getArtistAlbums(accessToken, artist_id).then((data) => {
+    getArtistAlbums(accessToken, artist_id).then(data => {
       setArtistAlbums(data.items);
     });
-    getArtistTracks(accessToken, artist_id).then((data) => {
+    getArtistTracks(accessToken, artist_id).then(data => {
       setArtistTracks(data.tracks);
     });
-    getRelatedArtists(accessToken, artist_id).then((data) => {
+    getRelatedArtists(accessToken, artist_id).then(data => {
       setArtistRelatedArtists(data.artists);
     });
   }, [props]);
 
   return (
     <div className="artistPageWrapper">
+      <div className="albumPagePlayerWrapper">
+        <ReactAudioPlayer src={selectedTrackToPlay} controls />
+      </div>
       <div className="artistPageHeader">
         <div className="headerLeftRow">
           {artistInfo.image ? (
@@ -67,7 +73,9 @@ function Artist(props) {
           <div className="artistPageSubBanner">top tracks</div>
 
           {artistTracks.length ? (
-            <SongList songs={artistTracks} />
+            <div className="artistSongListWrapper">
+              <SongList songs={artistTracks} />
+            </div>
           ) : (
             <Loader active size="big">
               Loading . . .
@@ -77,6 +85,9 @@ function Artist(props) {
       </div>
       <AlbumsList albums={artistAlbums} />
       <ArtistsList artists={artistRelatedArtists} />
+      <div className="artistPagePlaylistCreationWrapper">
+        <PlaylistsCreation />
+      </div>
     </div>
   );
 }

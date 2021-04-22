@@ -9,6 +9,9 @@ import {
   getArtistAlbums,
 } from "../services/spotAPIRequests";
 import useStore from "../store/store";
+import ReactAudioPlayer from "react-audio-player";
+import "./views.scss";
+import PlaylistsCreation from "../components/playlistsCreation/PlaylistsCreation";
 
 function Album(props) {
   const [albumInfo, setAlbumInfo] = useState({
@@ -21,11 +24,12 @@ function Album(props) {
   const [artistAlbums, setArtistAlbums] = useState([]);
 
   const album_id = props.match.params.album_id;
-  const accessToken = useStore((state) => state.accessToken);
+  const accessToken = useStore(state => state.accessToken);
+  const selectedTrackToPlay = useStore(state => state.selectedTrackToPlay);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    getAlbum(accessToken, album_id).then((data) => {
+    getAlbum(accessToken, album_id).then(data => {
       console.log(data);
       setAlbumInfo({
         name: data.name,
@@ -34,7 +38,7 @@ function Album(props) {
         genres: data.genres,
       });
     });
-    getAlbumTracks(accessToken, album_id).then((data) => {
+    getAlbumTracks(accessToken, album_id).then(data => {
       console.log("TRACKS", data);
       setAlbumTracks(data.items);
     });
@@ -42,7 +46,7 @@ function Album(props) {
 
   useEffect(() => {
     if (albumInfo.artist?.id) {
-      getArtistAlbums(accessToken, albumInfo.artist.id).then((data) => {
+      getArtistAlbums(accessToken, albumInfo.artist.id).then(data => {
         console.log("ALBUMS", data);
         setArtistAlbums(data.items);
       });
@@ -51,6 +55,9 @@ function Album(props) {
 
   return (
     <div className="albumPageWrapper">
+      <div className="albumPagePlayerWrapper1">
+        <ReactAudioPlayer src={selectedTrackToPlay} controls />
+      </div>
       <div className="albumPageHeader">
         <div className="albumPageBanner">{albumInfo.name}</div>
         <div className="albumPageSubBanner">
@@ -84,6 +91,9 @@ function Album(props) {
         </div>
       </div>
       <AlbumsList albums={artistAlbums} />
+      <div className="albumsPagePlaylistCreationWrapper">
+        <PlaylistsCreation />
+      </div>
     </div>
   );
 }
