@@ -162,3 +162,211 @@
     font-size: 3em;
   }
 }
+
+.artistPageWrapper {
+  padding-bottom: 5%;
+
+  .artistPageHeader {
+    padding: 2%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    // justify-content: space-evenly;
+
+    .headerLeftRow {
+      margin-right: 3%;
+      width: 360px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+
+      .artistPageMainArt {
+        flex-shrink: 1;
+      }
+    }
+
+    .headerRightRow {
+      flex-grow: 1;
+    }
+  }
+
+  .artistPageMainImage {
+    border-radius: 50%;
+    max-height: 340px;
+    max-width: 100%;
+
+  }
+
+  .artistPageBanner {
+    font-family: "Fredoka One", cursive;
+    top: 50%;
+    left: 50%;
+    line-height: 1em;
+    text-align: center;
+    height: 3em;
+    // height: 75px;
+    // width: 340px;
+    background-image: var(--gradient);
+    color: transparent;
+    background-clip: text;
+    background-size: 400%;
+    animation: bg-animation 3s infinite alternate;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 5em;
+  }
+
+  .artistPageSubBanner {
+    font-family: "Fredoka One", cursive;
+    top: 50%;
+    left: 50%;
+    height: 75px;
+    background-image: var(--gradient);
+    color: transparent;
+    background-clip: text;
+    background-size: 400%;
+    animation: bg-animation 3s infinite alternate;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 3em;
+  }
+
+  .artistPageCardContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .artistPageCard {
+    flex: 0 0 auto;
+    flex-basis: 350px;
+    width: 340px;
+    margin-right: 15px;
+    font-size: 1.5em;
+  }
+}
+
+.albumPageWrapper {
+  padding-bottom: 5%;
+
+  .albumPageHeader {
+    margin-left: 3%;
+    padding-top: 1%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+  }
+
+  .albumPageBanner {
+    font-family: "Fredoka One", cursive;
+    top: 50%;
+    left: 50%;
+    line-height: 1em;
+    text-align: center;
+    height: 1.25em;
+    // height: 75px;
+    // width: 340px;
+    background-image: var(--gradient);
+    color: transparent;
+    background-clip: text;
+    background-size: 400%;
+    animation: bg-animation 3s infinite alternate;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 5em;
+  }
+
+  .albumPageSubBanner {
+    font-family: "Fredoka One", cursive;
+    top: 50%;
+    left: 50%;
+    line-height: 1em;
+    text-align: center;
+    // height: 3em;
+    // height: 75px;
+    // width: 340px;
+    background-image: var(--gradient);
+    color: transparent;
+    background-clip: text;
+    background-size: 400%;
+    animation: bg-animation 3s infinite alternate;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 3em;
+  }
+
+  .albumPageBody {
+    display: flex;
+    margin-top: 3%;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-around;
+
+    .albumPageMainArt {
+      flex-shrink: 1;
+    }
+
+    .bodyLeftRow {
+      margin: 0 5% 5% 2%;
+      flex-shrink: 1;
+      flex-basis: 33%;
+      display: flex;
+      align-items: center;
+
+      .albumPageMainArt {
+        flex-shrink: 1;
+        // flex-basis: 5%;
+        max-width: 100%;
+      }
+    }
+
+    .bodyRightRow {
+      flex-grow: 1;
+      margin-right: 2%;
+    }
+  }
+
+  .artistPageCardContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .artistPageCard {
+    flex: 0 0 auto;
+    flex-basis: 350px;
+    width: 340px;
+    margin-right: 15px;
+    font-size: 1.5em;
+  }
+
+  .artistPageSubBanner {
+    font-family: "Fredoka One", cursive;
+    top: 50%;
+    left: 50%;
+    height: 75px;
+    background-image: var(--gradient);
+    color: transparent;
+    background-clip: text;
+    background-size: 400%;
+    animation: bg-animation 3s infinite alternate;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 3em;
+  }
+}

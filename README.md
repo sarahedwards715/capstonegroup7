@@ -14,6 +14,7 @@ References:
   How to Build A Spotify Player with React in 15 Minutes - Joe Karlsson - https://levelup.gitconnected.com/how-to-build-a-spotify-player-with-react-in-15-minutes-7e01991bc4b6
   Brian Design - React Form Validation Using Custom Hooks -https://www.youtube.com/watch?v=KGFG-yQD7Dw
   Bobby Kilpatrick - Responsive Square in CSS - https://spin.atomicobject.com/2015/07/14/css-responsive-square/
+  Free Code Camp - How to implement horizontal scrolling using Flexbox - https://www.freecodecamp.org/news/horizontal-scrolling-using-flexbox-f9d16817f742/
 
 This Get Users and Get Users By Id Stuff Works, putting it here for now!
 
