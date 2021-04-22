@@ -3,7 +3,7 @@
 // let baseURL = "http://localhost:4000/";
 let baseURL = "https://flicker-tropical-umbra.glitch.me/";
 
-export const postUsers = formData => {
+export const postUsers = (formData) => {
   //Maybe Password Later??
   return fetch(baseURL + "users", {
     method: "POST",
@@ -16,10 +16,10 @@ export const postUsers = formData => {
       displayName: formData.displayName,
       password: formData.password,
     }),
-  }).then(res => res.json());
+  }).then((res) => res.json());
 };
 
-export const loginUser = formData => {
+export const loginUser = (formData) => {
   return fetch(baseURL + "users/login", {
     method: "POST",
     headers: {
@@ -30,10 +30,10 @@ export const loginUser = formData => {
       username: formData.username,
       password: formData.password,
     }),
-  }).then(res => res.json());
+  }).then((res) => res.json());
 };
 
-export const premiumLogin = code => {
+export const premiumLogin = (code) => {
   return fetch(baseURL + "login", {
     method: "POST",
     headers: {
@@ -43,7 +43,7 @@ export const premiumLogin = code => {
     body: JSON.stringify({
       code,
     }),
-  }).then(res => {
+  }).then((res) => {
     console.log(res.data, "from premium login");
   });
 };
@@ -56,8 +56,8 @@ export const getUsers = () => {
       "Content-Type": "application/json",
     },
   })
-    .then(res => res.json())
-    .then(data => console.log(data));
+    .then((res) => res.json())
+    .then((data) => console.log(data));
 };
 
 export const patchUser = (id, displayName, moodifyToken) => {
@@ -71,7 +71,7 @@ export const patchUser = (id, displayName, moodifyToken) => {
     body: JSON.stringify({
       displayName,
     }),
-  }).then(res => res.json());
+  }).then((res) => res.json());
 };
 
 export const deleteUser = (id, moodifyToken) => {
@@ -82,10 +82,10 @@ export const deleteUser = (id, moodifyToken) => {
       "Content-Type": "application/json",
       Authorization: "Bearer " + moodifyToken,
     },
-  }).then(res => res.json());
+  }).then((res) => res.json());
 };
 
-export const getUsersById = id => {
+export const getUsersById = (id) => {
   console.log(id);
   return fetch(baseURL + "users/" + id, {
     method: "GET",
@@ -94,11 +94,11 @@ export const getUsersById = id => {
       "Content-Type": "application/json",
     },
   })
-    .then(res => res.json())
-    .then(data => console.log(data));
+    .then((res) => res.json())
+    .then((data) => console.log(data));
 };
 
-export const getUserByUsername = username => {
+export const getUserByUsername = (username) => {
   let name = username;
 
   console.log(name, "from backend");
@@ -108,7 +108,7 @@ export const getUserByUsername = username => {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-  }).then(res => res.json());
+  }).then((res) => res.json());
 };
 
 export const getPlaylists = () => {
@@ -118,17 +118,17 @@ export const getPlaylists = () => {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-  }).then(res => res.json());
+  }).then((res) => res.json());
 };
 
-export const getPlaylistById = id => {
+export const getPlaylistById = (id) => {
   return fetch(baseURL + "playlists/" + id, {
     method: "GET",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-  }).then(res => res.json());
+  }).then((res) => res.json());
 };
 
 export const getPlaylistByUsername = (username, moodifyToken) => {
@@ -139,7 +139,7 @@ export const getPlaylistByUsername = (username, moodifyToken) => {
       "Content-Type": "application/json",
       Authorization: "Bearer " + moodifyToken,
     },
-  }).then(res => res.json());
+  }).then((res) => res.json());
 };
 
 export const postPlaylists = (createdPlaylistData, username, moodifyToken) => {
@@ -154,11 +154,11 @@ export const postPlaylists = (createdPlaylistData, username, moodifyToken) => {
       ...createdPlaylistData,
       username: username,
     }),
-  }).then(res => res.json());
+  }).then((res) => res.json());
 };
 
-export const getReview = id => {
-  return fetch(baseURL + `reviews/${id}`).then(res => res.json());
+export const getReview = (id) => {
+  return fetch(baseURL + `reviews/${id}`).then((res) => res.json());
 };
 
 export const postReview = (
@@ -183,8 +183,7 @@ export const postReview = (
       thumbsUp: thumbsUp,
     }),
   })
-    .then(res => res.json())
-    .then(data => console.log(data));
+    .then((res) => res.json())
 };
 
 export const patchPlaylists = (
@@ -202,11 +201,16 @@ export const patchPlaylists = (
 
   return fetch(baseURL + "playlists/" + playlist_id, {
     method: "PATCH",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + moodifyToken,
+    },
     body: JSON.stringify({
       ...updateData,
       username: username,
     }),
-  }).then(res => res.json());
+  }).then((res) => res.json());
 };
 
 export const deletePlaylists = (playlist_id, moodifyToken) => {
@@ -217,5 +221,5 @@ export const deletePlaylists = (playlist_id, moodifyToken) => {
       "Content-Type": "application/json",
       Authorization: "Bearer " + moodifyToken,
     },
-  }).then(res => res.json());
+  }).then((res) => res.json());
 };

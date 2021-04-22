@@ -12,7 +12,6 @@ import {
 import useStore from "../store/store";
 import PlaylistsCreation from "../components/playlistsCreation/PlaylistsCreation";
 import "./views.scss";
-import ReactAudioPlayer from "react-audio-player";
 
 function Artist(props) {
   const accessToken = useStore((state) => state.accessToken);
@@ -76,9 +75,6 @@ function Artist(props) {
 
   return (
     <div className="artistPageWrapper">
-      <div className="albumPagePlayerWrapper">
-        <ReactAudioPlayer src={selectedTrackToPlay} controls />
-      </div>
       <div className="artistPageHeader">
         <div className="headerLeftRow">
           {artistInfo.image ? (
@@ -88,13 +84,7 @@ function Artist(props) {
                 backgroundImage: `url(${artistInfo.image})`,
                 backgroundSize: "cover",
               }}
-            >
-              {/* <img
-                className="artistPageMainImage"
-                src={artistInfo.image}
-                alt="img"
-              /> */}
-            </div>
+            ></div>
           ) : (
             <Placeholder.Image />
           )}
@@ -114,22 +104,20 @@ function Artist(props) {
           )}
         </div>
       </div>
-      <div className="artistPageAlbumsColumn">
-        <div className="viewsSubBanner">
-          appears on {artistTotalAlbums} albums
+      <div className="artistPageBody">
+        <div className="artistPageAlbumsColumn">
+          <div className="viewsSubBanner">
+            appears on {artistTotalAlbums} albums
+          </div>
+          <AlbumsList
+            albums={artistAlbums}
+            infiniteScrollCallback={infiniteScrollAlbums}
+          />
         </div>
-        <AlbumsList
-          albums={artistAlbums}
-          infiniteScrollCallback={infiniteScrollAlbums}
-        />
-      </div>
-      <div className="artistPageArtistsColumn">
-        <div className="viewsSubBanner">related artists</div>
-        <ArtistsList artists={artistRelatedArtists} />
-        <AlbumsList albums={artistAlbums} />
-      </div>
-      <div className="artistPagePlaylistCreationWrapper">
-        <PlaylistsCreation />
+        <div className="artistPageArtistsColumn">
+          <div className="viewsSubBanner">related artists</div>
+          <ArtistsList artists={artistRelatedArtists} />
+        </div>
       </div>
     </div>
   );

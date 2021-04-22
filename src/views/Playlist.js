@@ -4,22 +4,24 @@ import { Loader } from "semantic-ui-react";
 import { Button } from "react-bootstrap";
 import SongList from "../components/songList/SongList";
 import { getPlaylistById } from "../services/backendRequests";
+
 import useStore from "../store/store";
 import "./Playlist.scss";
-import ReactAudioPlayer from "react-audio-player";
 import "./views.scss";
+import PlaylistsCard from "../components/playlistsCard/PlaylistsCard";
+import ReviewsDisplay from "../components/reviewsDisplay/ReviewsDisplay";
+import Reviews from "../components/reviews/Reviews";
 
 function Playlist(props) {
-  let playlists = useStore(state => state.playlists);
+  let playlists = useStore((state) => state.playlists);
 
   const [errors, setErrors] = useState("");
   const [activePlaylist, setActivePlaylist] = useState({});
-  const selectedTrackToPlay = useStore(state => state.selectedTrackToPlay);
 
   let history = useHistory();
 
   function getPlaylist() {
-    getPlaylistById(props.match.params.playlist_id).then(data => {
+    getPlaylistById(props.match.params.playlist_id).then((data) => {
       console.log(data);
       if (data.statusCode === 404 || data.statusCode === 400) {
         setErrors(data.message);
@@ -39,43 +41,55 @@ function Playlist(props) {
   console.log(activePlaylist);
   return (
     <div className="playlistPageWrapper">
-      <div className="albumPagePlayerWrapper">
-        <ReactAudioPlayer src={selectedTrackToPlay} controls />
-      </div>
+      <div className="playlistTitleBanner">{activePlaylist.title}</div>
 
       <div
-        className="albumPageBody"
+        className="playlistPageBody"
         style={{
           display: "flex",
           justifyContent: "space-evenly",
+          alignItems: "center",
           marginTop: "5%",
-        }}>
+        }}
+      >
         {errors ? (
           <div className="viewsErrorWrapper">
             <div className="viewsErrorBanner">
               <p>ERROR</p>
               <p>{errors}</p>
             </div>
-            <Button onClick={e => history.push("/")}>Return to Landing</Button>
+            <Button onClick={(e) => history.push("/")}>
+              Return to Landing
+            </Button>
           </div>
-        ) : activePlaylist.songs ? (
-          <>
-            <div className="bodyLeftRow">
-              <div className="playlistTitleBanner">{activePlaylist.title}</div>
-            </div>
-            <div className="bodyRightRow">
-              <SongList
-                songs={activePlaylist.songs}
-                collapsing={false}
-                compact={false}
-              />
-            </div>
-          </>
         ) : (
-          <Loader active size="big">
-            Loading...
-          </Loader>
+          <div>
+            {activePlaylist.songs ? (
+              <>
+                <div className="bodyLeftRow">
+                  <PlaylistsCard showDescription playlist={activePlaylist} />
+                </div>
+                <div className="bodyRightRow">
+                  <SongList
+                    songs={activePlaylist.songs}
+                    collapsing={false}
+                    compact={false}
+                  />
+                </div>
+              </>
+            ) : (
+              <Loader active size="big">
+                Loading...
+              </Loader>
+            )}
+          </div>
         )}
+      </div>
+      <div className="reviewFormWrapper">
+        <Reviews playlist_id={props.match.params.playlist_id} />
+      </div>
+      <div className="playlistPageReviews">
+        <ReviewsDisplay reviews={activePlaylist.reviews} />
       </div>
     </div>
   );

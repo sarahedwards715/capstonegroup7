@@ -20,7 +20,14 @@ function SongListItem(props) {
   function handlePlaySong() {
     setSelectedTrackToPlay(props.song.preview_url);
   }
-  console.log(props.song.preview_url, "from songlistitem");
+
+  function millisToMinutesAndSeconds(duration_ms) {
+    var minutes = Math.floor(duration_ms / 60000);
+    var seconds = ((duration_ms % 60000) / 1000).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+  }
+  let songDuration = millisToMinutesAndSeconds(duration_ms)
+
   return (
     <Table.Row>
       {user.username && user.moodifyToken && (
@@ -73,7 +80,7 @@ function SongListItem(props) {
           )}
         </Table.Cell>
       )}
-      {props.compact || <Table.Cell>{duration_ms}</Table.Cell>}
+      {props.compact || <Table.Cell>{songDuration}</Table.Cell>}
     </Table.Row>
   );
 }

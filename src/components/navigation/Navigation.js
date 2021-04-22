@@ -3,16 +3,17 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import useStore from "../../store/store";
 import { Menu } from "semantic-ui-react";
+import SearchBar from "../searchBar/SearchBar";
 
 function Navigation(props) {
   const accessToken = useStore((state) => state.accessToken);
   const logout = useStore((state) => state.logout);
   const [activeItem, setActiveItem] = useState("landing");
   const setSelectedTrackToPlay = useStore(
-    state => state.setSelectedTrackToPlay
+    (state) => state.setSelectedTrackToPlay
   );
 
-  const logoutOnClick = e => {
+  const logoutOnClick = (e) => {
     setSelectedTrackToPlay([]);
     logout();
   };
@@ -53,6 +54,7 @@ function Navigation(props) {
             </Link>
           </Menu.Item>
         )}
+        
       </Menu>
     </div>
   );

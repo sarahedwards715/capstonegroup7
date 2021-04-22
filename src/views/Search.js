@@ -7,6 +7,7 @@ import useStore from "../store/store";
 
 function Search(props) {
   const accessToken = useStore((state) => state.accessToken);
+  const selectedTrackToPlay = useStore((state) => state.selectedTrackToPlay);
   const query = props.match.params.query;
   const [searchedTracks, setSearchedTracks] = useState([]);
   const [searchedArtists, setSearchedArtists] = useState([]);

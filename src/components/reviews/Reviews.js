@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import useStore from "../../store/store";
-import './Reviews.scss';
+import "./Reviews.scss";
 import { Button, Icon, Label, Form, Input, TextArea } from "semantic-ui-react";
 import { getReview, postReview } from "../../services/backendRequests";
 
 function Reviews(props) {
   let user = useStore((state) => state.user);
-
+  let setPlaylists = useStore((state) => state.setPlaylists);
+  
   const [like, setLike] = useState(false);
   const [description, setDescription] = useState(" ");
   const [change, setChange] = useState(false);
@@ -28,8 +29,13 @@ function Reviews(props) {
       like,
       user.moodifyToken,
       user.username
-    );
-    setDescription("");
+    ).then((data) => {
+      console.log(data)
+      if (data.statusCode === 201) {
+        setPlaylists();
+        setDescription("");
+      }
+    })
   }
 
   useEffect(() => {
@@ -40,7 +46,7 @@ function Reviews(props) {
 
   return (
     <div className="reviewsWrapper">
-      How is The Playlist? 
+      <div className="viewsSubBanner">leave a review</div>
       <Form onSubmit={(e) => handleSubmit(e)}>
         <Form.Field
           id="form-textarea-control-opinion"
@@ -50,7 +56,7 @@ function Reviews(props) {
           onChange={(e) => setDescription(e.target.value)}
           value={description}
         />
-           <Button
+        <Button
           className={`icon ${like ? "default_like" : "active_like"}`}
           as="Love"
           labelPosition="left"

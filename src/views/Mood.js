@@ -4,8 +4,6 @@ import { useHistory } from "react-router-dom";
 import SongList from "../components/songList/SongList";
 import { getRecommendations } from "../services/spotAPIRequests";
 import useStore from "../store/store";
-import PlaylistsCreation from "../components/playlistsCreation/PlaylistsCreation";
-import ReactAudioPlayer from "react-audio-player";
 import "./views.scss";
 
 function Mood(props) {
@@ -45,17 +43,11 @@ function Mood(props) {
 
   return (
     <div className="moodPageWrapper">
-      <div className="albumPagePlayerWrapper">
-        <ReactAudioPlayer src={selectedTrackToPlay} controls />
+   
+      <div className="moodPageHeader">
+        <div className="moodPageBanner">{props.match.params.mood}</div>
       </div>
-      <div
-        className="albumPageBody"
-        style={{
-          display: "flex",
-          justifyContent: "space-evenly",
-          marginTop: "5%",
-        }}
-      >
+      <div className="moodPageBody">
         {errors ? (
           <div className="viewsErrorWrapper">
             <div className="viewsErrorBanner">
@@ -68,12 +60,7 @@ function Mood(props) {
           </div>
         ) : (
           <>
-            <div className="bodyLeftRow" style={{ alignText: "center" }}>
-              <div className="moodPageBanner">
-                {props.match.params.mood} mood
-              </div>
-            </div>
-            <div className="bodyRightRow">
+            <div className="moodPageSongListWrapper">
               <SongList
                 songs={songs}
                 collapsing={false}
@@ -83,9 +70,6 @@ function Mood(props) {
             </div>
           </>
         )}
-      </div>
-      <div className="albumsPagePlaylistCreationWrapper">
-        <PlaylistsCreation />
       </div>
     </div>
   );

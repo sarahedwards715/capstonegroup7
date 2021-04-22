@@ -2,5 +2,6 @@
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    overflow-x: auto;
+    overflow-x: scroll;
+    max-width: 75vw;
 }

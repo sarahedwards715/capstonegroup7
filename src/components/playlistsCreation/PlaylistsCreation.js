@@ -81,7 +81,7 @@ function PlaylistsCreation() {
 
   return (
     <div className="playlistCreationWrapper">
-      <Segment>
+      {/* <Segment> */}
         {user.moodifyToken && (
           <div className="playlistCreationHeader">{playlistCreationHeader}</div>
         )}
@@ -140,7 +140,7 @@ function PlaylistsCreation() {
             </Form>
           </>
         )}
-      </Segment>
+      {/* </Segment> */}
     </div>
   );
 }
