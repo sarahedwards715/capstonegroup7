@@ -5,14 +5,14 @@ import PlaylistsCard from "../playlistsCard/PlaylistsCard";
 import "./UserPlaylists.scss";
 
 const UserPlaylists = (props) => {
-  const playlists = useStore((state) => state.playlists);
-  const setPlaylists = useStore((state) => state.setPlaylists);
+  // const playlists = useStore((state) => state.playlists);
+  // const setPlaylists = useStore((state) => state.setPlaylists);
   const userPlaylists = useStore((state) => state.userPlaylists);
   const moodifyUserInfo = useStore((state) => state.moodifyUserInfo);
 
-  useEffect(() => {
-    setPlaylists()
-  }, [playlists]);
+  // useEffect(() => {
+  //   setPlaylists()
+  // }, [playlists]);
 
   console.log(userPlaylists);
   return (
