@@ -32,7 +32,7 @@ function Mood(props) {
 
         // CITATATION: Remove Duplicates By Comparing Two Arrays
         // https://stackoverflow.com/questions/14930516/compare-two-javascript-arrays-and-remove-duplicates
-        let newSongs = data.tracks.filter((track) => !songs.includes(track));
+        let newSongs = data.tracks.filter((track) => songs.some(oldTrack => oldTrack.id !== track.id));
 
         let moreSongs = [...songs, ...newSongs];
 

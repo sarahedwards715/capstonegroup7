@@ -82,17 +82,16 @@ function Landing(props) {
         {accessToken ? (
           <>
             {registerUserVisible ? (
-              <UserRegistration setRegisterInProgress = {setRegisterInProgress}/>
+              <UserRegistration
+                toggleFunction={handleClick}
+                setRegisterInProgress={setRegisterInProgress}
+              />
             ) : (
-              <UserLogin setLoginInProgress={setLoginInProgress} />
+              <UserLogin
+                toggleFunction={handleClick}
+                setLoginInProgress={setLoginInProgress}
+              />
             )}
-            <div className="newUserButtonWrapper">
-              <Button onClick={handleClick}>
-                {registerUserVisible
-                  ? "Click Here to Login"
-                  : "Create a New Account"}
-              </Button>
-            </div>
           </>
         ) : (
           <div className="spotAuthWrapper">

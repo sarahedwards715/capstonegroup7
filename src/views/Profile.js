@@ -4,7 +4,6 @@ import "./Profile.scss";
 import useStore from "../store/store";
 
 const Profile = () => {
-  const selectedTrackToPlay = useStore(state => state.selectedTrackToPlay);
 
   return (
     <>

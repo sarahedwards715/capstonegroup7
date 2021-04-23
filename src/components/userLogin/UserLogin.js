@@ -3,7 +3,7 @@ import useStore from "../../store/store";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 // import { Button, Form } from "semantic-ui-react";
-import { Button, Form } from "react-bootstrap";
+import { Button, ButtonGroup, Form } from "react-bootstrap";
 import { loginUser } from "../../services/backendRequests";
 import useForm from "../../customHooks/useForm";
 import loginValidation from "../../validationInfo/loginValidation";
@@ -90,7 +90,12 @@ function UserLogin(props) {
               {errors.password}
             </Form.Control.Feedback>
           </Form.Group>
-          <Button type="submit">Login</Button>
+          <ButtonGroup>
+            <Button type="submit">Login</Button>
+            <Button type="reset" onClick={(e) => props.toggleFunction(e)}>
+              Create a New User
+            </Button>
+          </ButtonGroup>
         </Form>
       </div>
     </div>

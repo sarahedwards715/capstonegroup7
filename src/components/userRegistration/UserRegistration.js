@@ -1,7 +1,7 @@
 import "./UserRegistration.scss";
 import React, { useState } from "react";
 // import { Button, Form, Message } from "semantic-ui-react";
-import { Button, Form } from "react-bootstrap";
+import { Button, ButtonGroup, Form } from "react-bootstrap";
 import { postUsers } from "../../services/backendRequests";
 import useForm from "../../customHooks/useForm";
 import registrationValidation from "../../validationInfo/registrationValidation";
@@ -61,16 +61,25 @@ function UserRegistration(props) {
       {formSuccess ? (
         <>
           <div className="userRegistrationSuccessBanner">
-            <Button
-              className="userRegistrationResetButton"
-              onClick={(e) => handleReset(e)}
-            >
-              Reset Form
-            </Button>
             <p className="userRegistrationSuccessText">
               You've Successfully Registered!
             </p>
-            <p className="userRegistrationSuccessText">Try Logging In!</p>
+              <p className="userRegistrationSuccessText">Try Logging In!</p>
+            <ButtonGroup >
+              <Button
+                className="userRegistrationResetButton"
+                onClick={(e) => handleReset(e)}
+              >
+                Reset Form
+              </Button>
+              <Button
+                className="landingToggleButton"
+                type="reset"
+                onClick={(e) => props.toggleFunction(e)}
+              >
+               Head To Login
+              </Button>
+            </ButtonGroup>
           </div>
         </>
       ) : (
@@ -113,7 +122,16 @@ function UserRegistration(props) {
                 {errors.password}
               </Form.Control.Feedback>
             </Form.Group>
-            <Button type="submit">Register</Button>
+            <ButtonGroup className = "buttonGroupWrapper">
+              <Button type="submit">Register</Button>
+              <Button
+                className="landingToggleButton"
+                type="reset"
+                onClick={(e) => props.toggleFunction(e)}
+              >
+                Back to Login
+              </Button>
+            </ButtonGroup>
           </Form>
         </div>
       )}

@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import useStore from "../../store/store";
 import { Menu } from "semantic-ui-react";
-import SearchBar from "../searchBar/SearchBar";
 
 function Navigation(props) {
   const accessToken = useStore((state) => state.accessToken);
+  const user = useStore((state) => state.user);
   const logout = useStore((state) => state.logout);
   const [activeItem, setActiveItem] = useState("landing");
   const setSelectedTrackToPlay = useStore(
@@ -30,14 +30,14 @@ function Navigation(props) {
             Landing
           </Link>
         </Menu.Item>
-        {accessToken && (
+        {accessToken && user.moodifyToken && (
           <Menu.Item name="home" active={activeItem === "home"}>
             <Link to="/home" onClick={(e) => handleClick(e, "home")}>
               Home
             </Link>
           </Menu.Item>
         )}
-        {accessToken && (
+        {(accessToken && user.moodifyToken) && (
           <Menu.Item name="userProfile" active={activeItem === "userProfile"}>
             <Link
               to="/userProfile"
@@ -47,14 +47,13 @@ function Navigation(props) {
             </Link>
           </Menu.Item>
         )}
-        {accessToken && (
+        {(accessToken && user.moodifyToken) && (
           <Menu.Item name="logout" active={activeItem === "logout"}>
             <Link to="/" onClick={(event) => logoutOnClick(event)}>
               Logout
             </Link>
           </Menu.Item>
         )}
-        
       </Menu>
     </div>
   );

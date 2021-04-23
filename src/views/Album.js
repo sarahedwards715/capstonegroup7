@@ -11,7 +11,6 @@ import {
 } from "../services/spotAPIRequests";
 import useStore from "../store/store";
 import "./views.scss";
-import PlaylistsCreation from "../components/playlistsCreation/PlaylistsCreation";
 
 function Album(props) {
   const [albumInfo, setAlbumInfo] = useState({
@@ -22,10 +21,11 @@ function Album(props) {
   });
   const [albumTracks, setAlbumTracks] = useState([]);
   const [artistAlbums, setArtistAlbums] = useState([]);
+  const [artistTotalAlbums, setArtistTotalAlbums] = useState(0);
+  const [artistAlbumsOffset, setArtistAlbumsOffset] = useState(0);
 
   const album_id = props.match.params.album_id;
   const accessToken = useStore((state) => state.accessToken);
-  const selectedTrackToPlay = useStore((state) => state.selectedTrackToPlay);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -47,11 +47,38 @@ function Album(props) {
   useEffect(() => {
     if (albumInfo.artist?.id) {
       getArtistAlbums(accessToken, albumInfo.artist.id).then((data) => {
-        console.log("ALBUMS", data);
         setArtistAlbums(data.items);
+        setArtistTotalAlbums(data.total);
       });
     }
   }, [albumInfo]);
+
+  function infiniteScrollAlbums() {
+    if (artistAlbums.length < artistTotalAlbums) {
+      return getArtistAlbums(
+        accessToken,
+        albumInfo.artist.id,
+        10,
+        artistAlbumsOffset
+      )
+        .then((data) => {
+          let newAlbums = data.items.filter((album) =>
+            artistAlbums.some((oldAlbum) => oldAlbum.id !== album.id)
+          );
+
+          let moreAlbums = [...artistAlbums, ...newAlbums];
+
+          console.log(newAlbums);
+
+          setArtistAlbums(moreAlbums);
+        })
+        .then(
+          setArtistAlbumsOffset(
+            (artistAlbumsOffset) => (artistAlbumsOffset += 10)
+          )
+        );
+    }
+  }
 
   return (
     <div className="albumPageWrapper">
@@ -89,7 +116,10 @@ function Album(props) {
       </div>
       <div className="albumPageAlbumsColumn">
         <div className="viewsSubBanner">Albums By {albumInfo.artist.name} </div>
-        <AlbumsList albums={artistAlbums} />
+        <AlbumsList
+          albums={artistAlbums}
+          infiniteScrollCallback={infiniteScrollAlbums}
+        />
       </div>
     </div>
   );

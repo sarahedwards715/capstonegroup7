@@ -6,13 +6,11 @@ import { deletePlaylists } from "../../services/backendRequests";
 import DeletionModal from "../deletionModal/DeletionModal";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import { Label } from "semantic-ui-react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function PlaylistsCard(props) {
   const user = useStore((state) => state.user);
   let setPlaylists = useStore((state) => state.setPlaylists);
-  let createdPlaylistData = useStore((state) => state.createdPlaylistData);
   let setCreatedPlaylistEditData = useStore(
     (state) => state.setCreatedPlaylistEditData
   );
@@ -38,7 +36,6 @@ function PlaylistsCard(props) {
     setCreatedPlaylistEditData(props.playlist);
   }
 
-  console.log(props.playlist)
   let totalLikes = props.playlist.reviews.reduce(
     (total, currentValue, index, reviews) => {
       if (reviews[index].thumbsUp === true) total += 1;
