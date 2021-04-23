@@ -38,7 +38,7 @@ const useStore = (set, get) => ({
   },
   accessExpiresIn: null,
   setExpiresIn: time => {
-    set({ accessExpiresIn: time });
+    set({ accessExpiresIn: Number(time) });
   },
   authURL: authURL,
   moodsArray: [],

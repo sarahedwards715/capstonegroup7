@@ -16,6 +16,8 @@ import Search from "./views/Search";
 import SearchBar from "./components/searchBar/SearchBar";
 import PlaylistsCreation from "./components/playlistsCreation/PlaylistsCreation";
 import ReactAudioPlayer from "react-audio-player";
+import AccessCountdown from "./components/accessCountdown/AccessCountdown";
+
 
 function App() {
   const accessToken = useStore((state) => state.accessToken);
@@ -28,6 +30,7 @@ function App() {
       <div className="appBody">
         {accessToken && user.moodifyToken && (
           <div className="appLeftColumn">
+            <AccessCountdown/>
             <div className="searchBarDiv">
               <SearchBar />
             </div>
