@@ -10,13 +10,11 @@ import {
   getRelatedArtists,
 } from "../services/spotAPIRequests";
 import useStore from "../store/store";
-import PlaylistsCreation from "../components/playlistsCreation/PlaylistsCreation";
 import "./views.scss";
 
 function Artist(props) {
   const accessToken = useStore((state) => state.accessToken);
   const artist_id = props.match.params.artist_id;
-  const selectedTrackToPlay = useStore((state) => state.selectedTrackToPlay);
   const [artistInfo, setArtistInfo] = useState({
     genres: [],
     name: "",
@@ -55,8 +53,8 @@ function Artist(props) {
     if (artistAlbums.length < artistTotalAlbums) {
       return getArtistAlbums(accessToken, artist_id, 10, artistAlbumsOffset)
         .then((data) => {
-          let newAlbums = data.items.filter(
-            (album) => !artistAlbums.includes(album)
+          let newAlbums = data.items.filter((album) =>
+            artistAlbums.some((oldAlbum) => oldAlbum.id !== album.id)
           );
 
           let moreAlbums = [...artistAlbums, ...newAlbums];

@@ -8,7 +8,7 @@ function ReviewsItems(props) {
 
   return (
     <div className="reviewsItemsWrapper">
-      <Card fluid>
+      <Card>
         <Card.Title>{props.review.username}</Card.Title>
         <Card.Text>
           {props.review.thumbsUp && (

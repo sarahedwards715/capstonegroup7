@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useStore from "../../store/store";
 import "./Reviews.scss";
-import { Button, Icon, Label, Form, Input, TextArea } from "semantic-ui-react";
+import { Button, Icon, Form, TextArea } from "semantic-ui-react";
 import { getReview, postReview } from "../../services/backendRequests";
 
 function Reviews(props) {
@@ -13,13 +13,13 @@ function Reviews(props) {
   const [change, setChange] = useState(false);
   const [reviews, setReviews] = useState([]);
 
-  function handleLike() {
-    if (like === true) setLike(true);
-  }
+  // function handleLike() {
+  //   if (like === true) setLike(true);
+  // }
 
-  function handleChange(event) {
-    if (change === true) setChange(false);
-  }
+  // function handleChange(event) {
+  //   if (change === true) setChange(false);
+  // }
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -30,7 +30,6 @@ function Reviews(props) {
       user.moodifyToken,
       user.username
     ).then((data) => {
-      console.log(data)
       if (data.statusCode === 201) {
         setPlaylists();
         setDescription("");

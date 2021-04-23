@@ -1,6 +1,6 @@
 import useStore from "../store/store";
-import React, { useEffect, useState } from "react";
-import { Loader, Button } from "semantic-ui-react";
+import React, { useEffect } from "react";
+import { Loader} from "semantic-ui-react";
 import MoodsList from "../components/moodsList/MoodsList";
 import PlaylistsList from "../components/playlistsList/PlaylistsList";
 import "./views.scss";
@@ -10,7 +10,6 @@ function Browse(props) {
   let setMoodsArray = useStore((state) => state.setMoodsArray);
   let playlists = useStore((state) => state.playlists);
   let setPlaylists = useStore((state) => state.setPlaylists);
-  const selectedTrackToPlay = useStore((state) => state.selectedTrackToPlay);
 
   useEffect(() => {
     setMoodsArray();

@@ -23,7 +23,7 @@ function SongList(props) {
 
   return (
     <div onScroll={(e) => handleScroll(e)} className="songListWrapper">
-      <Table collapsing={props.collapsing} compact={props.compact} size="small">
+      <Table stackable collapsing={props.collapsing} compact={props.compact} size="small">
         <Table.Header>
           <Table.Row>
             {user.username && user.moodifyToken && (
@@ -44,7 +44,7 @@ function SongList(props) {
                   key={song.id}
                   compact={props.compact}
                   collapsing={props.collapsing}
-                  albumName={props.albumName || "ignore"}
+                  albumName={props.albumName || ""}
                 />
               );
             })}

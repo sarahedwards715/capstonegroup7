@@ -6,7 +6,6 @@ import PlaylistsCard from "../playlistsCard/PlaylistsCard";
 
 function PlaylistsList(props) {
   const playlists = useStore(state => state.playlists);
-  const moodifyUserInfo = useStore(state => state.moodifyUserInfo);
 
   return (
     <div className="playlistsListWrapper">

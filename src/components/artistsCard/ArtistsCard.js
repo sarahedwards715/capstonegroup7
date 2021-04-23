@@ -5,7 +5,6 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function ArtistsCard(props) {
-  console.log("FROM ARTISTS CARD", props)
   // const image
 
   return (
