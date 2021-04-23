@@ -226,10 +226,6 @@
   width: 300px;
 }
 
-.artistSongListWrapper {
-  // max-width: 66%;
-}
-
 .audioPlayerWrapper {
   // position: absolute;
   align-self: flex-start;
@@ -245,7 +241,6 @@
 }
 
 .artistPageWrapper {
-  padding: 5%;
   max-width: 100%;
   height: 85vh;
   overflow-y: scroll;
@@ -321,7 +316,7 @@
   }
 
   .artistPageBody {
-    padding-right: 5%;
+    // padding-right: 5%;
 
     .artistPageCardContainer {
       display: flex;
